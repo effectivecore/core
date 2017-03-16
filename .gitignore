@@ -1,0 +1,13 @@
+.DS_Store
+.vscode
+.idea
+
+/dynamic/*
+!/dynamic/readme.md
+!/dynamic/cache/
+
+/dynamic/cache/*
+!/dynamic/cache/readme.md
+
+/modules/*
+!/modules/readme.md
