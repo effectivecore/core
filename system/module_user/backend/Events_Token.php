@@ -2,9 +2,7 @@
 
 namespace effectivecore\modules\user {
           use \effectivecore\url;
-          use \effectivecore\message;
-          use \effectivecore\modules\storage\db;
-          abstract class events extends \effectivecore\events {
+          abstract class events_token extends \effectivecore\events_token {
 
   static function on_token_replace($match) {
     switch ($match) {
