@@ -3,7 +3,7 @@
 namespace effectivecore\modules\storage {
           use \effectivecore\settings;
           use \effectivecore\factory;
-          abstract class events extends \effectivecore\events {
+          abstract class events_module extends \effectivecore\events_module {
 
   static function on_init() {
     $is_init = db::init(
