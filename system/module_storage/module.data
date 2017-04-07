@@ -1,6 +1,5 @@
 module
   id: storage
-  path: system/module_storage
   title: Storage
   description: Database support module.
   version: 1.0
