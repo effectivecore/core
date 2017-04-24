@@ -13,8 +13,8 @@ namespace effectivecore {
 
   static protected function _update() {
     $parse = [];
-    $files = files::get_all(dir_system, '%^.*\.data$%') +
-             files::get_all(dir_modules, '%^.*\.data$%');
+    $files = files_factory::get_all(dir_system, '%^.*\.data$%') +
+             files_factory::get_all(dir_modules, '%^.*\.data$%');
     $modules = [];
     foreach ($files as $c_file) {
       if ($c_file->get_file_full() == 'module.data') {
