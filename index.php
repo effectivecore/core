@@ -12,7 +12,8 @@ namespace effectivecore {
   const nl              = "\n";
   const br              = "<br/>";
 
-  require_once('system/module_core/backend/Core.php');
-  core::init();
+  require_once('system/module_core/backend/Events.php');
+  require_once('system/module_core/backend/Events_module.php');
+  events_module::on_init();
 
 }
