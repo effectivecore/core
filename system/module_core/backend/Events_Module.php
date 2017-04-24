@@ -2,19 +2,19 @@
 
 namespace effectivecore {
           use \effectivecore\console_factory as console;
-          abstract class events_module extends events {
+          abstract class events_module extends events_factory {
 
   static function on_init() {
-    require_once('Cache_factory.php');
+    require_once('Cache__factory.php');
     require_once('Factory.php');
-    require_once('Files_factory.php');
+    require_once('Files__factory.php');
     require_once('File.php');
     spl_autoload_register('\effectivecore\factory::autoload');
     settings_factory::init();
     translate_factory::init();
     token_factory::init();
     urls_factory::init();
-    events::init();
+    events_factory::init();
     core_factory::init();
   # init modules
     ob_start();
