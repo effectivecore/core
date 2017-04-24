@@ -9,7 +9,7 @@ namespace effectivecore {
     require_once('Files.php');
     require_once('File.php');
     spl_autoload_register('\effectivecore\factory::autoload');
-    settings::init();
+    settings_factory::init();
     translate_factory::init();
     token_factory::init();
     urls_factory::init();
