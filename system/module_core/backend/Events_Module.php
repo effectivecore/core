@@ -4,7 +4,7 @@ namespace effectivecore {
           abstract class events_module extends events {
 
   static function on_init() {
-    require_once('Cache.php');
+    require_once('Cache_factory.php');
     require_once('Factory.php');
     require_once('Files.php');
     require_once('File.php');
