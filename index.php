@@ -13,7 +13,7 @@ namespace effectivecore {
   const br              = "<br/>";
 
   require_once('system/module_core/backend/Events__factory.php');
-  require_once('system/module_core/backend/Events_Module.php');
-  events_module::on_init();
+  require_once('system/module_core/backend/Events_Module__factory.php');
+  events_module_factory::on_init();
 
 }
