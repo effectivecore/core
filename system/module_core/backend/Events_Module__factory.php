@@ -5,10 +5,10 @@ namespace effectivecore {
           abstract class events_module_factory extends events_factory {
 
   static function on_init() {
-    require_once('Cache__factory.php');
-    require_once('Factory.php');
-    require_once('Files__factory.php');
     require_once('File.php');
+    require_once('Factory.php');
+    require_once('Cache__factory.php');
+    require_once('Files__factory.php');
     spl_autoload_register('\effectivecore\factory::autoload');
     settings_factory::init();
     translate_factory::init();
