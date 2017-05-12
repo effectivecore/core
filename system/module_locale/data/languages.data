@@ -1,0 +1,11 @@
+languages
+- en
+    code: en
+    title
+      en: English
+      native: English
+- ru
+    code: ru
+    title
+      en: Russian
+      native: Русский
