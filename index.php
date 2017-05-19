@@ -12,8 +12,12 @@ namespace effectivecore {
   const nl              = "\n";
   const br              = "<br/>";
 
-  require_once('system/module_core/backend/Events__factory.php');
-  require_once('system/module_core/backend/Events_Module__factory.php');
+  require_once('system/module_core/backend/File.php');
+  require_once('system/module_core/backend/Factory.php');
+  require_once('system/module_core/backend/Timer__factory.php');
+  require_once('system/module_core/backend/Cache__factory.php');
+  require_once('system/module_core/backend/Files__factory.php');
+  spl_autoload_register('\effectivecore\factory::autoload');
   events_module_factory::on_init();
 
 }
