@@ -4,16 +4,13 @@ misc
       match: %.*%
     styles
     - style_page
-        file: misc/page.css
+        file: misc/page.cssd
         media: all
     - style_form
-        file: misc/form.css
+        file: misc/form.cssd
         media: all
     - style_console
-        file: misc/console.css
-        media: all
-    - style_diagram
-        file: misc/diagram.css
+        file: misc/console.cssd
         media: all
     script
     - script_page
