@@ -22,6 +22,7 @@ namespace effectivecore {
   require_once('system/module_core/backend/Cache__factory.php');
   require_once('system/module_core/backend/File__factory.php');
   require_once('system/module_core/backend/Console__factory.php');
+  require_once('system/module_core/backend/Message__factory.php');
   spl_autoload_register('\effectivecore\factory::autoload');
   use \effectivecore\url_factory as urls;
   use \effectivecore\token_factory as tokens;
