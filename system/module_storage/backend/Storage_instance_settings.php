@@ -15,10 +15,11 @@ namespace effectivecore {
     if ($file->is_exist()) {
       $file->insert();
     } else {
-      $data_orig = $data = static::settings_get_all();
-      $changes_static    = static::changes_get_static($data_orig);
-      $changes_dynamic   = static::changes_get_dynamic();
-      static::changes_apply_to_settings($changes_static, $data);
+      $data_orig       = static::settings_get_all();
+      $data            = $data_orig;
+      $changes_static  = static::changes_get_static($data_orig);
+      $changes_dynamic = static::changes_get_dynamic();
+      static::changes_apply_to_settings($changes_static,  $data);
       static::changes_apply_to_settings($changes_dynamic, $data);
    # ...
 
@@ -82,7 +83,7 @@ namespace effectivecore {
           break;
         }
       }
-      $c_parsed = static::_parse($c_file->load());
+      $c_parsed = static::settings_to_code($c_file->load());
       foreach ($c_parsed as $c_type => $c_data) {
         if (is_object($c_data)) {
           if ($c_type == 'module') $c_data->path = $modules_path[$c_scope];
@@ -128,7 +129,7 @@ namespace effectivecore {
     $return = [];
     $files = files::get_all(dir_dynamic, '%^.*\/changes(--.+|)\.data$%');
     foreach ($files as $c_file) {
-      $c_parsed = static::_parse($c_file->load());
+      $c_parsed = static::settings_to_code($c_file->load());
       if (!empty($c_parsed->changes)) {
         foreach ($c_parsed->changes as $c_id => $c_change) {
           $return[$c_change->action][$c_id] = $c_change;
@@ -176,7 +177,10 @@ namespace effectivecore {
   ### parser ###
   ##############
 
-  static function _parse($data) {
+  static function code_to_settings($data) {
+  }
+
+  static function settings_to_code($data) {
     $return = new \StdClass();
     $p = [-1 => &$return];
     foreach (explode(nl, $data) as $c_line) {
@@ -192,7 +196,7 @@ namespace effectivecore {
         $depth = strlen($matches['indent'].$matches['prefix']) / 2;
         if ($matches['delimiter'] == ': ') {
           $value = $matches['value'];
-          if ((string)(int)$value === $value) $value = (int)$value;
+          if (is_numeric($value)) $value += 0;
           if ($value === 'true')  $value = true;
           if ($value === 'false') $value = false;
           if ($value === 'null')  $value = null;
