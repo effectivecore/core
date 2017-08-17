@@ -20,7 +20,7 @@ namespace effectivecore {
   require_once('system/module_core/backend/File.php');
   require_once('system/module_core/backend/Timer__factory.php');
   require_once('system/module_core/backend/Factory.php');
-  require_once('system/module_core/backend/Cache__factory.php');
+  require_once('system/module_core/backend/Caches__factory.php');
   require_once('system/module_core/backend/File__factory.php');
   require_once('system/module_core/backend/Console__factory.php');
   require_once('system/module_core/backend/Message__factory.php');
