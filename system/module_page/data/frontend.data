@@ -5,7 +5,7 @@ frontend
         match: %.*%
     favicons
   # icon for all modern browsers: ie-11, edge, ...
-    - icon_default
+    - icon_32
         type: image/png
         rel: icon
         file: frontend/icon-favourite-32.png
