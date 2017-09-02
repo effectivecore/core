@@ -18,8 +18,9 @@ namespace effectivecore {
   const br              = "<br/>";
 
   require_once('system/module_core/backend/File.php');
-  require_once('system/module_core/backend/Timers__factory.php');
   require_once('system/module_core/backend/Factory.php');
+  require_once('system/module_core/backend/Events__factory.php');
+  require_once('system/module_core/backend/Timers__factory.php');
   require_once('system/module_core/backend/Caches__factory.php');
   require_once('system/module_core/backend/Files__factory.php');
   require_once('system/module_core/backend/Console__factory.php');
@@ -88,8 +89,10 @@ namespace effectivecore {
 
   # case for page (non file)
   ob_start();
-  foreach (events::start('on_module_start') as $c_result) {
-    print str_replace("\n\n", '', $c_result);
+  foreach (events::start('on_module_start') as $c_results) {
+    foreach ($c_results as $c_result) {
+      print str_replace("\n\n", '', $c_result);
+    }
   }
 
 }
