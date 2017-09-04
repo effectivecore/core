@@ -19,14 +19,12 @@ namespace effectivecore {
   const state_0         = 0;
   const state_1         = 1; # in system context it'a means: settings is loaded
 
-  require_once('system/module_core/backend/File.php');
   require_once('system/module_core/backend/Factory.php');
-  require_once('system/module_core/backend/Events__factory.php');
   require_once('system/module_core/backend/Timers__factory.php');
-  require_once('system/module_core/backend/Caches__factory.php');
-  require_once('system/module_core/backend/Files__factory.php');
   require_once('system/module_core/backend/Console__factory.php');
-  require_once('system/module_core/backend/Messages__factory.php');
+  require_once('system/module_core/backend/Caches__factory.php');
+  require_once('system/module_core/backend/File.php');
+  require_once('system/module_core/backend/Files__factory.php');
   spl_autoload_register('\effectivecore\factory::autoload');
 
   use \effectivecore\urls_factory as urls;
