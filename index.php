@@ -17,7 +17,7 @@ namespace effectivecore {
   const nl              = "\n";
   const br              = "<br/>";
   const state_0         = 0;
-  const state_1         = 1; # in system context it'a means: settings is loaded
+  const state_1         = 1;
 
   require_once('system/module_core/backend/Factory.php');
   require_once('system/module_core/backend/Timers__factory.php');
