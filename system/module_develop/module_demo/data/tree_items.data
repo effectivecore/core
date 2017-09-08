@@ -1,11 +1,11 @@
 tree_items
-- main_admin_demo|tree_item
-    parent: tree_items/core/main_admin
+- main_develop_demo|tree_item
+    parent: tree_items/develop/main_develop
     title: Demo
     attributes
-    - href: /admin/demo
+    - href: /develop/demo
     - class
-      - admin-demo: admin-demo
+      - develop-demo: develop-demo
     access
       roles
       - admins: admins
