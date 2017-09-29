@@ -1,6 +1,6 @@
 tree_items
 - main_develop|tree_item
-    parent: trees/core/main
+    parent_npath: trees/core/main
     title: Develop
     attributes
     - class
