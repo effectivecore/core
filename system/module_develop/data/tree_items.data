@@ -1,5 +1,6 @@
 tree_items
 - main_develop|tree_item
+    id: main_develop
     parent_npath: trees/core/main
     title: Develop
     attributes
