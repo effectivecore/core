@@ -3,7 +3,6 @@ tree_items
     id: main_develop
     parent_is_tree: true
     parent_id: main
-    parent_npath: trees/core/main
     title: Develop
     attributes
     - class
