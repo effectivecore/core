@@ -1,12 +1,12 @@
 tree_items
-- main_develop|tree_item
-    id: main_develop
+- develop|tree_item
+    id: develop
     parent_is_tree: true
     parent_id: main
     title: Develop
-    attributes
-    - class
-      - develop: develop
     access
       roles
       - admins: admins
+    attributes
+    - class
+      - develop: develop
