@@ -1,7 +1,7 @@
 tree_items
 - demo|tree_item
     id: demo
-    parent_id: develop
+    id_parent: develop
     title: Demo
     access
       roles
