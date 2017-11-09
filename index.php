@@ -23,7 +23,7 @@ namespace effectivecore {
   require_once('system/module_core/backend/Dynamic__factory.php');
   require_once('system/module_core/backend/Cache__factory.php');
   require_once('system/module_core/backend/File.php');
-  require_once('system/module_core/backend/Files__factory.php');
+  require_once('system/module_core/backend/File__factory.php');
   spl_autoload_register('\effectivecore\factory::autoload');
 
   use \effectivecore\url_factory as url;
