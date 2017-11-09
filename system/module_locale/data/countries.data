@@ -1,5 +1,6 @@
 countries
-- us
+- usa
+    code: usa
     title
       en: United States of America
       native: United States of America
