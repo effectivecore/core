@@ -16,7 +16,7 @@ namespace effectivecore\modules\demo {
 
   static function on_install() {
   # install entities
-    foreach (entity::get_all_by_module('demo') as $c_entity) {
+    foreach (entity::select_all_by_module('demo') as $c_entity) {
       if ($c_entity->install()) message::insert(translation::get('Entity %%_name was installed.',     ['name' => $c_entity->get_name()]));
       else                      message::insert(translation::get('Entity %%_name was not installed!', ['name' => $c_entity->get_name()]), 'error');
     }

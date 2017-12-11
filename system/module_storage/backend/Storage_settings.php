@@ -67,8 +67,8 @@ namespace effectivecore {
 
   static function settings_find_static() {
     $return = [];
-    $files = file::get_all(dir_system, '%^.*\.data$%') +
-             file::get_all(dir_modules, '%^.*\.data$%');
+    $files = file::select_all(dir_system, '%^.*\.data$%') +
+             file::select_all(dir_modules, '%^.*\.data$%');
     $modules_path = [];
     foreach ($files as $c_file) {
       if ($c_file->get_file_full() == 'module.data') {
