@@ -15,10 +15,10 @@ namespace effectivecore {
   const br              = "<br/>";
 
   require_once('system/module_core/backend/Factory.php');
-  require_once('system/module_core/backend/Timer__factory.php');
-  require_once('system/module_core/backend/Console__factory.php');
-  require_once('system/module_core/backend/Dynamic__factory.php');
-  require_once('system/module_core/backend/Cache__factory.php');
+  require_once('system/module_core/backend/Timer.php');
+  require_once('system/module_core/backend/Console.php');
+  require_once('system/module_core/backend/Dynamic.php');
+  require_once('system/module_core/backend/Cache.php');
   require_once('system/module_core/backend/File.php');
   spl_autoload_register('\effectivecore\factory::autoload');
 
