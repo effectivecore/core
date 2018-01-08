@@ -82,8 +82,8 @@ namespace effectivecore {
 
   static function data_find_static() {
     $return = [];
-    $files = file::select_all(dir_system, '%^.*\.data$%') +
-             file::select_all(dir_modules, '%^.*\.data$%');
+    $files = file::select_all_recursive(dir_system, '%^.*\.data$%') +
+             file::select_all_recursive(dir_modules, '%^.*\.data$%');
     $modules_path = [];
     foreach ($files as $c_file) {
       if ($c_file->get_file() == 'module.data') {
