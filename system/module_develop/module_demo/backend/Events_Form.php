@@ -4,10 +4,10 @@
   ### Copyright © 2017—2018 Maxim Rysevets. All rights reserved. ###
   ##################################################################
 
-namespace effectivecore\modules\demo {
-          use \effectivecore\message as message;
-          use \effectivecore\translation as translation;
-          abstract class events_form extends \effectivecore\events_form {
+namespace effcore\modules\demo {
+          use \effcore\message as message;
+          use \effcore\translation as translation;
+          abstract class events_form extends \effcore\events_form {
 
   ##################
   ### form: demo ###
