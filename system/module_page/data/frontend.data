@@ -49,7 +49,7 @@ frontend
         media: all
     script
     - script_page
-        file: frontend/page.js
+        file: frontend/page.jsd
 - frontend_form_n
     display
       check: dpath
@@ -61,4 +61,4 @@ frontend
         media: all
     script
     - script_form
-        file: frontend/form.js
+        file: frontend/form.jsd
