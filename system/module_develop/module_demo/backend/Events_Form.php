@@ -5,8 +5,8 @@
   ##################################################################
 
 namespace effcore\modules\demo {
-          use \effcore\message as message;
-          use \effcore\translation as translation;
+          use \effcore\message;
+          use \effcore\translation;
           abstract class events_form extends \effcore\events_form {
 
   ##################
