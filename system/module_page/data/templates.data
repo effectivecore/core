@@ -16,16 +16,16 @@ templates
     markup: <%%_tag_name %%_attributes> %%_title_t %%_content %%_title_b %%_description </%%_tag_name>
 - page
     type: file
-    path: frontend/template--page.html
+    path: frontend/template--page.tpl
 - page_access_denided
     type: file
-    path: frontend/template--page--access_denided.html
+    path: frontend/template--page--access_denided.tpl
 - page_not_found
     type: file
-    path: frontend/template--page--not_found.html
+    path: frontend/template--page--not_found.tpl
 - page_simple
     type: file
-    path: frontend/template--page_simple.html
+    path: frontend/template--page_simple.tpl
 - canvas_svg
     type: file
-    path: frontend/template--canvas_svg.xml
+    path: frontend/template--canvas_svg.tpl
