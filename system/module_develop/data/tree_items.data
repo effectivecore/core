@@ -10,3 +10,14 @@ tree_items
     attributes
     - class
       - develop: develop
+- classes|tree_item
+    id: classes
+    id_parent: develop
+    title: Classes
+    access
+      roles
+      - admins: admins
+    attributes
+    - href: /develop/classes
+    - class
+      - classes: classes
