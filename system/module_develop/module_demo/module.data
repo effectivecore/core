@@ -1,6 +1,6 @@
-module
+module|module
   id: demo
   title: Demo
   description: Module for demonstrating capabilities.
-  version: 1.1
-  state: enabled
+  version: 1.00
+  state: off
