@@ -85,11 +85,14 @@ namespace effcore {
     $files = file::select_all_recursive(dir_system, '%^.*\.data$%') +
              file::select_all_recursive(dir_modules, '%^.*\.data$%');
     $modules_path = [];
+  # collect information about module paths
     foreach ($files as $c_file) {
       if ($c_file->get_file() == 'module.data') {
         $modules_path[$c_file->get_name_parent()] = $c_file->get_dirs_relative();
       }
     }
+    arsort($modules_path);
+  # parse each _data file
     foreach ($files as $c_file) {
       $c_scope = 'global';
       foreach ($modules_path as $c_dir_parent => $c_dir_relative) {
