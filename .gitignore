@@ -5,9 +5,13 @@
 /dynamic/*
 !/dynamic/readme.md
 !/dynamic/cache/
+!/dynamic/data/
 
 /dynamic/cache/*
 !/dynamic/cache/readme.md
+
+/dynamic/data/*
+!/dynamic/data/readme.md
 
 /modules/*
 !/modules/readme.md
