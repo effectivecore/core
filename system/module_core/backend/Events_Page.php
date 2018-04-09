@@ -22,7 +22,7 @@ namespace effcore\modules\core {
   static function on_show_info($page) {
     $title = new markup('h2', [], 'Shared information'); # @todo: move title to block settings
     $info = new markup('dl', ['class' => ['info' => 'info']]);
-    $logo_system = new markup_simple('img', ['src' => '/system/page/frontend/logo-system.svg', 'alt' => 'effcore']);
+    $logo_system = new markup_simple('img', ['src' => '/system/page/frontend/images/logo-system.svg', 'alt' => 'effcore']);
     $info->child_insert(new markup('dt', [], 'System'));
     $info->child_insert(new markup('dd', [], $logo_system));
     $info->child_insert(new markup('dt', [], 'Bundle build number'));
