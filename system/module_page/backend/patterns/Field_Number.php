@@ -5,7 +5,7 @@
   ##################################################################
 
 namespace effcore {
-          class form_field_number extends form_field {
+          class field_number extends field {
 
   public $title = 'Number';
 
