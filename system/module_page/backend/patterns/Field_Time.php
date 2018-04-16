@@ -5,7 +5,7 @@
   ##################################################################
 
 namespace effcore {
-          class form_field_time extends form_field {
+          class field_time extends field {
 
   public $title = 'Time';
 

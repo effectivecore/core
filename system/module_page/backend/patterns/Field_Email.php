@@ -5,7 +5,7 @@
   ##################################################################
 
 namespace effcore {
-          class form_field_email extends form_field {
+          class field_email extends field {
 
   public $title = 'EMail';
 

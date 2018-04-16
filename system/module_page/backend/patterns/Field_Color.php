@@ -5,7 +5,7 @@
   ##################################################################
 
 namespace effcore {
-          class form_field_color extends form_field {
+          class field_color extends field {
 
   public $title = 'Color';
 

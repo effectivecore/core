@@ -5,7 +5,7 @@
   ##################################################################
 
 namespace effcore {
-          class form_field_range extends form_field {
+          class field_range extends field {
 
   public $title = 'Range';
 

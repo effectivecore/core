@@ -5,7 +5,7 @@
   ##################################################################
 
 namespace effcore {
-          class form_field_url extends form_field {
+          class field_url extends field {
 
   public $title = 'URL';
 

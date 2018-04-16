@@ -5,7 +5,7 @@
   ##################################################################
 
 namespace effcore {
-          class form_field_password extends form_field {
+          class field_password extends field {
 
   public $title = 'Password';
 

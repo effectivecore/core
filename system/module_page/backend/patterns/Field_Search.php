@@ -5,7 +5,7 @@
   ##################################################################
 
 namespace effcore {
-          class form_field_search extends form_field {
+          class field_search extends field {
 
   public $title = 'Search';
 
