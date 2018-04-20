@@ -15,5 +15,5 @@ frontend
       match: %/develop/structures/.*%
     styles
     - form_style
-        file: /page/frontend/form.cssd
+        file: /system/module_page/frontend/form.cssd
         media: all
