@@ -5,10 +5,8 @@
   ##################################################################
 
 namespace effcore {
-
-# indicates that the cache for marked pattern should be separated by files
-  interface has_external_cache {
-    static function not_external_properties_get();
+# indicates that the group shold have single type of all fields
+  interface group_mono {
+    function first_element_name_get();
   }
-
 }
