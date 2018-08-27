@@ -7,11 +7,7 @@
 namespace effcore\modules\page {
           use \effcore\message;
           use \effcore\storage;
-          abstract class events_form extends \effcore\events_form {
-
-  ########################
-  ### form: decoration ###
-  ########################
+          abstract class events_form_decoration extends \effcore\events_form {
 
   static function on_init_decoration($form, $items) {
     $settings = storage::get('files')->select('settings');
