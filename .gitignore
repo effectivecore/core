@@ -6,12 +6,24 @@
 !/dynamic/readme.md
 !/dynamic/cache/
 !/dynamic/data/
+!/dynamic/files/
+!/dynamic/logs/
+!/dynamic/tmp/
 
 /dynamic/cache/*
 !/dynamic/cache/readme.md
 
 /dynamic/data/*
 !/dynamic/data/readme.md
+
+/dynamic/files/*
+!/dynamic/files/readme.md
+
+/dynamic/logs/*
+!/dynamic/logs/readme.md
+
+/dynamic/tmp/*
+!/dynamic/tmp/readme.md
 
 /modules/*
 !/modules/readme.md
