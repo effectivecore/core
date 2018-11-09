@@ -71,14 +71,10 @@ namespace effcore {
     else        static::data_cache_rebuild();
   }
 
-  ##############################
-  ### functionality for data ###
-  ##############################
-
-  static function data_cache_rebuild() {
+  static function data_cache_rebuild($reset = false) {
   # init original data
     $data_orig = cache::select('data_original');
-    if (!$data_orig) {
+    if (!$data_orig || $reset) {
       static::$data_orig = $data_orig = static::data_static_find();
       cache::update('data_original', $data_orig, '', ['build' => core::datetime_get()]);
     }
@@ -168,10 +164,6 @@ namespace effcore {
     }
     return $result;
   }
-
-  ###############
-  ### parsing ###
-  ###############
 
   static function data_to_dataline($data, $entity_name = '', $entity_prefix = '  ', $depth = 0) {
     $result = [];
