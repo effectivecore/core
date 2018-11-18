@@ -28,7 +28,7 @@ namespace effcore {
   require_once('system/module_core/backend/Dynamic.php');
   require_once('system/module_core/backend/Cache.php');
   require_once('system/module_core/backend/File.php');
-  spl_autoload_register('\\effcore\\core::autoload');
+  spl_autoload_register('\\effcore\\core::structure_autoload');
   timer::tap('total');
 
   #######################
