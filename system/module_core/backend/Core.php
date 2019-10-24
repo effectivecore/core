@@ -42,8 +42,17 @@ namespace effcore {
   ###############################################
 
   static function structure_autoload($name) {
-    console::log_insert('autoload', 'search', $name, 'ok');
     $name = strtolower($name);
+    if ($name == 'effcore\\timer'              ) {require_once(dir_system.'module_core/backend/Timer.php'                          ); console::log_insert('autoload', 'search', $name, 'ok'); return;}
+    if ($name == 'effcore\\console'            ) {require_once(dir_system.'module_core/backend/Console.php'                        ); console::log_insert('autoload', 'search', $name, 'ok'); return;}
+    if ($name == 'effcore\\cache'              ) {require_once(dir_system.'module_core/backend/Cache.php'                          ); console::log_insert('autoload', 'search', $name, 'ok'); return;}
+    if ($name == 'effcore\\dynamic'            ) {require_once(dir_system.'module_core/backend/Dynamic.php'                        ); console::log_insert('autoload', 'search', $name, 'ok'); return;}
+    if ($name == 'effcore\\file'               ) {require_once(dir_system.'module_core/backend/File.php'                           ); console::log_insert('autoload', 'search', $name, 'ok'); return;}
+    if ($name == 'effcore\\storage_nosql_files') {require_once(dir_system.'module_storage/backend/patterns/Storage_NoSQL_files.php'); console::log_insert('autoload', 'search', $name, 'ok'); return;}
+    if ($name == 'effcore\\module_embed'       ) {require_once(dir_system.'module_core/backend/patterns/Module_embedded.php'       ); console::log_insert('autoload', 'search', $name, 'ok'); return;}
+    if ($name == 'effcore\\module'             ) {require_once(dir_system.'module_core/backend/patterns/Module.php'                ); console::log_insert('autoload', 'search', $name, 'ok'); return;}
+    if ($name == 'effcore\\data'               ) {require_once(dir_system.'module_core/backend/Data.php'                           ); console::log_insert('autoload', 'search', $name, 'ok'); return;}
+    console::log_insert('autoload', 'search', $name, 'ok');
     if (isset(static::structures_select()[$name])) {
       $c_item_info = static::structures_select()[$name];
       $c_file = new file($c_item_info->file);
