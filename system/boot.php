@@ -26,16 +26,7 @@ namespace effcore {
   #############################
 
   require_once('system/module_core/backend/Core.php');
-  require_once('system/module_core/backend/File.php');
-  require_once('system/module_core/backend/Dynamic.php');
-  require_once('system/module_core/backend/Data.php');
-  require_once('system/module_core/backend/Cache.php');
-  require_once('system/module_core/backend/Timer.php');
-  require_once('system/module_core/backend/Console.php');
   require_once('system/module_storage/backend/markers.php');
-  require_once('system/module_core/backend/patterns/Module_embedded.php');
-  require_once('system/module_core/backend/patterns/Module.php');
-  require_once('system/module_storage/backend/patterns/Storage_NoSQL_files.php');
   spl_autoload_register('\\effcore\\core::structure_autoload');
   timer::tap('total');
 
