@@ -44,7 +44,6 @@ namespace effcore {
   static function structure_autoload($name) {
     $name = strtolower($name);
     if ($name == 'effcore\\timer'              ) {require_once(dir_system.'module_core/backend/Timer.php'                          ); console::log_insert('file', 'insertion', 'module_core/backend/Timer.php',                           'ok'); return;}
-    if ($name == 'effcore\\console'            ) {require_once(dir_system.'module_core/backend/Console.php'                        ); console::log_insert('file', 'insertion', 'module_core/backend/Console.php',                         'ok'); return;}
     if ($name == 'effcore\\cache'              ) {require_once(dir_system.'module_core/backend/Cache.php'                          ); console::log_insert('file', 'insertion', 'module_core/backend/Cache.php',                           'ok'); return;}
     if ($name == 'effcore\\dynamic'            ) {require_once(dir_system.'module_core/backend/Dynamic.php'                        ); console::log_insert('file', 'insertion', 'module_core/backend/Dynamic.php',                         'ok'); return;}
     if ($name == 'effcore\\file'               ) {require_once(dir_system.'module_core/backend/File.php'                           ); console::log_insert('file', 'insertion', 'module_core/backend/File.php',                            'ok'); return;}
