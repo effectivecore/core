@@ -68,6 +68,7 @@ namespace effcore {
     if ($name == 'effcore\\storage_nosql_files') {require_once(dir_system.'module_storage/backend/patterns/Storage_NoSQL_files.php'); console::log_insert('file', 'insertion', 'module_storage/backend/patterns/Storage_NoSQL_files.php', 'ok'); return;}
     if ($name == 'effcore\\module_embed'       ) {require_once(dir_system.'module_core/backend/patterns/Module_embedded.php'       ); console::log_insert('file', 'insertion', 'module_core/backend/patterns/Module_embedded.php',        'ok'); return;}
     if ($name == 'effcore\\module'             ) {require_once(dir_system.'module_core/backend/patterns/Module.php'                ); console::log_insert('file', 'insertion', 'module_core/backend/patterns/Module.php',                 'ok'); return;}
+    if ($name == 'effcore\\module_as_profile'  ) {require_once(dir_system.'module_core/backend/patterns/Module_as_profile.php'     ); console::log_insert('file', 'insertion', 'module_core/backend/patterns/Module_as_profile.php',      'ok'); return;}
     if ($name == 'effcore\\data'               ) {require_once(dir_system.'module_core/backend/Data.php'                           ); console::log_insert('file', 'insertion', 'module_core/backend/Data.php',                            'ok'); return;}
     console::log_insert('autoload', 'search', $name, 'ok');
     if (isset(static::structures_select()[$name])) {
