@@ -1,76 +1,76 @@
 copy
 - logotype
     from: files/logotype.svg
-    to: dynamic/files/picture-logotype_classic.svg
+    to: dynamic/files/pictures/picture-logotype_classic.svg
 - logotype_bitbucket
     from: files/logotype-bitbucket.svgd
-    to: dynamic/files/picture-logotype_bitbucket_classic.svgd
+    to: dynamic/files/pictures/picture-logotype_bitbucket_classic.svgd
 - logotype_behance
     from: files/logotype-behance.svgd
-    to: dynamic/files/picture-logotype_behance_classic.svgd
+    to: dynamic/files/pictures/picture-logotype_behance_classic.svgd
 - logotype_blogger
     from: files/logotype-blogger.svgd
-    to: dynamic/files/picture-logotype_blogger_classic.svgd
+    to: dynamic/files/pictures/picture-logotype_blogger_classic.svgd
 - logotype_facebook
     from: files/logotype-facebook.svgd
-    to: dynamic/files/picture-logotype_facebook_classic.svgd
+    to: dynamic/files/pictures/picture-logotype_facebook_classic.svgd
 - logotype_flickr
     from: files/logotype-flickr.svgd
-    to: dynamic/files/picture-logotype_flickr_classic.svgd
+    to: dynamic/files/pictures/picture-logotype_flickr_classic.svgd
 - logotype_github
     from: files/logotype-github.svgd
-    to: dynamic/files/picture-logotype_github_classic.svgd
+    to: dynamic/files/pictures/picture-logotype_github_classic.svgd
 - logotype_instagram
     from: files/logotype-instagram.svgd
-    to: dynamic/files/picture-logotype_instagram_classic.svgd
+    to: dynamic/files/pictures/picture-logotype_instagram_classic.svgd
 - logotype_linkedin
     from: files/logotype-linkedin.svgd
-    to: dynamic/files/picture-logotype_linkedin_classic.svgd
+    to: dynamic/files/pictures/picture-logotype_linkedin_classic.svgd
 - logotype_livejournal
     from: files/logotype-livejournal.svgd
-    to: dynamic/files/picture-logotype_livejournal_classic.svgd
+    to: dynamic/files/pictures/picture-logotype_livejournal_classic.svgd
 - logotype_ok
     from: files/logotype-ok.svgd
-    to: dynamic/files/picture-logotype_ok_classic.svgd
+    to: dynamic/files/pictures/picture-logotype_ok_classic.svgd
 - logotype_pinterest
     from: files/logotype-pinterest.svgd
-    to: dynamic/files/picture-logotype_pinterest_classic.svgd
+    to: dynamic/files/pictures/picture-logotype_pinterest_classic.svgd
 - logotype_reddit
     from: files/logotype-reddit.svgd
-    to: dynamic/files/picture-logotype_reddit_classic.svgd
+    to: dynamic/files/pictures/picture-logotype_reddit_classic.svgd
 - logotype_skype
     from: files/logotype-skype.svgd
-    to: dynamic/files/picture-logotype_skype_classic.svgd
+    to: dynamic/files/pictures/picture-logotype_skype_classic.svgd
 - logotype_soundcloud
     from: files/logotype-soundcloud.svgd
-    to: dynamic/files/picture-logotype_soundcloud_classic.svgd
+    to: dynamic/files/pictures/picture-logotype_soundcloud_classic.svgd
 - logotype_telegram
     from: files/logotype-telegram.svgd
-    to: dynamic/files/picture-logotype_telegram_classic.svgd
+    to: dynamic/files/pictures/picture-logotype_telegram_classic.svgd
 - logotype_tiktok
     from: files/logotype-tiktok.svgd
-    to: dynamic/files/picture-logotype_tiktok_classic.svgd
+    to: dynamic/files/pictures/picture-logotype_tiktok_classic.svgd
 - logotype_tumblr
     from: files/logotype-tumblr.svgd
-    to: dynamic/files/picture-logotype_tumblr_classic.svgd
+    to: dynamic/files/pictures/picture-logotype_tumblr_classic.svgd
 - logotype_twitter
     from: files/logotype-twitter.svgd
-    to: dynamic/files/picture-logotype_twitter_classic.svgd
+    to: dynamic/files/pictures/picture-logotype_twitter_classic.svgd
 - logotype_viber
     from: files/logotype-viber.svgd
-    to: dynamic/files/picture-logotype_viber_classic.svgd
+    to: dynamic/files/pictures/picture-logotype_viber_classic.svgd
 - logotype_vimeo
     from: files/logotype-vimeo.svgd
-    to: dynamic/files/picture-logotype_vimeo_classic.svgd
+    to: dynamic/files/pictures/picture-logotype_vimeo_classic.svgd
 - logotype_vk
     from: files/logotype-vk.svgd
-    to: dynamic/files/picture-logotype_vk_classic.svgd
+    to: dynamic/files/pictures/picture-logotype_vk_classic.svgd
 - logotype_whatsapp
     from: files/logotype-whatsapp.svgd
-    to: dynamic/files/picture-logotype_whatsapp_classic.svgd
+    to: dynamic/files/pictures/picture-logotype_whatsapp_classic.svgd
 - logotype_yahoo
     from: files/logotype-yahoo.svgd
-    to: dynamic/files/picture-logotype_yahoo_classic.svgd
+    to: dynamic/files/pictures/picture-logotype_yahoo_classic.svgd
 - logotype_youtube
     from: files/logotype-youtube.svgd
-    to: dynamic/files/picture-logotype_youtube_classic.svgd
+    to: dynamic/files/pictures/picture-logotype_youtube_classic.svgd
