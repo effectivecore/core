@@ -15,13 +15,13 @@ copy
     from: files/logotype.svg
     to: dynamic/files/pictures/picture-logotype_classic.svg
     if_exists: backup_and_replace
-- logotype_bitbucket
-    from: files/logotype-bitbucket.svgd
-    to: dynamic/files/pictures/picture-logotype_bitbucket_classic.svgd
-    if_exists: backup_and_replace
 - logotype_behance
     from: files/logotype-behance.svgd
     to: dynamic/files/pictures/picture-logotype_behance_classic.svgd
+    if_exists: backup_and_replace
+- logotype_bitbucket
+    from: files/logotype-bitbucket.svgd
+    to: dynamic/files/pictures/picture-logotype_bitbucket_classic.svgd
     if_exists: backup_and_replace
 - logotype_blogger
     from: files/logotype-blogger.svgd
@@ -39,9 +39,17 @@ copy
     from: files/logotype-github.svgd
     to: dynamic/files/pictures/picture-logotype_github_classic.svgd
     if_exists: backup_and_replace
+- logotype_gitlab
+    from: files/logotype-gitlab.svgd
+    to: dynamic/files/pictures/picture-logotype_gitlab_classic.svgd
+    if_exists: backup_and_replace
 - logotype_instagram
     from: files/logotype-instagram.svgd
     to: dynamic/files/pictures/picture-logotype_instagram_classic.svgd
+    if_exists: backup_and_replace
+- logotype_line
+    from: files/logotype-line.svgd
+    to: dynamic/files/pictures/picture-logotype_line_classic.svgd
     if_exists: backup_and_replace
 - logotype_linkedin
     from: files/logotype-linkedin.svgd
@@ -50,6 +58,10 @@ copy
 - logotype_livejournal
     from: files/logotype-livejournal.svgd
     to: dynamic/files/pictures/picture-logotype_livejournal_classic.svgd
+    if_exists: backup_and_replace
+- logotype_messenger
+    from: files/logotype-messenger.svgd
+    to: dynamic/files/pictures/picture-logotype_messenger_classic.svgd
     if_exists: backup_and_replace
 - logotype_ok
     from: files/logotype-ok.svgd
@@ -66,6 +78,10 @@ copy
 - logotype_skype
     from: files/logotype-skype.svgd
     to: dynamic/files/pictures/picture-logotype_skype_classic.svgd
+    if_exists: backup_and_replace
+- logotype_snapchat
+    from: files/logotype-snapchat.svgd
+    to: dynamic/files/pictures/picture-logotype_snapchat_classic.svgd
     if_exists: backup_and_replace
 - logotype_soundcloud
     from: files/logotype-soundcloud.svgd
@@ -98,6 +114,10 @@ copy
 - logotype_vk
     from: files/logotype-vk.svgd
     to: dynamic/files/pictures/picture-logotype_vk_classic.svgd
+    if_exists: backup_and_replace
+- logotype_wechat
+    from: files/logotype-wechat.svgd
+    to: dynamic/files/pictures/picture-logotype_wechat_classic.svgd
     if_exists: backup_and_replace
 - logotype_whatsapp
     from: files/logotype-whatsapp.svgd
