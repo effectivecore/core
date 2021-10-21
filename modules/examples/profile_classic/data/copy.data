@@ -1,15 +1,15 @@
 copy
 - meta
     from: files/meta.html
-    to: dynamic/data/meta.html
+    to: dynamic/files/meta.html
     if_exists: backup_and_replace
 - robots
     from: files/robots.txt
-    to: dynamic/data/robots.txt
+    to: dynamic/files/robots.txt
     if_exists: backup_and_replace
 - sitemap
     from: files/sitemap.xml
-    to: dynamic/data/sitemap.xml
+    to: dynamic/files/sitemap.xml
     if_exists: backup_and_replace
 # ◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦
 - logotype
