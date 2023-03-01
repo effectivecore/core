@@ -1,11 +1,11 @@
 module|module
-  id: translation_ru
+  id: translation_uk
   id_bundle: system
-  title: Russian
+  title: Ukrainian
   group: Translations
-  description: Module for translation into Russian language.
+  description: Module for translation into Ukrainian language.
   copyright: Copyright © 2017—2022 Maxim Rysevets. All rights reserved.
-  icon_path: frontend/pictures/flag-ru-mini.svg
+  icon_path: frontend/pictures/flag-ua-mini.svg
   enabled: yes
   version: 0.903
   dependencies
