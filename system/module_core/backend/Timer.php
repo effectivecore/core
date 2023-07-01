@@ -1,14 +1,14 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore;
 
-abstract class timer {
+abstract class Timer {
 
-    static protected $data;
+    protected static $data;
 
     static function tap($name) {
         static::$data[$name][] = microtime(true);

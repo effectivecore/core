@@ -1,16 +1,16 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore;
 
-class field_hidden extends markup_simple {
+class Field_Hidden extends Markup_simple {
 
     public $tag_name = 'input';
     public $attributes = [
-        'type' => 'hidden',
+        'type' => 'hidden'
     ];
 
     function __construct($name = null, $value = null, $attributes = [], $weight = 0) {
@@ -34,7 +34,7 @@ class field_hidden extends markup_simple {
     }
 
     function value_request_get($number = 0, $source = '_POST') {
-        return request::value_get($this->name_get(), $number, $source);
+        return Request::value_get($this->name_get(), $number, $source);
     }
 
     function value_get() {

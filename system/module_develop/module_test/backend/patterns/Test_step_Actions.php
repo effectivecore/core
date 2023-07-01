@@ -1,12 +1,12 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore;
 
-class step_actions {
+class Test_step_Actions {
 
     function run(&$test, $dpath, &$c_results) {
         $c_results['reports'][$dpath]['dpath'] = '### dpath: '.$dpath;

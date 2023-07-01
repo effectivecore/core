@@ -1,7 +1,7 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore;
@@ -10,14 +10,14 @@ use RecursiveArrayIterator;
 use RecursiveIteratorIterator;
 use stdClass;
 
-abstract class request {
+abstract class Request {
 
-    static protected $cache;
-    static protected $allowed_args_in_get = [];
+    protected static $cache;
+    protected static $allowed_args_in_get = [];
 
     static function init() {
         if (static::$cache === null) {
-            foreach (storage::get('data')->select_array('request_settings') as $c_module_id => $c_settings) {
+            foreach (Storage::get('data')->select_array('request_settings') as $c_module_id => $c_settings) {
                 static::$allowed_args_in_get+= $c_settings->allowed_args_in_get;
                 static::$cache[$c_module_id] = $c_settings;
             }
@@ -30,7 +30,7 @@ abstract class request {
     }
 
     # ─────────────────────────────────────────────────────────────────────
-    # sanitize(…, $is_files === false) of requests:
+    # sanitize_structure(…):
     # ═════════════════════════════════════════════════════════════════════
     #   (string)key => (string)value
     # ◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦
@@ -41,23 +41,7 @@ abstract class request {
     #   ]
     # ─────────────────────────────────────────────────────────────────────
 
-    # ─────────────────────────────────────────────────────────────────────
-    # sanitize(…, $is_files !== false) of requests:
-    # ═════════════════════════════════════════════════════════════════════
-    #   (string)key => [
-    #     (string)key => (string)|(int)value
-    #   ]
-    # ◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦
-    #   (string)key => [
-    #     (string)key => [
-    #       (int)0 => (string)|(int)value,
-    #       (int)1 => (string)|(int)value …
-    #       (int)N => (string)|(int)value
-    #     ]
-    #   ]
-    # ─────────────────────────────────────────────────────────────────────
-
-    static function sanitize($source = '_POST', $is_files = false) {
+    static function sanitize_structure($source = '_POST') {
         $result = [];
         global ${$source};
         # filtering by structure
@@ -68,21 +52,53 @@ abstract class request {
                 $c_k0 = $iterator->getSubIterator(0) ? $iterator->getSubIterator(0)->key() : null;
                 $c_k1 = $iterator->getSubIterator(1) ? $iterator->getSubIterator(1)->key() : null;
                 $c_k2 = $iterator->getSubIterator(2) ? $iterator->getSubIterator(2)->key() : null;
-                if ($is_files !== true && $c_depth === 0 && is_string($c_k0) &&                                      is_string($c_value)) $result[$c_k0]          = $c_value;
-                if ($is_files !== true && $c_depth === 1 && is_string($c_k0) &&    is_int($c_k1) &&                  is_string($c_value)) $result[$c_k0][]        = $c_value;
-                if ($is_files === true && $c_depth === 1 && is_string($c_k0) && is_string($c_k1) &&                  is_string($c_value)) $result[$c_k0][$c_k1]   = $c_value;
-                if ($is_files === true && $c_depth === 1 && is_string($c_k0) && is_string($c_k1) &&                     is_int($c_value)) $result[$c_k0][$c_k1]   = $c_value;
-                if ($is_files === true && $c_depth === 2 && is_string($c_k0) && is_string($c_k1) && is_int($c_k2) &&    is_int($c_value)) $result[$c_k0][$c_k1][] = $c_value;
-                if ($is_files === true && $c_depth === 2 && is_string($c_k0) && is_string($c_k1) && is_int($c_k2) && is_string($c_value)) $result[$c_k0][$c_k1][] = $c_value;
+                if ($c_depth === 0 && is_string($c_k0) &&                  is_string($c_value)) $result[$c_k0]   = $c_value;
+                if ($c_depth === 1 && is_string($c_k0) && is_int($c_k1) && is_string($c_value)) $result[$c_k0][] = $c_value;
             }
         }
         # filtering by whitelist
         if ($source === '_GET') {
-            $allowed_args = request::allowed_args_in_get_get();
+            $allowed_args = Request::allowed_args_in_get_get();
             foreach ($result as $c_name => $c_value) {
                 if (!isset($allowed_args[$c_name])) {
                     unset($result[$c_name]);
                 }
+            }
+        }
+        return $result;
+    }
+
+    # ─────────────────────────────────────────────────────────────────────
+    # sanitize_structure_files():
+    # ═════════════════════════════════════════════════════════════════════
+    #   (string)key => [
+    #     (string)key => (string|int)value
+    #   ]
+    # ◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦
+    #   (string)key => [
+    #     (string)key => [
+    #       (int)0 => (string|int)value,
+    #       (int)1 => (string|int)value …
+    #       (int)N => (string|int)value
+    #     ]
+    #   ]
+    # ─────────────────────────────────────────────────────────────────────
+
+    static function sanitize_structure_files($source = '_FILES') {
+        $result = [];
+        global ${$source};
+        # filtering by structure
+        if (is_array(${$source}) && count(${$source})) {
+            $iterator = new RecursiveIteratorIterator(new RecursiveArrayIterator(${$source}));
+            foreach ($iterator as $c_value) {
+                $c_depth = $iterator->getDepth();
+                $c_k0 = $iterator->getSubIterator(0) ? $iterator->getSubIterator(0)->key() : null;
+                $c_k1 = $iterator->getSubIterator(1) ? $iterator->getSubIterator(1)->key() : null;
+                $c_k2 = $iterator->getSubIterator(2) ? $iterator->getSubIterator(2)->key() : null;
+                if ($c_depth === 1 && is_string($c_k0) && is_string($c_k1) &&                  is_string($c_value)) $result[$c_k0][$c_k1]   = $c_value;
+                if ($c_depth === 1 && is_string($c_k0) && is_string($c_k1) &&                     is_int($c_value)) $result[$c_k0][$c_k1]   = $c_value;
+                if ($c_depth === 2 && is_string($c_k0) && is_string($c_k1) && is_int($c_k2) &&    is_int($c_value)) $result[$c_k0][$c_k1][] = $c_value;
+                if ($c_depth === 2 && is_string($c_k0) && is_string($c_k1) && is_int($c_k2) && is_string($c_value)) $result[$c_k0][$c_k1][] = $c_value;
             }
         }
         return $result;
@@ -161,7 +177,7 @@ abstract class request {
     # │ $_FILES[field] === [name = [0 => 'file1', 1 => 'file2']] ║ return [0 => (object)[name = 'file1'], 1 => (object)[name = 'file2']] │
     # └──────────────────────────────────────────────────────────╨───────────────────────────────────────────────────────────────────────┘
 
-    static function files_get($name, $return_class_name = 'file_history') {
+    static function files_get($name, $return_class_name = 'File_history') {
         $result = [];
         if (isset($_FILES[$name]['name'    ]) &&
             isset($_FILES[$name]['type'    ]) &&
@@ -183,8 +199,8 @@ abstract class request {
                 $c_path_tmp = $info['tmp_name'][$c_number];
                 $c_error    = $info['error'   ][$c_number];
                 if ($c_error !== UPLOAD_ERR_NO_FILE) {
-                    if ($return_class_name === 'file_history') {
-                        $result[$c_number] = new file_history;
+                    if ($return_class_name === 'File_history') {
+                        $result[$c_number] = new File_history;
                         $result[$c_number]->init_from_tmp($c_file, $c_mime, $c_size, $c_path_tmp, $c_error);
                     } else {
                         $result[$c_number] = new $return_class_name;
@@ -264,23 +280,6 @@ abstract class request {
     static function user_agent_get($max_length = 240) {
         return                  isset($_SERVER['HTTP_USER_AGENT']) ?
             mb_strcut(trim(strip_tags($_SERVER['HTTP_USER_AGENT'])), 0, $max_length) : '';
-    }
-
-    static function user_agent_get_info() {
-        $result = new stdCLass;
-        $matches = [];
-        # detect Internet Explorer v.6-v.11 (non-existent version like '12' will be identified as '1')
-        $ie_core_to_name = ['8' => '11', '7' => '11', '6' => '10', '5' => '9', '4' => '8', '3' => '7', '2' => '6', '1' => '5'];
-        $ie_name_to_core = array_flip($ie_core_to_name);
-        preg_match('%^(?:.+?(?<name>MSIE) '.'(?<name_v>11|10|9|8|7|6|5|4|3|2|1)|)'.
-                     '(?:.+?(?<core>Trident)/(?<core_v>8|7|6|5|4|3|2|1)|)%', static::user_agent_get(), $matches);
-        $result->name = isset($matches['name']) ? strtolower($matches['name']) : '';
-        $result->core = isset($matches['core']) ? strtolower($matches['core']) : '';
-        $result->core_version = $matches['core_v'] ?? '';
-        $result->name_version = $matches['name_v'] ?? '';
-        if ($result->name === '' && $result->core && isset($ie_core_to_name[$matches['core_v']])) {$result->name = 'msie';    $result->name_version = $ie_core_to_name[$matches['core_v']];}
-        if ($result->core === '' && $result->name && isset($ie_name_to_core[$matches['name_v']])) {$result->core = 'trident'; $result->core_version = $ie_name_to_core[$matches['name_v']];}
-        return $result;
     }
 
     static function software_get_info($software = null) {

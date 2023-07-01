@@ -1,12 +1,12 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore;
 
-trait widget_files_audios__shared {
+trait Widget_Files_audios__Shared {
 
     public $cover_is_allowed = true;
     public $cover_thumbnails = [

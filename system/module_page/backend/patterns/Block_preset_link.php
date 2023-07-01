@@ -1,12 +1,12 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore;
 
-class block_preset_link {
+class Block_preset_link {
 
     public $id;
     public $weight = 0;
@@ -17,7 +17,7 @@ class block_preset_link {
     }
 
     function preset_make() {
-        $preset = core::deep_clone(block_preset::select($this->id));
+        $preset = Core::deep_clone(Block_preset::select($this->id));
         if ($preset) {
             foreach ($this as $c_key => $c_value)
                 $preset->{$c_key} =

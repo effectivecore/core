@@ -1,21 +1,21 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore\modules\core;
 
-use effcore\language;
-use effcore\url;
+use effcore\Language;
+use effcore\Url;
 
-abstract class events_page_install {
+abstract class Events_Page_Install {
 
     static function on_redirect($event, $page) {
-        $languages = language::get_all();
+        $languages = Language::get_all();
         $code = $page->args_get('lang_code');
-        if (empty($languages[$code])) url::go($page->args_get('base').'/en');
-        language::code_set_current($code);
+        if (empty($languages[$code])) Url::go($page->args_get('base').'/en');
+        Language::code_set_current($code);
     }
 
 }

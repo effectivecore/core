@@ -1,12 +1,12 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore;
 
-class module_as_profile extends module {
+class Module_as_profile extends Module {
 
     public $group = 'Profiles';
     public $deploy_weight = -50;

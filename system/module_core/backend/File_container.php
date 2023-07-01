@@ -1,14 +1,14 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore;
 
 use Exception;
 
-class file_container {
+class File_container {
 
     const WRAPPER = 'container';
     const META_TITLE = self::WRAPPER.'-meta=';
@@ -104,7 +104,7 @@ class file_container {
             $this->path_root = $path_parsed['path_root'];
             $this->path_file = $path_parsed['path_file'];
             $this->target    = $path_parsed['target'   ];
-            $this->mode      = $mode ? $mode : 'c+b';
+            $this->mode      = $mode ?: 'c+b';
             $this->mode_is_readable = strpbrk($this->mode,  'r' ) || strpos($this->mode, 'a+') === 0 || strpos($this->mode, 'c+') === 0;
             $this->mode_is_writable = strpbrk($this->mode, 'wxc') || strpos($this->mode, 'r+') === 0;
             $this->stream = @fopen($this->path_root, $this->mode, false, $this->context ?: stream_context_create([static::WRAPPER => []]));

@@ -1,12 +1,12 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore;
 
-trait widget_files_videos__shared {
+trait Widget_Files_videos__Shared {
 
     public $poster_is_allowed = true;
     public $poster_thumbnails = [

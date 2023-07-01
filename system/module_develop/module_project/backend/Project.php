@@ -1,15 +1,15 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore;
 
-abstract class project {
+abstract class Project {
 
     static function select($id) {
-        return (new instance('project', [
+        return (new Instance('project', [
             'id' => $id
         ]))->select();
     }

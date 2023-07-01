@@ -1,34 +1,34 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore\modules\test;
 
-use effcore\module;
+use effcore\Module;
 
-abstract class events_module {
+abstract class Events_Module {
 
     static function on_install($event) {
-        $module = module::get('test');
+        $module = Module::get('test');
         $module->install();
     }
 
     static function on_uninstall($event) {
-        $module = module::get('test');
+        $module = Module::get('test');
         $module->uninstall();
     }
 
     static function on_enable($event) {
-        if (module::is_installed('test')) {
-            $module = module::get('test');
+        if (Module::is_installed('test')) {
+            $module = Module::get('test');
             $module->enable();
         }
     }
 
     static function on_disable($event) {
-        $module = module::get('test');
+        $module = Module::get('test');
         $module->disable();
     }
 
