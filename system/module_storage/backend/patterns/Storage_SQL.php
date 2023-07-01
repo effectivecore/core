@@ -1,7 +1,7 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore;
@@ -11,11 +11,11 @@ use PDO;
 use PDOException;
 use PDOStatement;
 
-class storage_sql_pdo implements has_external_cache {
+class Storage_SQL_PDO implements Has_external_cache {
 
     public $name;
     public $driver;
-    public $credentials = [];
+    public $credentials = null;
     public $table_prefix = '';
     public $args = [];
     public $args_previous = [];
@@ -33,17 +33,17 @@ class storage_sql_pdo implements has_external_cache {
                $this->credentials;
     }
 
-    function init($driver = null, $credentials = [], $table_prefix = '') {
+    function init($driver = null, $credentials = null, $table_prefix = '', $root = Data::DIRECTORY) {
         if ($this->connection) return
             $this->connection;
         else {
-            if ($driver)       $this->driver       =         $driver;
-            if ($credentials)  $this->credentials  = (object)$credentials;
-            if ($table_prefix) $this->table_prefix =         $table_prefix;
+            if ($driver      ) $this->driver       = $driver;
+            if ($credentials ) $this->credentials  = $credentials;
+            if ($table_prefix) $this->table_prefix = $table_prefix;
             if ($this->driver &&
                 $this->credentials) {
                 try {
-                    event::start('on_storage_init_before', 'pdo', ['storage' => &$this]);
+                    Event::start('on_storage_init_before', 'pdo', ['storage' => &$this]);
                     switch ($this->driver) {
                         case 'mysql':
                             $this->connection = new PDO(
@@ -56,24 +56,24 @@ class storage_sql_pdo implements has_external_cache {
                             break;
                         case 'sqlite':
                             $this->connection = new PDO(
-                                $this->driver.':'.data::DIRECTORY.
+                                $this->driver.':'.$root.
                                 $this->credentials->file_name);
                             $this->query(['action' => 'PRAGMA', 'command' => 'encoding',     'operator' => '=', 'value' => '"UTF-8"']);
                             $this->query(['action' => 'PRAGMA', 'command' => 'foreign_keys', 'operator' => '=', 'value' =>  'ON'    ]);
                             break;
                     }
                     $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
-                    event::start('on_storage_init_after', 'pdo', ['storage' => &$this]);
+                    Event::start('on_storage_init_after', 'pdo', ['storage' => &$this]);
                     return $this->connection;
                 } catch (PDOException $e) {
-                    message::insert(new text(
+                    Message::insert(new Text(
                         'Storage "%%_name" is not available!', ['name' => $this->name]), 'error'
                     );
                 }
             } else {
-                $path = (new file(data::DIRECTORY.'changes.php'))->path_get_relative();
-                $link = (new markup('a', ['href' => '/install/en'], 'Installation'))->render();
-                message::insert(new text_multiline([
+                $path = (new File(Data::DIRECTORY.'changes.php'))->path_get_relative();
+                $link = (new Markup('a', ['href' => '/install/en'], 'Installation'))->render();
+                Message::insert(new Text_multiline([
                     'Credentials for storage "%%_name" was not set!',
                     'Restore the storage credentials in "%%_file" or reinstall this system on the page: %%_link'], [
                     'name' => $this->name,
@@ -84,32 +84,34 @@ class storage_sql_pdo implements has_external_cache {
         }
     }
 
-    function test($driver, $credentials = []) {
-        $credentials = (object)$credentials;
-        try {
-            switch ($driver) {
-                case 'mysql':
-                    $connection = new PDO(
-                        $driver           .':host='.
-                        $credentials->host.';port='.
-                        $credentials->port.';dbname='.
-                        $credentials->database,
-                        $credentials->login,
-                        $credentials->password);
-                    break;
-                case 'sqlite':
-                    $path = data::DIRECTORY.$credentials->file_name;
-                    $connection = new PDO($driver.':'.$path);
-                    if (!is_writable($path)) {
-                        throw new Exception('File is not writable!');
-                    }
-                    break;
+    function test($driver = null, $credentials = null, $root = Data::DIRECTORY) {
+        if ($driver      === null) $driver      = $this->driver;
+        if ($credentials === null) $credentials = $this->credentials;
+        if ($driver &&
+            $credentials) {
+            try {
+                switch ($driver) {
+                    case 'mysql':
+                        $connection = new PDO(
+                            $driver           .':host='.
+                            $credentials->host.';port='.
+                            $credentials->port.';dbname='.
+                            $credentials->database,
+                            $credentials->login,
+                            $credentials->password);
+                        break;
+                    case 'sqlite':
+                        $path = $root.$credentials->file_name;
+                        if (file_exists($path) !== true && is_writable($root) !== true) throw new Exception('Directory "'.$root.'" is not writable!');
+                        if (file_exists($path) === true && is_writable($path) !== true) throw new Exception('File "'.     $path.'" is not writable!');
+                        $connection = new PDO($driver.':'.$path);
+                        break;
+                }
+                $connection = null;
+                return true;
+            } catch (Exception $e) {
+                return ['message' => $e->getMessage(), 'code' => $e->getCode()];
             }
-            $connection = null;
-            return true;
-        } catch (PDOException $e) {
-            return ['message' => $e->getMessage(), 'code' => $e->getCode()]; } catch (Exception $e) {
-            return ['message' => $e->getMessage(), 'code' => $e->getCode()];
         }
     }
 
@@ -145,7 +147,7 @@ class storage_sql_pdo implements has_external_cache {
             $query = $query[0];
         if ($this->init()) {
             $this->prepare_query($query);
-            $query_flat = core::array_values_select_recursive($query);
+            $query_flat = Core::array_values_select_recursive($query);
             $query_flat_string = implode(' ', $query_flat).';';
             $statement = $this->connection->prepare($query_flat_string);
             if ($statement instanceof PDOStatement) {
@@ -161,17 +163,17 @@ class storage_sql_pdo implements has_external_cache {
         if (is_array($query[0]))
             $query = $query[0];
         if ($this->init()) {
-            event::start('on_query_before', 'pdo', ['storage' => &$this, 'query' => &$query]);
+            Event::start('on_query_before', 'pdo', ['storage' => &$this, 'query' => &$query]);
             $this->queries[] = $query_prepared = $query;
             $this->prepare_query($query_prepared);
-            $query_flat = core::array_values_select_recursive($query_prepared);
+            $query_flat = Core::array_values_select_recursive($query_prepared);
             $query_flat_string = implode(' ', $query_flat).';';
             $statement = $this->connection->prepare($query_flat_string);
             if ($statement instanceof PDOStatement) {
                 $statement->execute($this->args);
                    $error_info = $statement->errorInfo();
             } else $error_info = ['HY007', 0, 'Associated statement is not prepared'];
-            event::start('on_query_after', 'pdo', ['storage' => &$this, 'query' => $query, 'statement' => &$statement, 'errors' => &$error_info]);
+            Event::start('on_query_after', 'pdo', ['storage' => &$this, 'query' => $query, 'statement' => &$statement, 'errors' => &$error_info]);
             $this->args_previous = $this->args;
             $this->args = [];
             if ($error_info[0] !== PDO::ERR_NONE) {
@@ -181,7 +183,7 @@ class storage_sql_pdo implements has_external_cache {
                 return null;
             }
             switch (strtoupper(array_values($query)[0])) {
-                case 'SELECT': return $statement->fetchAll(PDO::FETCH_CLASS| PDO::FETCH_PROPS_LATE, '\\effcore\\instance');
+                case 'SELECT': return $statement->fetchAll(PDO::FETCH_CLASS| PDO::FETCH_PROPS_LATE, '\\effcore\\Instance');
                 case 'INSERT': return $this->connection->lastInsertId();
                 case 'UPDATE': return $statement->rowCount();
                 case 'DELETE': return $statement->rowCount();
@@ -223,7 +225,7 @@ class storage_sql_pdo implements has_external_cache {
     }
 
     function prepare_table($name) {
-        if ($name[0] === '~') $name = entity::get(ltrim($name, '~'))->catalog_name;
+        if ($name[0] === '~') $name = Entity::get(ltrim($name, '~'))->catalog_name;
         if ($this->driver === 'mysql' ) return '`'.$this->table_prefix.$name.'`';
         if ($this->driver === 'sqlite') return '"'.$this->table_prefix.$name.'"';
     }
@@ -241,8 +243,8 @@ class storage_sql_pdo implements has_external_cache {
     function prepare_value($value, $is_emulation = false) {
         if (!$is_emulation)
             if (is_array($value)) foreach ($value as $c_sub_value)
-                 $this->args[] = core::return_rendered($c_sub_value);
-            else $this->args[] = core::return_rendered(      $value);
+                 $this->args[] = Core::return_rendered($c_sub_value);
+            else $this->args[] = Core::return_rendered(      $value);
         return is_array($value) ? implode(', ', array_pad([], count($value), '?')) : '?';
     }
 
@@ -470,7 +472,7 @@ class storage_sql_pdo implements has_external_cache {
 
     # ◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦
 
-    function instance_select($instance) { # @return: null | instance
+    function instance_select($instance) { # @return: null | Instance
         if ($this->init()) {
             $entity = $instance->entity_get();
             $values = $instance->values_get();
@@ -495,7 +497,7 @@ class storage_sql_pdo implements has_external_cache {
         }
     }
 
-    function instance_insert($instance) { # @return: null | instance | instance + new_id
+    function instance_insert($instance) { # @return: null | Instance | Instance + new_id
         if ($this->init()) {
             $entity = $instance->entity_get();
             $values = $instance->values_get();
@@ -523,7 +525,7 @@ class storage_sql_pdo implements has_external_cache {
         }
     }
 
-    function instance_update($instance) { # @return: null | instance
+    function instance_update($instance) { # @return: null | Instance
         if ($this->init()) {
             $entity = $instance->entity_get();
             $values = $instance->values_get();
@@ -546,7 +548,7 @@ class storage_sql_pdo implements has_external_cache {
         }
     }
 
-    function instance_delete($instance) { # @return: null | instance + empty(values)
+    function instance_delete($instance) { # @return: null | Instance + empty(values)
         if ($this->init()) {
             $entity = $instance->entity_get();
             $values = $instance->values_get();
@@ -577,7 +579,7 @@ class storage_sql_pdo implements has_external_cache {
     static function error_report($error_info, $query_string, $args) {
         $query_beautiful = str_replace([' ,', '( ', ' )'], [',', '(', ')'], $query_string);
         $query_beautiful_args = '\''.implode('\', \'', $args).'\'';
-        message::insert(new text_multiline([
+        Message::insert(new Text_multiline([
             'Query error!',
             'SQL state: %%_state',
             'Driver error code: %%_code',
@@ -587,7 +589,7 @@ class storage_sql_pdo implements has_external_cache {
             'code'  => $error_info[1],
             'text'  => $error_info[2],
             'info'  => 'dynamic/logs/']), 'error');
-        console::log_insert('storage', 'query',  count($args) ?
+        Console::log_insert('storage', 'query',  count($args) ?
             'error state = %%_state'.BR.'error code = %%_code'.BR.'error text = %%_text'.BR.'query = "%%_query"'.BR.'arguments = [%%_args]' :
             'error state = %%_state'.BR.'error code = %%_code'.BR.'error text = %%_text'.BR.'query = "%%_query"',
             'error', 0, [

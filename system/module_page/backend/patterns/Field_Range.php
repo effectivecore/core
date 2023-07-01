@@ -1,12 +1,12 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore;
 
-class field_range extends field_number {
+class Field_Range extends Field_Number {
 
     const INPUT_MIN_RANGE = 0;
     const INPUT_MAX_RANGE = 100;

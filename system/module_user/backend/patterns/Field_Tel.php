@@ -1,12 +1,12 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore;
 
-class field_tel extends field_text {
+class Field_Tel extends Field_Text {
 
     public $title = 'Telephone number';
     public $description = 'Field value should be represented in the international format of telephone numbers.';
@@ -24,9 +24,9 @@ class field_tel extends field_text {
     ###########################
 
     static function validate_value($field, $form, $element, &$new_value) {
-        if (strlen($new_value) && !core::validate_tel($new_value)) {
+        if (strlen($new_value) && !Core::validate_tel($new_value)) {
             $field->error_set(
-                'Field "%%_title" contains an incorrect telephone number!', ['title' => (new text($field->title))->render() ]
+                'Field "%%_title" contains an incorrect telephone number!', ['title' => (new Text($field->title))->render() ]
             );
         } else {
             return true;

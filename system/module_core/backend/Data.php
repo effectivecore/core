@@ -1,12 +1,12 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore;
 
-abstract class data extends dynamic {
+abstract class Data extends Dynamic {
 
     const TYPE = 'data';
     const DIRECTORY = DIR_DYNAMIC.'data/';

@@ -1,30 +1,30 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore\modules\core;
 
-use effcore\message;
-use effcore\module;
+use effcore\Message;
+use effcore\Module;
 
-abstract class events_module {
+abstract class Events_Module {
 
     static function on_install($event) {
-        $module = module::get('core');
+        $module = Module::get('core');
         $module->install();
     }
 
     static function on_enable($event) {
-        if (module::is_installed('core')) {
-            $module = module::get('core');
+        if (Module::is_installed('core')) {
+            $module = Module::get('core');
             $module->enable();
         }
     }
 
     static function on_cron_run($event) {
-        message::cleaning();
+        Message::cleaning();
     }
 
 }

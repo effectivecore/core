@@ -1,16 +1,16 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore\modules\demo;
 
-use effcore\message;
-use effcore\modules\core\events_module_update as core_events_module_update;
-use effcore\text;
+use effcore\Message;
+use effcore\modules\core\Events_Module_update as Core_Events_Module_update;
+use effcore\Text;
 
-abstract class events_module_update {
+abstract class Events_Module_update {
 
     # ──────────────────────────────────────────────────────────────────────────────
     # to activate the files update through the repository:
@@ -24,37 +24,37 @@ abstract class events_module_update {
     # ──────────────────────────────────────────────────────────────────────────────
 
     static function on_update_files($event, $bundle_id) {
-        return core_events_module_update::on_update_files__git($event, $bundle_id); # ← unregistered event (for demonstration only)
+        return Core_Events_Module_update::on_update_files__git($event, $bundle_id); # ← unregistered event (for demonstration only)
     }
 
     static function on_repo_restore($event, $bundle_id) {
-        return core_events_module_update::on_repo_restore__git($event, $bundle_id); # ← unregistered event (for demonstration only)
+        return Core_Events_Module_update::on_repo_restore__git($event, $bundle_id); # ← unregistered event (for demonstration only)
     }
 
     # ◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦
 
     static function on_update_data_before($event, $update) {
-        message::insert(new text('Call "%%_call" for #%%_number', ['call' => $event->handler, 'number' => $update->number]));
+        Message::insert(new Text('Call "%%_call" for #%%_number', ['call' => $event->handler, 'number' => $update->number]));
     }
 
     static function on_update_data_after($event, $update) {
-        message::insert(new text('Call "%%_call" for #%%_number', ['call' => $event->handler, 'number' => $update->number]));
+        Message::insert(new Text('Call "%%_call" for #%%_number', ['call' => $event->handler, 'number' => $update->number]));
     }
 
     # ◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦
 
     static function on_update_data_1000($update) {
-        message::insert(new text('Call "%%_call"', ['call' => $update->handler]));
+        Message::insert(new Text('Call "%%_call"', ['call' => $update->handler]));
         return true;
     }
 
     static function on_update_data_1001($update) {
-        message::insert(new text('Call "%%_call"', ['call' => $update->handler]));
+        Message::insert(new Text('Call "%%_call"', ['call' => $update->handler]));
         return true;
     }
 
     static function on_update_data_1002($update) {
-        message::insert(new text('Call "%%_call"', ['call' => $update->handler]));
+        Message::insert(new Text('Call "%%_call"', ['call' => $update->handler]));
         return true;
     }
 

@@ -1,12 +1,12 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore;
 
-class button_default extends button {
+class Button_default extends Button {
 
     public $title = null;
     public $attributes = [

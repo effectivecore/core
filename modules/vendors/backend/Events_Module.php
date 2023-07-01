@@ -1,22 +1,22 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore\modules\vendors;
 
-use effcore\module;
+use effcore\Module;
 
-abstract class events_module {
+abstract class Events_Module {
 
     static function on_enable($event) {
-        $module = module::get('vendors');
+        $module = Module::get('vendors');
         $module->enable();
     }
 
     static function on_disable($event) {
-        $module = module::get('vendors');
+        $module = Module::get('vendors');
         $module->disable();
     }
 

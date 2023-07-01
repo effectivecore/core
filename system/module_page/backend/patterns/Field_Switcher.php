@@ -1,12 +1,12 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore;
 
-class field_switcher extends field_checkbox {
+class Field_Switcher extends Field_Checkbox {
 
     public $title;
     public $title_position = 'bottom';
@@ -15,7 +15,7 @@ class field_switcher extends field_checkbox {
         'data-type' => 'switcher',
         'type'      => 'checkbox',
         'name'      => 'checkbox',
-        'value'     => 'on',
+        'value'     => 'on'
     ];
 
 }

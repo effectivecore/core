@@ -1,15 +1,15 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore;
 
-class template_text extends template {
+class Template_text extends Template {
 
     function render() {
-        if (is_object($this->data) && $this->data instanceof text) {
+        if (is_object($this->data) && $this->data instanceof Text) {
                    $this->data->args = $this->args;
             return $this->data->render();
         }

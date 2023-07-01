@@ -1,12 +1,12 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore;
 
-class color {
+class Color {
 
     const RETURN_HEX  = 0b00;
     const RETURN_RGB  = 0b01;
@@ -61,7 +61,7 @@ class color {
     ### static declarations ###
     ###########################
 
-    static protected $cache;
+    protected static $cache;
 
     static function cache_cleaning() {
         static::$cache = null;
@@ -69,9 +69,9 @@ class color {
 
     static function init() {
         if (static::$cache === null) {
-            foreach (storage::get('data')->select_array('colors') as $c_module_id => $c_colors) {
+            foreach (Storage::get('data')->select_array('colors') as $c_module_id => $c_colors) {
                 foreach ($c_colors as $c_row_id => $c_color) {
-                    if (isset(static::$cache[$c_color->id])) console::report_about_duplicate('colors', $c_color->id, $c_module_id, static::$cache[$c_color->id]);
+                    if (isset(static::$cache[$c_color->id])) Console::report_about_duplicate('colors', $c_color->id, $c_module_id, static::$cache[$c_color->id]);
                               static::$cache[$c_color->id] = $c_color;
                               static::$cache[$c_color->id]->module_id = $c_module_id;
                 }

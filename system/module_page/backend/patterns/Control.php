@@ -1,12 +1,12 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore;
 
-class control extends container {
+class Control extends Container {
 
     public $name_prefix = '';
     public $cform;
@@ -29,10 +29,10 @@ class control extends container {
             $this->initial_value = $value;
     }
 
-    function value_is_unique_in_storage_sql($value) { # @return: null | false | instance
+    function value_is_unique_in_storage_sql($value) { # @return: null | false | Instance
         if ($this->entity_name &&
             $this->entity_field_name) {
-            $result = entity::get($this->entity_name)->instances_select(['conditions' => [
+            $result = Entity::get($this->entity_name)->instances_select(['conditions' => [
                 'field_!f' => $this->entity_field_name,
                 'operator' => '=',
                 'field_!v' => $value], 'limit' => 1]);

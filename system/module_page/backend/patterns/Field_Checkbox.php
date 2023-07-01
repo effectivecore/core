@@ -1,12 +1,12 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore;
 
-class field_checkbox extends field_radiobutton {
+class Field_Checkbox extends Field_Radiobutton {
 
     public $title;
     public $title_position = 'bottom';

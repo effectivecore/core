@@ -1,12 +1,12 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore;
 
-class field_file_video extends field_file {
+class Field_File_video extends Field_File {
 
     public $title = 'Video';
     public $attributes = ['data-type' => 'file-video'];
@@ -23,7 +23,7 @@ class field_file_video extends field_file {
     ###########################
 
     static function widget_manage_action_text_get($field, $item, $id, $scope) {
-        return new text('video "%%_video"', ['video' => $item->file]);
+        return new Text('video "%%_video"', ['video' => $item->file]);
     }
 
 }

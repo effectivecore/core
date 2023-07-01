@@ -1,12 +1,12 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore;
 
-class field_select_text_direction extends field_select {
+class Field_Select_text_direction extends Field_Select {
 
     public $title = 'Text direction';
     public $attributes = ['data-type' => 'text_direction'];

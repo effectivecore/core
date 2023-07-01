@@ -1,12 +1,12 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore;
 
-class field_select_logic extends field_select {
+class Field_Select_logic extends Field_Select {
 
     public $title = 'Logic';
     public $attributes = ['data-type' => 'logic'];

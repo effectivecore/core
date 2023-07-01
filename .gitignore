@@ -34,4 +34,4 @@
 
 /modules/vendors/packages/*
 !/modules/vendors/packages/readme.md
-!/modules/vendors/packages/post-install-cmd.php
+!/modules/vendors/packages/effcore

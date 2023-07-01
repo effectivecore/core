@@ -29,14 +29,13 @@
 - Проект с открытым исходным кодом: да
 - Лицензия: проприетарное программное обеспечение
 - Сайт: [http://effcore.com](http://effcore.com)
-- Основной репозиторий кода: [https://bitbucket.org/effcore](https://bitbucket.org/effcore)
-- Зеркало основного репозитория кода: [https://github.com/effcore-foundation](https://github.com/effcore-foundation)
+- Репозиторий кода: [https://github.com/effectivecore](https://github.com/effectivecore)
 
 **EFFCORE** — это мини-CMS (система управления содержимым)
 и мини-CMF (фреймворк управления содержимым) нового поколения.
-Была разработана в промежутке между 2016 и 2022 годам.
+Была разработана в промежутке между 2016 и 2024 годам.
 Использует такие технологии как: HTML5, CSS3, IP v6, SVG, SMIL,
-UTF8, UTC, WAI-ARIA, NoSQL, Markdown, UML, Composer…
+UTF8, UTC, WAI-ARIA, NoSQL, Markdown, UML, Composer, Docker…
 
 Может использоваться в качестве инструмента для создания
 простых веб-сайтов без необходимости программирования. Может использоваться
@@ -69,7 +68,7 @@ UTF8, UTC, WAI-ARIA, NoSQL, Markdown, UML, Composer…
 на хостинге с самым дешёвым тарифным планом, должна генерировать главную страницу
 за 0,01 секунду. Это позволит обслуживать одновременно до ~100 запросов в секунду.
 Тарифный план должен соответствовать минимальным требованиям установки и включать
-в себя такие базовые возможности как OPCache + JIT и твердотельный накопитель.
+в себя такие базовые возможности как OPCache + JIT и твёрдотельный накопитель.
 Примерная стоимость тарифного плана должна варьироваться в пределах 3-5$ в месяц.
 
 
@@ -114,7 +113,7 @@ UTF8, UTC, WAI-ARIA, NoSQL, Markdown, UML, Composer…
 меню на одной языковой версии может иметь одни пункты меню, а на другой — совсем
 иные — будут отличаться и названия этих пунктов и их адреса, и их количество.
 
-В модуле "Профиль "Классика" Вы можете увидеть пример реализации
+В модуле "Профиль "Классический" Вы можете увидеть пример реализации
 мультиязычности по способу №1.
 
 
@@ -152,8 +151,8 @@ UTF8, UTC, WAI-ARIA, NoSQL, Markdown, UML, Composer…
 имеется раздел _Управление → Вид_, который включает в себя
 следующие подразделы:
 
-- _Цвета → Текущие_: изменение цвета конкретного элемента;
-- _Цвета → Предустановки_: одновременное изменение цвета множества элементов;
+- _Цвета → Управление_: работа с цветами;
+- _Цвета → Профили_: работа с цветовыми профилями;
 - _Макеты_: просмотр доступных макетов страниц;
 - _Глобальный CSS_: добавление пользовательских CSS-директив;
 - _Настройки_: изменение минимальной и максимальной ширины всех
@@ -225,7 +224,7 @@ UTF8, UTC, WAI-ARIA, NoSQL, Markdown, UML, Composer…
 Архитектура выполнена по классической схеме MVC.
 Хранение данных осуществляется в SQL и NoSQL-хранилищах.
 Для структурированных данных используется SQL-хранилище.
-Для неструктурированных данных (например, формы, наборы цветов,
+Для неструктурированных данных (например, формы, цветовые профили,
 тесты, настройки модулей) используется NoSQL-хранилище.
 Описание SQL и NoSQL приводится в соответствующих
 разделах.
@@ -288,53 +287,51 @@ UTF8, UTC, WAI-ARIA, NoSQL, Markdown, UML, Composer…
 - изменение одной строки в файле `*.data` приводит
   к изменению одной строки в `git diff`.
 
-Пример из файла `demo--data.data`:
+Пример файла `*.data`:
 
-    demo_data
-      demo_string: text
-      demo_string_empty: 
-      demo_integer: 123
-      demo_float: 0.000001
-      demo_boolean: true
-      demo_null: null
-      demo_array
+    example
+      string: text
+      string_empty: 
+      integer: 123
+      float: 0.000001
+      boolean: true
+      null: null
+      array
       - key_1: value 1
       - key_2: value 2
       - key_3: value 3
-      demo_array_empty|_empty_array
-      demo_object
+      array_empty|_empty_array
+      object
         property_name_1: value 1
         property_name_2: value 2
         property_name_3: value 3
-      demo_object_empty
-      demo_object_text|text
+      object_empty
+      object_text|Text
         text: some translated text
 
-Такой файл будет преобразован в PHP-файл `/dynamic/cache/data--demo.php`
-со следующим содержанием:
+Такой файл будет преобразован в PHP-файл `/dynamic/cache/data--example.php`
+с примерно следующим содержанием:
 
-    namespace effcore {
-        cache::$data['demo_data'] = new \stdClass;
-        cache::$data['demo_data']->demo_string = 'text';
-        cache::$data['demo_data']->demo_string_empty = '';
-        cache::$data['demo_data']->demo_integer = 123;
-        cache::$data['demo_data']->demo_float = 0.000001;
-        cache::$data['demo_data']->demo_boolean = true;
-        cache::$data['demo_data']->demo_null = null;
-        cache::$data['demo_data']->demo_array['key_1'] = 'value 1';
-        cache::$data['demo_data']->demo_array['key_2'] = 'value 2';
-        cache::$data['demo_data']->demo_array['key_3'] = 'value 3';
-        cache::$data['demo_data']->demo_array_empty = [];
-        cache::$data['demo_data']->demo_object = new \stdClass;
-        cache::$data['demo_data']->demo_object->property_name_1 = 'value 1';
-        cache::$data['demo_data']->demo_object->property_name_2 = 'value 2';
-        cache::$data['demo_data']->demo_object->property_name_3 = 'value 3';
-        cache::$data['demo_data']->demo_object_empty = new \stdClass;
-        cache::$data['demo_data']->demo_object_text = new \effcore\text;
-        cache::$data['demo_data']->demo_object_text->text = 'some translated text';
-    }
+    Cache::$data['example'] = new \stdClass;
+    Cache::$data['example']->string = 'text';
+    Cache::$data['example']->string_empty = '';
+    Cache::$data['example']->integer = 123;
+    Cache::$data['example']->float = 0.000001;
+    Cache::$data['example']->boolean = true;
+    Cache::$data['example']->null = null;
+    Cache::$data['example']->array['key_1'] = 'value 1';
+    Cache::$data['example']->array['key_2'] = 'value 2';
+    Cache::$data['example']->array['key_3'] = 'value 3';
+    Cache::$data['example']->array_empty = [];
+    Cache::$data['example']->object = new \stdClass;
+    Cache::$data['example']->object->property_name_1 = 'value 1';
+    Cache::$data['example']->object->property_name_2 = 'value 2';
+    Cache::$data['example']->object->property_name_3 = 'value 3';
+    Cache::$data['example']->object_empty = new \stdClass;
+    Cache::$data['example']->object_text = new \effcore\Text;
+    Cache::$data['example']->object_text->text = 'some translated text';
 
-При вызове `cache::select('demo_data')` этот файл будет загружен
+При вызове `Cache::select('example')` этот файл будет загружен
 в память и данные станут доступны без задержки.
 
 **Если используется PHP OPCache**, тогда все данные будут скомпилированы
@@ -349,7 +346,7 @@ UTF8, UTC, WAI-ARIA, NoSQL, Markdown, UML, Composer…
 вариаций записи:
 
 - `имя_сущности`
-- `имя_сущности|имя_класса`
+- `имя_сущности|Имя_класса`
 - `имя_свойства_обьекта: значение`
 - `- имя_ключа_массива: значение`
 
@@ -383,7 +380,7 @@ UTF8, UTC, WAI-ARIA, NoSQL, Markdown, UML, Composer…
 через административный интерфейс.
 
 **Примечание**: пример внесения изменений показан в файле
-`demo--data--changes.data` модуля "Демо".
+`test--data--changes.data` модуля "Тест".
 
 Скорость обновления кэша в среднем не превышает одной секунды.
 Скорость обновления через "Changes" выполняется за десятые доли секунды.
@@ -396,7 +393,7 @@ SQL
 ---------------------------------------------------------------------
 
 В качестве SQL-хранилища могут быть использованы MySQL или SQLite.
-Требуемые версии можно узнать в файле `readme/software.md`.
+Требуемые версии можно узнать в файле `docs/software.md`.
 Основной упор в системе сделан на ANSI SQL и кроссплатформенность.
 
 Поддерживаются следующие возможности:
@@ -474,16 +471,17 @@ SQL
 
 Пример переменных, которые могут быть использованы в
 динамических файлах:
-- `%%_color__main`
-- `%%_color__main(10|10|10|.5)`
-- `%%_return_if_token_color_is_dark(color__text|#000|#fff)`
-- `%%_return_if_token(color__text|#fff|1|0)`
-- `%%_avatar_path`
-- `%%_page_width_min_context`
-- `%%_page_width_max_context`
-- `%%_request_scheme`
-- `%%_request_host`
-- `%%_return_translation(simple string)`
+
+    %%_color(main)
+    %%_color(main|profile=dark|r=10|g=20|b=30|o=.5)
+    %%_return_if_scope_is_dark(text|#000|#fff)
+    %%_return_if_token(color\(text\)|#fff|1|0)
+    %%_avatar_path
+    %%_page_width_min(context)
+    %%_page_width_max(context)
+    %%_request(scheme)
+    %%_request(host)
+    %%_translation(simple string)
 
 По факту:
 - *`*.cssd`* — это классический CSS-файл, содержащий каскадные таблицы стилей,
@@ -494,7 +492,7 @@ SQL
   но который может содержать динамический контент.
 
 **Примечание**: больше примеров можно увидеть в файле
-`/system/module_develop/frontend/develop.cssd`.
+`develop.cssd`.
 
 
 Событийная модель
@@ -532,7 +530,7 @@ SQL
 
 - в PHP v.7+ включить OPCache;
 - в PHP v.8+ включить OPCache + JIT;
-- перейти на использование твердотельных накопителей (англ. Solid-State Drive, SSD);
+- перейти на использование твёрдотельных накопителей (англ. Solid-State Drive, SSD);
 - перенести директории `dynamic/cache` и `dynamic/tmp` в ОЗУ при этом
   для повышения уровня надёжности веб-сервера такая ОЗУ должна поддерживать коды
   исправления ошибок (англ. error-correcting code, ECC), а сам сервер использовать
@@ -605,21 +603,10 @@ Git невозможно.
 
 Система является **открытой и бесплатной**.
 
-Система не является общественным достоянием.
+Лицензионное соглашение является простым и минималистичным
+и не ограничивает права добропорядочных пользователей.
 
-Любое физическое лицо или организация вправе взять систему,
-внести в неё изменения или оставить в неизменном виде, а далее,
-на основе такой системы создать веб-сайт, веб-портал, веб-сервис
-и разместить его на сервере (осуществить развёртывание),
-где система будет выполнять работу, при этом программные
-файлы системы не должны стать общедоступными.
-
-Физическое лицо или организация вправе распространять систему
-в составе других продуктов только в неизменном виде.
-
-Таким образом, лицензионное соглашение налагает запрет на
-распространение системы в модифицированном виде. Это сделано для
-того чтобы злонамеренные лица не смогли выдавать себя за авторов
-данного произведения. При этом добросовестные пользователи
-по сути не ограничены в правах.
+Согласно лицензионному соглашению злонамеренные пользователи, которые
+хотели бы выдать данное произведение как своё собственное, уже будут находиться
+вне рамок правового поля.
 

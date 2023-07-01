@@ -1,12 +1,12 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore;
 
-class field_search extends field_text {
+class Field_Search extends Field_Text {
 
     public $title = 'Search';
     public $attributes = ['data-type' => 'search'];

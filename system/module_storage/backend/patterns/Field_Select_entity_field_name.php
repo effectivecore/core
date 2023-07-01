@@ -1,14 +1,14 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore;
 
 use stdClass;
 
-class field_select_entity_field_name extends field_select {
+class Field_Select_entity_field_name extends Field_Select {
 
     public $title = 'Field name';
     public $title__not_selected = '- select -';
@@ -22,8 +22,8 @@ class field_select_entity_field_name extends field_select {
         if (!$this->is_builded) {
             parent::build();
             $items = [];
-            $entities = entity::get_all();
-            core::array_sort_by_string($entities);
+            $entities = Entity::get_all();
+            Core::array_sort_by_string($entities);
             foreach ($entities as $c_entity) {
                 if (!empty($c_entity->managing_is_enabled)) {
                     foreach ($c_entity->fields as $c_name => $c_field) {
@@ -31,13 +31,13 @@ class field_select_entity_field_name extends field_select {
                             if (!isset($items[$c_entity->name])) {
                                        $items[$c_entity->name] = new stdClass;
                                        $items[$c_entity->name]->title = $c_entity->title; }
-                            $c_text_object = new text_multiline(['title' => $c_field->title, 'id' => '(~'.$c_entity->name.'.'.$c_name.')'], [], ' ');
+                            $c_text_object = new Text_multiline(['title' => $c_field->title, 'id' => '(~'.$c_entity->name.'.'.$c_name.')'], [], ' ');
                             $c_text_object->_text_translated = $c_text_object->render();
                             $items[$c_entity->name]->items[$c_entity->name.'.'.$c_name] = $c_text_object;
                         }
                     }
-                    core::array_sort_by_string(
-                        $items[$c_entity->name]->items, '_text_translated', 'd', false
+                    Core::array_sort_by_string(
+                        $items[$c_entity->name]->items, '_text_translated', Core::SORT_DSC, false
                     );
                 }
             }
@@ -65,12 +65,12 @@ class field_select_entity_field_name extends field_select {
 
     static function generate_disabled_items($filter) {
         $result = [];
-        $entities = entity::get_all();
+        $entities = Entity::get_all();
         foreach ($entities as $c_entity)
             if (!empty($c_entity->managing_is_enabled))
                 foreach ($c_entity->fields as $c_name => $c_field)
                     if (isset($c_field->managing_control_class))
-                        if (!in_array($c_entity->name, $filter))
+                        if (!Core::in_array($c_entity->name, $filter))
                             $result[$c_entity->name.'.'.$c_name] =
                                     $c_entity->name.'.'.$c_name;
         return $result;

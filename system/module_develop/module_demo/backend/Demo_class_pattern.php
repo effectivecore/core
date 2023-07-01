@@ -1,12 +1,12 @@
 <?php
 
 ##################################################################
-### Copyright © 2017—2022 Maxim Rysevets. All rights reserved. ###
+### Copyright © 2017—2023 Maxim Rysevets. All rights reserved. ###
 ##################################################################
 
 namespace effcore;
 
-class demo_pattern_class {
+class Demo_class_pattern {
 
     public $prop_1 = 'property value 1';
     public $prop_2 = 'property value 2';
