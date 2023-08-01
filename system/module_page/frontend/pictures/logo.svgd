@@ -23,7 +23,7 @@
 
     <defs>
         <linearGradient id="color-main">
-            <stop offset="0" stop-color="%%_return_url_arg(color|black|css_units)"/>
+            <stop offset="0" stop-color="%%_return_url_arg(color|black|filter_css_color=yes)"/>
         </linearGradient>
 
         <linearGradient id="color-wave-b" gradientTransform="rotate(90)">
