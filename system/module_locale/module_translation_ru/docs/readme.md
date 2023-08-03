@@ -466,7 +466,7 @@ SQL
 - `%%_page_width_max_context`
 - `%%_request_scheme`
 - `%%_request_host`
-- `%%_return_translation(simple string)`
+- `%%_translation(simple string)`
 
 По факту:
 - *`*.cssd`* — это классический CSS-файл, содержащий каскадные таблицы стилей,
