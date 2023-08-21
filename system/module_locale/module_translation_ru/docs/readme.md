@@ -273,51 +273,51 @@ UTF8, UTC, WAI-ARIA, NoSQL, Markdown, UML, Composer, Docker…
 - изменение одной строки в файле `*.data` приводит
   к изменению одной строки в `git diff`.
 
-Пример из файла `demo--data.data`:
+Пример файла `*.data`:
 
-    demo_data
-      demo_string: text
-      demo_string_empty: 
-      demo_integer: 123
-      demo_float: 0.000001
-      demo_boolean: true
-      demo_null: null
-      demo_array
+    example
+      string: text
+      string_empty: 
+      integer: 123
+      float: 0.000001
+      boolean: true
+      null: null
+      array
       - key_1: value 1
       - key_2: value 2
       - key_3: value 3
-      demo_array_empty|_empty_array
-      demo_object
+      array_empty|_empty_array
+      object
         property_name_1: value 1
         property_name_2: value 2
         property_name_3: value 3
-      demo_object_empty
-      demo_object_text|Text
+      object_empty
+      object_text|Text
         text: some translated text
 
-Такой файл будет преобразован в PHP-файл `/dynamic/cache/data--demo.php`
-со следующим содержанием:
+Такой файл будет преобразован в PHP-файл `/dynamic/cache/data--example.php`
+с примерно следующим содержанием:
 
-    Cache::$data['demo_data'] = new \stdClass;
-    Cache::$data['demo_data']->demo_string = 'text';
-    Cache::$data['demo_data']->demo_string_empty = '';
-    Cache::$data['demo_data']->demo_integer = 123;
-    Cache::$data['demo_data']->demo_float = 0.000001;
-    Cache::$data['demo_data']->demo_boolean = true;
-    Cache::$data['demo_data']->demo_null = null;
-    Cache::$data['demo_data']->demo_array['key_1'] = 'value 1';
-    Cache::$data['demo_data']->demo_array['key_2'] = 'value 2';
-    Cache::$data['demo_data']->demo_array['key_3'] = 'value 3';
-    Cache::$data['demo_data']->demo_array_empty = [];
-    Cache::$data['demo_data']->demo_object = new \stdClass;
-    Cache::$data['demo_data']->demo_object->property_name_1 = 'value 1';
-    Cache::$data['demo_data']->demo_object->property_name_2 = 'value 2';
-    Cache::$data['demo_data']->demo_object->property_name_3 = 'value 3';
-    Cache::$data['demo_data']->demo_object_empty = new \stdClass;
-    Cache::$data['demo_data']->demo_object_text = new \effcore\Text;
-    Cache::$data['demo_data']->demo_object_text->text = 'some translated text';
+    Cache::$data['example'] = new \stdClass;
+    Cache::$data['example']->string = 'text';
+    Cache::$data['example']->string_empty = '';
+    Cache::$data['example']->integer = 123;
+    Cache::$data['example']->float = 0.000001;
+    Cache::$data['example']->boolean = true;
+    Cache::$data['example']->null = null;
+    Cache::$data['example']->array['key_1'] = 'value 1';
+    Cache::$data['example']->array['key_2'] = 'value 2';
+    Cache::$data['example']->array['key_3'] = 'value 3';
+    Cache::$data['example']->array_empty = [];
+    Cache::$data['example']->object = new \stdClass;
+    Cache::$data['example']->object->property_name_1 = 'value 1';
+    Cache::$data['example']->object->property_name_2 = 'value 2';
+    Cache::$data['example']->object->property_name_3 = 'value 3';
+    Cache::$data['example']->object_empty = new \stdClass;
+    Cache::$data['example']->object_text = new \effcore\Text;
+    Cache::$data['example']->object_text->text = 'some translated text';
 
-При вызове `Cache::select('demo_data')` этот файл будет загружен
+При вызове `Cache::select('example')` этот файл будет загружен
 в память и данные станут доступны без задержки.
 
 **Если используется PHP OPCache**, тогда все данные будут скомпилированы
@@ -366,7 +366,7 @@ UTF8, UTC, WAI-ARIA, NoSQL, Markdown, UML, Composer, Docker…
 через административный интерфейс.
 
 **Примечание**: пример внесения изменений показан в файле
-`demo--data--changes.data` модуля "Демо".
+`test--data--changes.data` модуля "Тест".
 
 Скорость обновления кэша в среднем не превышает одной секунды.
 Скорость обновления через "Changes" выполняется за десятые доли секунды.
