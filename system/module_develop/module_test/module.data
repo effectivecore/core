@@ -10,4 +10,4 @@ module|Module
     system
     - develop: 0.907
     php
-    - curl: 7.1.0
+    - curl: 7.3.0

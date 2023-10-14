@@ -10,6 +10,7 @@ module|Module_embedded
     - bcmath: 1.0
     - exif: 1.0
     - fileinfo: 1.0
-    - filter: 7.1.0
+    - filter: 7.3.0
     - gd: 1.0
     - hash: 1.0
+    - mbstring: 7.3.0
