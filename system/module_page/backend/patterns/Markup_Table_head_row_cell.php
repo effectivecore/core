@@ -8,7 +8,7 @@ namespace effcore;
 
 #[\AllowDynamicProperties]
 
-class Table_head_row_cell extends Markup {
+class Markup_Table_head_row_cell extends Markup {
 
     public $tag_name = 'th';
 
