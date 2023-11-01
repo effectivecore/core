@@ -8,7 +8,7 @@ namespace effcore;
 
 #[\AllowDynamicProperties]
 
-class Table_head extends Markup {
+class Markup_Table_head extends Markup {
 
     public $tag_name = 'thead';
 
@@ -17,9 +17,9 @@ class Table_head extends Markup {
     }
 
     function child_insert($child, $id = null) {
-        if ($child instanceof Table_head_row) return parent::child_insert(                       $child,                $id);
-        if ($child instanceof Instance      ) return parent::child_insert(new Table_head_row([], $child->values_get()), $id);
-        if (is_array($child)                ) return parent::child_insert(new Table_head_row([], $child),               $id);
+        if ($child instanceof Markup_Table_head_row) return parent::child_insert(                              $child,                $id);
+        if ($child instanceof Instance             ) return parent::child_insert(new Markup_Table_head_row([], $child->values_get()), $id);
+        if (is_array($child)                       ) return parent::child_insert(new Markup_Table_head_row([], $child),               $id);
     }
 
 }
