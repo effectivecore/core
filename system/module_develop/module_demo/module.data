@@ -1,7 +1,7 @@
 module|Module
   id: demo
   id_bundle: system
-  title: Demo
+  title: Demonstration
   group: Develop
   description: Module for demonstrating capabilities.
   copyright: Copyright © 2017—2023 Maxim Rysevets. All rights reserved.
