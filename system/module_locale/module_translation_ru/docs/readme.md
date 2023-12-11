@@ -457,16 +457,17 @@ SQL
 
 Пример переменных, которые могут быть использованы в
 динамических файлах:
-- `%%_color__main`
-- `%%_color__main(10|10|10|.5)`
-- `%%_return_if_token_color_is_dark(color__text|#000|#fff)`
-- `%%_return_if_token(color__text|#fff|1|0)`
-- `%%_avatar_path`
-- `%%_page_width_min_context`
-- `%%_page_width_max_context`
-- `%%_request_scheme`
-- `%%_request_host`
-- `%%_translation(simple string)`
+
+    %%_color__main
+    %%_color__main(10|10|10|.5)
+    %%_return_if_token_color_is_dark(color__text|#000|#fff)
+    %%_return_if_token(color__text|#fff|1|0)
+    %%_avatar_path
+    %%_page_width_min_context
+    %%_page_width_max_context
+    %%_request_scheme
+    %%_request_host
+    %%_translation(simple string)
 
 По факту:
 - *`*.cssd`* — это классический CSS-файл, содержащий каскадные таблицы стилей,
@@ -477,7 +478,7 @@ SQL
   но который может содержать динамический контент.
 
 **Примечание**: больше примеров можно увидеть в файле
-`/system/module_develop/frontend/develop.cssd`.
+`develop.cssd`.
 
 
 Событийная модель
