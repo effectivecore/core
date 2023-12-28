@@ -12,15 +12,21 @@ Timer::tap('total');
 # prepare incoming parameters
 # ─────────────────────────────────────────────────────────────────────
 
-global $_ORIGINAL_POST;    $_ORIGINAL_POST    = $_POST;
-global $_ORIGINAL_GET;     $_ORIGINAL_GET     = $_GET;
-global $_ORIGINAL_REQUEST; $_ORIGINAL_REQUEST = $_REQUEST;
-global $_ORIGINAL_FILES;   $_ORIGINAL_FILES   = $_FILES;
+global $_GET;
+global $_GET_ORIGINAL;
+global $_POST;
+global $_POST_ORIGINAL;
+global $_FILES;
+global $_FILES_ORIGINAL;
 
-if (count($_POST))    $_POST    = Request::sanitize_structure('_POST');
-if (count($_GET))     $_GET     = Request::sanitize_structure('_GET');
-if (count($_REQUEST)) $_REQUEST = Request::sanitize_structure('_REQUEST');
-if (count($_FILES))   $_FILES   = Request::sanitize_structure_files();
+$_GET_ORIGINAL   = $_GET;
+$_POST_ORIGINAL  = $_POST;
+$_FILES_ORIGINAL = $_FILES;
+
+$_GET   = Request::sanitize_structure('_GET');
+$_GET   = Request::sanitize_args('_GET');
+$_POST  = Request::sanitize_structure('_POST');
+$_FILES = Request::sanitize_structure_FILES();
 
 # ─────────────────────────────────────────────────────────────────────
 # redirect on invalid requests (for example: send the value "http://домен/путь?запрос" over the socket instead of "http://xn--d1acufc/%D0%BF%D1%83%D1%82%D1%8C?%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81" through the browser)
@@ -37,8 +43,8 @@ if (Security::sanitize_url($raw_url) !== $raw_url || Security::validate_url($raw
 # redirect on invalid arguments
 # ─────────────────────────────────────────────────────────────────────
 
-if (count($_ORIGINAL_GET)) {
-    if (Security::hash_get($_GET) !== Security::hash_get($_ORIGINAL_GET)) {
+if (count($_GET_ORIGINAL)) {
+    if (Security::hash_get($_GET) !== Security::hash_get($_GET_ORIGINAL)) {
         Response::send_header_and_exit('redirect', null, null, count($_GET) ?
             Request::scheme_get().'://'.Request::host_get(false).Request::path_get().'?'.http_build_query($_GET, '', '&', PHP_QUERY_RFC3986) :
             Request::scheme_get().'://'.Request::host_get(false).Request::path_get()
