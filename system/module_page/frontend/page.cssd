@@ -14,6 +14,12 @@ body {
   background: %%_color__page;
 }
 
+@media screen and (max-width: %%_page_width_mobile(null)px) {
+  body {
+    padding: 0 15px 50px 15px;
+  }
+}
+
 
 
 /* layout */
@@ -306,10 +312,10 @@ x-admin-actions a[data-id='update'] {
 }
 
 body[data-is-managed-layout] [data-block] {
-  min-height: 50px;
+  min-height: 65px;
   margin: 10px 0;
   border: 1px dotted %%_color__warning}
-body[data-is-managed-layout] [data-block] x-admin-actions {margin-bottom: 5px; background-color: %%_color__warning}
+body[data-is-managed-layout] [data-block] x-admin-actions {background-color: %%_color__warning}
 body[data-is-managed-layout] [data-block][data-id='block__page_actions'] {min-height: auto; margin-top: 0; border: 0}
 
 

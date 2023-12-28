@@ -55,9 +55,9 @@ abstract class Events_Token {
             if ($name === 'color__tabs_link'             ) $color = $colors[ $is_all_colors_available ? $settings->color__tabs_link_id              : 'white'        ];
             if ($name === 'color__tabs_link_active'      ) $color = $colors[ $is_all_colors_available ? $settings->color__tabs_link_active_id       : 'white'        ];
             if ($name === 'color__tabs_link_active_no_bg') $color = $colors[ $is_all_colors_available ? $settings->color__tabs_link_active_no_bg_id : 'gold_r1'      ];
-            if ($name === 'color__ok'                    ) $color = $colors[ $is_all_colors_available ? $settings->color__ok_id                     : 'state_ok'     ];
-            if ($name === 'color__warning'               ) $color = $colors[ $is_all_colors_available ? $settings->color__warning_id                : 'state_warning'];
-            if ($name === 'color__error'                 ) $color = $colors[ $is_all_colors_available ? $settings->color__error_id                  : 'state_error'  ];
+            if ($name === 'color__ok'                    ) $color = $colors[ $is_all_colors_available ? $settings->color__ok_id                     : 'green_l2'     ];
+            if ($name === 'color__warning'               ) $color = $colors[ $is_all_colors_available ? $settings->color__warning_id                : 'orange_l1'    ];
+            if ($name === 'color__error'                 ) $color = $colors[ $is_all_colors_available ? $settings->color__error_id                  : 'red_l2'       ];
             if ($name === 'color__fieldset'              ) $color = $colors[ $is_all_colors_available ? $settings->color__fieldset_id               : 'default_2'    ];
             if ($name === 'color__fieldset_nested'       ) $color = $colors[ $is_all_colors_available ? $settings->color__fieldset_nested_id        : 'default_1'    ];
             if ($name === 'color__field'                 ) $color = $colors[ $is_all_colors_available ? $settings->color__field_id                  : 'default_1'    ];

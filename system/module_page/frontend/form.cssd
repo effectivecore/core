@@ -481,7 +481,7 @@ x-widget input[data-opener-type='settings']:checked ~ x-settings:first-of-type {
 x-widget x-settings {
   display: block;
   margin-top: 10px;
-  padding: 10px 10px 10px 40px;
+  padding: 10px 20px;
   border-top: 1px dashed %%_color__main;
   background: url('pictures/lines.svgd?opacity=.04&color=%%_return_if_token_color_is_dark(color__page|white|black)');
   background-size: 20px 20px;

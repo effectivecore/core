@@ -11,6 +11,18 @@ colors
     id: black
     value_hex: #000000
     group: base
+- default_1|Color
+    id: default_1
+    value_hex: #2a304a
+    group: base
+- default_2|Color
+    id: default_2
+    value_hex: #313852
+    group: base
+- default_3|Color
+    id: default_3
+    value_hex: #3b4157
+    group: base
 # ─────────────────────────────────────────────────────────────────────
 # gray group
 # ─────────────────────────────────────────────────────────────────────
@@ -968,30 +980,3 @@ colors
     id: violet_r10
     value_hex: #f4eaf4
     group: violet
-# ─────────────────────────────────────────────────────────────────────
-# default system colors
-# ─────────────────────────────────────────────────────────────────────
-- state_ok|Color
-    id: state_ok
-    value_hex: #48be38
-    group: default
-- state_warning|Color
-    id: state_warning
-    value_hex: #fd9a1e
-    group: default
-- state_error|Color
-    id: state_error
-    value_hex: #fa4c31
-    group: default
-- default_1|Color
-    id: default_1
-    value_hex: #2a304a
-    group: default
-- default_2|Color
-    id: default_2
-    value_hex: #313852
-    group: default
-- default_3|Color
-    id: default_3
-    value_hex: #3b4157
-    group: default

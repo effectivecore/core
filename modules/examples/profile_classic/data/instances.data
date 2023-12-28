@@ -15,7 +15,7 @@ instances
     values
     - id: logotype
     - description: Logotype main
-    - path: dynamic/files/pictures/picture-logotype.svg
+    - path: dynamic/files/pictures/picture-logotype.svgd
     - url: /
     - attributes
       - 0
@@ -28,7 +28,7 @@ instances
     values
     - id: logotype_ru
     - description: Логотип основной
-    - path: dynamic/files/pictures/picture-logotype-ru.svg
+    - path: dynamic/files/pictures/picture-logotype-ru.svgd
     - url: /ru
     - attributes
       - 0
@@ -1355,7 +1355,7 @@ instances
             title: Социальные сети
             title_is_visible: false
             attributes
-            - data-id: block__selection__social_networks
+            - data-id: block__selection_sql__social_networks
             - data-style: at-right
         - block__text_sql__copyright_ru|Block_preset_link
             id: block__text_sql__copyright_ru

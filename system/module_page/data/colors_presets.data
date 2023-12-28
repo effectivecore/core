@@ -19,9 +19,9 @@ colors_presets
       color__tabs_link_id: lightblue_l1
       color__tabs_link_active_id: white
       color__tabs_link_active_no_bg_id: black
-      color__ok_id: state_ok
-      color__warning_id: state_warning
-      color__error_id: state_error
+      color__ok_id: green_l2
+      color__warning_id: orange_l1
+      color__error_id: red_l2
       color__fieldset_id: gray_r10
       color__fieldset_nested_id: white
       color__field_id: white
