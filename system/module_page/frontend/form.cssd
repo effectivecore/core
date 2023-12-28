@@ -188,7 +188,7 @@ textarea {display: block; box-sizing: border-box; width: 100%; min-width: 100px}
 input[type='range'] {border-radius: 20px}
 input[type='email'] {text-transform: lowercase}
 input[type='color'] {height: 40px; padding: 0; cursor: pointer; text-transform: lowercase}
-
+input[data-is-wide-field] {box-sizing: border-box; width: 100%; min-width: 100px; max-width: 500px}
 
 
 /* checkboxes and radiobuttons */

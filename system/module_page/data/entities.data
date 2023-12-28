@@ -104,7 +104,7 @@ entities
             - weight: +380
             element_attributes
             - maxlength: 1024
-            - size: 60
+            - data-is-wide-field: true
     - attributes
         title: Attributes
         type: blob
@@ -265,7 +265,7 @@ entities
             - weight: +380
             element_attributes
             - maxlength: 1024
-            - size: 60
+            - data-is-wide-field: true
     - attributes
         title: Attributes
         type: blob
@@ -444,7 +444,7 @@ entities
             element_attributes
             - maxlength: 1024
             - required: null
-            - size: 60
+            - data-is-wide-field: true
     - url
         title: URL
         type: varchar
@@ -462,7 +462,7 @@ entities
             - weight: +340
             element_attributes
             - maxlength: 255
-            - size: 60
+            - data-is-wide-field: true
             element_attributes_on_insert
             - value: /some/address
     - is_https
@@ -709,7 +709,7 @@ entities
             - weight: +380
             element_attributes
             - maxlength: 1024
-            - size: 60
+            - data-is-wide-field: true
     - attributes
         title: Attributes
         type: blob
@@ -788,7 +788,7 @@ entities
             element_attributes
             - maxlength: 2048
             - required: null
-            - size: 60
+            - data-is-wide-field: true
     - created
         title: Created
         type: datetime
@@ -895,7 +895,7 @@ entities
             - weight: +380
             element_attributes
             - maxlength: 1024
-            - size: 60
+            - data-is-wide-field: true
     - attributes
         title: Attributes
         type: blob
@@ -1040,7 +1040,7 @@ entities
             - weight: +380
             element_attributes
             - maxlength: 1024
-            - size: 60
+            - data-is-wide-field: true
     - attributes
         title: Attributes
         type: blob

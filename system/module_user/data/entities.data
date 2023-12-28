@@ -192,7 +192,7 @@ entities
             properties
             - weight: +380
             element_attributes
-            - size: 60
+            - data-is-wide-field: true
     - created
         title: Created
         type: datetime
@@ -522,7 +522,7 @@ entities
             properties
             - weight: +380
             element_attributes
-            - size: 60
+            - data-is-wide-field: true
     - weight
         title: Weight
         type: integer

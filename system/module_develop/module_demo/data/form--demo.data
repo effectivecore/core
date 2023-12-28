@@ -330,7 +330,7 @@ forms
             - value: text in input
             - minlength: 5
             - pattern: ^[a-zA-Z0-9 ]+$
-            - size: 60
+            - data-is-wide-field: true
         # field 'Search'
         - search|Field_Search
             title: Search
@@ -341,7 +341,7 @@ forms
             element_attributes
             - name: search
             - value: text in search
-            - size: 57
+            - data-is-wide-field: true
         # field 'URL'
         - url|Field_URL
             title: URL
@@ -352,7 +352,7 @@ forms
             element_attributes
             - name: url
             - value: http://domain/path?q=w#p1
-            - size: 60
+            - data-is-wide-field: true
             is_trim_trailing_slash: false
             is_trim_trailing_question: false
             is_trim_trailing_sharp: false
@@ -380,7 +380,7 @@ forms
             - name: email
             - value: test1@example.com,test2@example.com
             - multiple: true
-            - size: 60
+            - data-is-wide-field: true
         # field 'Telephone number'
         - tel|Field_Tel
             title: Telephone number
