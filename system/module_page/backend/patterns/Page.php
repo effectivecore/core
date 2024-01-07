@@ -29,6 +29,8 @@ class Page extends Node implements has_Data_cache {
     public $origin = 'nosql'; # nosql | sql
     public $module_id;
     public $_markup;
+    public $_layout;
+    public $_layout_settings;
     public $_areas_pointers = [];
     protected $args              = [];
     protected $used_blocks_dpath = [];
@@ -43,26 +45,33 @@ class Page extends Node implements has_Data_cache {
     function build() {
         if (!$this->is_builded) {
             Event::start('on_page_build_before', $this->id, ['page' => &$this]);
-            $this->_markup = Core::deep_clone(Layout::select($this->id_layout));
-            if ($this->_markup) {
-                foreach ($this->_markup->children_select_recursive() as $c_area) {
-                    if ($c_area instanceof Area && isset($c_area->id)) {
-                        if (isset($this->blocks[$c_area->id])) {
-                            $this->_areas_pointers[$c_area->id] = $c_area;
-                            $c_blocks = $this->blocks[$c_area->id];
-                            Core::array_sort_by_number($c_blocks);
-                            foreach ($c_blocks as $c_row_id => $c_block) {
-                                if ($c_blocks[$c_row_id] instanceof Block_preset_link) $c_blocks[$c_row_id] = $c_block->block_make();
-                                if ($c_blocks[$c_row_id] instanceof Block) {
-                                    $c_blocks[$c_row_id]->build($this);
-                                    if ($c_blocks[$c_row_id]->children_select_count()) {
-                                        $c_area->child_insert($c_blocks[$c_row_id], $c_row_id);
-                                        if (isset($c_blocks[$c_row_id]->attributes['data-id']))
-                                            $this->used_blocks_cssid[$c_blocks[$c_row_id]->attributes['data-id']] =
-                                                                     $c_blocks[$c_row_id]->attributes['data-id'];
-                                        if ($c_blocks[$c_row_id]->type === 'link' ||
-                                            $c_blocks[$c_row_id]->type === 'copy') {
-                                            $this->used_blocks_dpath[] = $c_blocks[$c_row_id]->source;
+            $this->_layout = Core::deep_clone(Layout::select ($this->id_layout) );
+            $this->_layout_settings = Layout::select_settings($this->id_layout);
+            if ($this->_layout) {
+                foreach ($this->_layout->children_select_recursive() as $c_area) {
+                    if ($c_area instanceof Area) {
+                        if (isset($c_area->id)) {
+                            $c_area->states_set(
+                                isset($this->_layout_settings['states'][$c_area->id]) ?
+                                      $this->_layout_settings['states'][$c_area->id] : []);
+                            $c_area->build();
+                            if (isset($this->blocks[$c_area->id])) {
+                                $this->_areas_pointers[$c_area->id] = $c_area;
+                                $c_blocks = $this->blocks[$c_area->id];
+                                Core::array_sort_by_number($c_blocks);
+                                foreach ($c_blocks as $c_row_id => $c_block) {
+                                    if ($c_blocks[$c_row_id] instanceof Block_preset_link) $c_blocks[$c_row_id] = $c_block->block_make();
+                                    if ($c_blocks[$c_row_id] instanceof Block) {
+                                        $c_blocks[$c_row_id]->build($this);
+                                        if ($c_blocks[$c_row_id]->children_select_count()) {
+                                            $c_area->child_insert($c_blocks[$c_row_id], $c_row_id);
+                                            if (isset($c_blocks[$c_row_id]->attributes['data-id']))
+                                                $this->used_blocks_cssid[$c_blocks[$c_row_id]->attributes['data-id']] =
+                                                                         $c_blocks[$c_row_id]->attributes['data-id'];
+                                            if ($c_blocks[$c_row_id]->type === 'link' ||
+                                                $c_blocks[$c_row_id]->type === 'copy') {
+                                                $this->used_blocks_dpath[] = $c_blocks[$c_row_id]->source;
+                                            }
                                         }
                                     }
                                 }
@@ -70,6 +79,7 @@ class Page extends Node implements has_Data_cache {
                         }
                     }
                 }
+                $this->_markup = $this->_layout;
             } else {
                 $this->_markup = new Text(
                     'LOST LAYOUT: %%_id', ['id' => $this->id_layout ?: 'n/a']

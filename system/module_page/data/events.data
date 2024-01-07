@@ -48,8 +48,14 @@ events
       for: virtual
       weight: -600
       handler: \effcore\modules\page\Events_File::on_load_virtual_not_found
+  - virtual_style__grid_custom|Event
+      for: virtual
+      handler: \effcore\modules\page\Events_File::on_load_virtual_style__grid_custom
   # ◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦
   on_form_build
+  - layout|Event
+      for: layout
+      handler: \effcore\modules\page\Events_Form_Layout::on_build
   - instance_update__page|Event
       for: instance_update
       weight: +300

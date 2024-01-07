@@ -12,6 +12,7 @@ class Layout extends Node implements has_Data_cache {
 
     public $id;
     public $title;
+    public $is_manageable = false;
 
     function render_self() {
         return '';
@@ -22,6 +23,7 @@ class Layout extends Node implements has_Data_cache {
     ###########################
 
     protected static $cache;
+    protected static $cache_for_settings;
 
     static function not_external_properties_get() {
         return [
@@ -30,7 +32,8 @@ class Layout extends Node implements has_Data_cache {
     }
 
     static function cache_cleaning() {
-        static::$cache = null;
+        static::$cache              = null;
+        static::$cache_for_settings = null;
     }
 
     static function init() {
@@ -40,6 +43,13 @@ class Layout extends Node implements has_Data_cache {
                     if (isset(static::$cache[$c_id])) Console::report_about_duplicate('layouts', $c_id, $c_module_id, static::$cache[$c_id]);
                               static::$cache[$c_id] = $c_layout;
                               static::$cache[$c_id]->module_id = $c_module_id;
+                }
+            }
+            foreach (Storage::get('data')->select_array('layouts_settings') as $c_module_id => $c_settings) {
+                foreach ($c_settings as $c_id => $c_states) {
+                    if (isset(static::$cache_for_settings[$c_id])) Console::report_about_duplicate('layouts_settings', $c_id, $c_module_id, static::$cache_for_settings[$c_id]);
+                              static::$cache_for_settings[$c_id]['module_id'] = $c_module_id;
+                              static::$cache_for_settings[$c_id]['states'   ] = $c_states;
                 }
             }
         }
@@ -62,6 +72,11 @@ class Layout extends Node implements has_Data_cache {
                static::$cache[$id] =
                static::$cache[$id]->load_from_nosql_storage();
         return static::$cache[$id];
+    }
+
+    static function select_settings($id) {
+        static::init();
+        return static::$cache_for_settings[$id] ?? [];
     }
 
 }

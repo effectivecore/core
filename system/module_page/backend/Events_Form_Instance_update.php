@@ -27,14 +27,19 @@ abstract class Events_Form_Instance_update {
                     Form_part::get('form_instance_update__page_width'), 'page_width'
                 );
                 # layout and its blocks
-                $layout = Core::deep_clone(
-                    Layout::select($form->_instance->id_layout)
-                );
-                if ($layout) {
-                    foreach ($layout->children_select_recursive() as $c_area) {
+                $form->_layout = Core::deep_clone(Layout::select ($form->_instance->id_layout) );
+                $form->_layout_settings = Layout::select_settings($form->_instance->id_layout);
+                if ($form->_layout) {
+                    foreach ($form->_layout->children_select_recursive() as $c_area) {
                         if ($c_area instanceof Area) {
-                            $c_area->managing_enable();
+                            # prepare area
+                            $c_area->manage_mode_enable('decorated');
+                            $c_area->states_set(
+                                $c_area->id &&
+                                isset($form->_layout_settings['states'][$c_area->id]) ?
+                                      $form->_layout_settings['states'][$c_area->id] : []);
                             $c_area->build();
+                            # prepare blocks
                             if ($c_area->id) {
                                 $c_widget_blocks = new Widget_Blocks($c_area->id);
                                 $c_widget_blocks->cform = $form;
@@ -47,7 +52,7 @@ abstract class Events_Form_Instance_update {
                         }
                     }
                     $form->child_select('fields')->child_insert(
-                        new Markup('x-layout-manager', ['data-layout-id' => $layout->id], ['manager' => $layout], -500), 'layout_manager'
+                        new Markup('x-layout-manager', ['data-layout-id' => $form->_layout->id], ['manager' => $form->_layout], -500), 'layout_manager'
                     );
                 } else {
                     $form->child_select('fields')->child_insert(
@@ -77,6 +82,10 @@ abstract class Events_Form_Instance_update {
                                             'permissions' => ['manage__seo' => 'manage__seo']])) {
                     $items['#meta']->disabled_set(true);
                     $items['#is_use_global_meta']->disabled_set(true);
+                }
+                # when the layout is lost
+                if (!Layout::select($form->_instance->id_layout)) {
+                    $items['~update']->disabled_set();
                 }
             }
         }

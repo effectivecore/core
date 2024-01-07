@@ -415,6 +415,7 @@ translations
     - go to page %%_link: перейти на сторінку %%_link
     - go to Russian language: перейти на Російську мову
     - go to section "%%_title": перейти до розділу "%%_title"
+    - Grid custom: Сітка користувальницька
     - Group "%%_title" should contain a maximum %%_number item%%_plural(number\|s)!: Група "%%_title" повинна містити максимально %%_number элемент%%_plural(number|iv-i)!
     - Group "%%_title" should contain a minimum %%_number item%%_plural(number\|s)!: Група "%%_title" повинна містити мінімально %%_number элемент%%_plural(number|iv-i)!
     - Group "%%_title" should contain at least one selected item!: Група "%%_title" повинна містити щонайменше один вибраний елемент!

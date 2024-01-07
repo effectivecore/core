@@ -509,8 +509,24 @@ x-widget[data-type^='items-files'] x-audio-player {
 
 /* form 'instance_update' */
 
-form#instance_update x-layout-manager [data-area][data-id] {padding: 15px}
-form#instance_update x-layout-manager x-area-info {margin: -15px -15px 9px -15px}
+form#instance_update x-layout-manager [data-area][data-id] {
+  background: none;
+}
+
+form#instance_update x-layout-manager x-area-info {
+  margin: -20px -20px 20px -20px;
+  padding: 10px;
+  color: white;
+  background: %%_color__ok url('pictures/lines.svgd');
+}
+
+form#instance_update x-layout-manager x-area-info x-area-id {
+  display: inline-block;
+}
+
+form#instance_update x-layout-manager x-area-info x-area-tag-name {
+  display: inline-block;
+}
 
 
 
