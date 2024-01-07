@@ -19,7 +19,7 @@ General information
 
 **EFFCORE** — the next-generation mini-CMS (Content Management System)
 and mini-CMF (Content Management Framework).
-It was developed between 2016 and 2023.
+It was developed between 2016 and 2024.
 Uses technologies such as: HTML5, CSS3, IP v6, SVG, SMIL,
 UTF8, UTC, WAI-ARIA, NoSQL, Markdown, UML, Composer, Docker…
 
