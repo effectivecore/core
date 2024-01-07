@@ -22,8 +22,8 @@ class Field_Hidden extends Markup_simple {
     }
 
     function name_get($trim = true) {
-        return $trim ? rtrim($this->attribute_select('name'), '[]') :
-                             $this->attribute_select('name');
+        if ($trim === false) return                  $this->attribute_select('name') ;
+        if ($trim !== false) return Field::trim_name($this->attribute_select('name'));
     }
 
     function name_set($name) {

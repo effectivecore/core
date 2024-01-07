@@ -759,7 +759,7 @@ translations
     - Reload this page and make changes again to prevent inconsistency.: Перезагрузите эту страницу и снова внесите изменения, чтобы предотвратить несогласованность действий.
     - Report: Отчёт
     - required for modules: требуется для модулей
-    - reset: сброс
+    - reset: сбросить
     - restore repository: восстановить репозиторий
     - Restore the storage credentials in "%%_file" or reinstall this system on the page\: %%_link: Восстановите учётные данные хранилища в "%%_file" или переустановите эту систему на странице: %%_link
     - review: обзор

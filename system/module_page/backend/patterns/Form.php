@@ -315,6 +315,10 @@ class Form extends Markup implements has_Data_cache {
         return static::$c_form_number++;
     }
 
+    static function is_posted() {
+        return Request::value_get('validation_id', 0, '_POST', false);
+    }
+
     # ─────────────────────────────────────────────────────────────────────
     # functionality for validation_id
     # ─────────────────────────────────────────────────────────────────────

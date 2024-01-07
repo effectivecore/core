@@ -6,6 +6,8 @@
 
 namespace effcore;
 
+use stdClass;
+
 #[\AllowDynamicProperties]
 
 class Group_Palette extends Group_Radiobuttons {
@@ -19,34 +21,39 @@ class Group_Palette extends Group_Radiobuttons {
 
     function build() {
         if (!$this->is_builded) {
-            $previous_group_name = '';
             foreach (Color::get_all() as $c_color) {
-                if ($previous_group_name !== '' &&
-                    $previous_group_name !== $c_color->group) $this->child_insert(HR);
-                    $previous_group_name  =  $c_color->group;
-                if (!$this->child_select($c_color->id)) {
-                    $c_color_id        = $c_color->id;
-                    $c_color_value_hex = $c_color->value_hex ?: '#ffffff';
-                    $c_color_value     = $c_color->value_hex ?: 'transparent';
-                    $c_element_attributes = [
-                        'value' => $c_color_id,
-                        'title' => new Text('color ID = "%%_id" and value = "%%_value"', ['id' => $c_color_id, 'value' => $c_color_value]),
-                        'style' => ['background-color: '.$c_color_value_hex]];
-                    $c_field                     = new $this->field_class;
-                    $c_field->tag_name           = $this->field_tag_name;
-                    $c_field->title_tag_name     = $this->field_title_tag_name;
-                    $c_field->title_position     = $this->field_title_position;
-                    $c_field->title              = null;
-                    $c_field->description        = null;
-                    $c_field->element_attributes = $c_element_attributes + $this->attributes_select('element_attributes') + $c_field->attributes_select('element_attributes');
-                    $c_field->weight             = 0;
-                    $c_field->build();
-                    $c_field->required_set(isset($this->required[$c_color->id]));
-                    $c_field-> checked_set(isset($this->checked [$c_color->id]));
-                    $c_field->disabled_set(isset($this->disabled[$c_color->id]));
-                    $this->child_insert($c_field, $c_color->id);
-                }
+                $c_color_value_hex = $c_color->value_hex ?: '#ffffff';
+                $c_color_value     = $c_color->value_hex ?: 'transparent';
+                $this->items[$c_color->id] = new stdClass;
+                $this->items[$c_color->id]->title = null;
+                $this->items[$c_color->id]->description = null;
+                $this->items[$c_color->id]->weight = +0;
+                $this->items[$c_color->id]->group = $c_color->group;
+                $this->items[$c_color->id]->element_attributes = [
+                    'value' => $c_color->id,
+                    'title' => new Text('color ID = "%%_id" and value = "%%_value"', ['id' => $c_color->id, 'value' => $c_color_value]),
+                    'style' => ['background-color: '.$c_color_value_hex]
+                ];
             }
+            $fields = [];
+            foreach ($this->items as $c_value => $c_info) {
+                $c_field                     = new $this->field_class;
+                $c_field->tag_name           =     $this->field_tag_name;
+                $c_field->title_tag_name     =     $this->field_title_tag_name;
+                $c_field->title_position     =     $this->field_title_position;
+                $c_field->title              = $c_info->title;
+                $c_field->description        = $c_info->description;
+                $c_field->weight             = $c_info->weight;
+                $c_field->element_attributes = $c_info->element_attributes + $this->attributes_select('element_attributes') + $c_field->attributes_select('element_attributes');
+                $c_field->build();
+                $c_field->required_set(isset($this->required[$c_value]));
+                $c_field-> checked_set(isset($this->checked [$c_value]));
+                $c_field->disabled_set(isset($this->disabled[$c_value]));
+                if (!isset($fields[$c_info->group]))
+                           $fields[$c_info->group] = new Markup('x-sub-group', ['data-sub-group' => true, 'data-sub-group' => $c_info->group]);
+                $fields[$c_info->group]->child_insert($c_field, $c_value);
+            }
+            $this->children_update($fields);
             $this->is_builded = true;
         }
     }

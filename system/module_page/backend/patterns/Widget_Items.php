@@ -30,8 +30,8 @@ class Widget_Items extends Control implements Control_complex {
         parent::__construct(null, null, null, $attributes, [], $weight);
     }
 
-    function build($reset = false) {
-        if (!$this->is_builded || $reset) {
+    function build($rebuild = false) {
+        if (!$this->is_builded || $rebuild) {
             $this->child_insert(static::widget_manage_group_get($this), 'manage');
             $this->child_insert(static::widget_insert_get      ($this), 'insert');
             $this->build_widget_manage_group();

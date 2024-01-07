@@ -230,8 +230,8 @@ class Field extends Control {
 
     function name_get($trim = true) {
         $element = $this->child_select('element');
-        return $trim ? rtrim($element->attribute_select('name'), '[]') :
-                             $element->attribute_select('name');
+        if ($trim === false) return                   $element->attribute_select('name') ;
+        if ($trim !== false) return static::trim_name($element->attribute_select('name'));
     }
 
     function name_set($name) {
@@ -422,5 +422,13 @@ class Field extends Control {
     static function on_validate_final   ($field, $form, $npath) {}
     static function on_request_value_set($field, $form, $npath) {}
     static function on_submit           ($field, $form, $npath) {} */
+
+    static function trim_name($name) {
+        if (is_string($name) && strlen($name)) {
+            $matches = [];
+            preg_match('%^(?<name>[^[]+).*%S', $name, $matches);
+               return $matches['name'];
+        } else return          $name;
+    }
 
 }

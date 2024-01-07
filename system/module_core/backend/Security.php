@@ -16,6 +16,32 @@ abstract class Security {
                        'br|b|i|u|s|q|em|span|strong|small|sub|sup|del|ins|mark|abbr|cite|dfn|wbr|kbd|var|samp|'.
                        'img|map|area|svg|video|audio|source|track|bdi|bdo';
 
+    const CSS_COLORS = [
+        'aliceblue',      'darkblue',       'firebrick',   'lavender',             'magenta',           'palegoldenrod', 'saddlebrown', 'tan',
+        'antiquewhite',   'darkcyan',       'floralwhite', 'lavenderblush',        'maroon',            'palegreen',     'salmon',      'teal',
+        'aqua',           'darkgoldenrod',  'forestgreen', 'lawngreen',            'mediumaquamarine',  'paleturquoise', 'sandybrown',  'thistle',
+        'aquamarine',     'darkgray',       'fuchsia',     'lemonchiffon',         'mediumblue',        'palevioletred', 'seagreen',    'tomato',
+        'azure',          'darkgreen',      'gainsboro',   'lightblue',            'mediumorchid',      'papayawhip',    'seashell',    'turquoise',
+        'beige',          'darkkhaki',      'ghostwhite',  'lightcoral',           'mediumpurple',      'peachpuff',     'sienna',      'violet',
+        'bisque',         'darkmagenta',    'gold',        'lightcyan',            'mediumseagreen',    'peru',          'silver',      'wheat',
+        'black',          'darkolivegreen', 'goldenrod',   'lightgoldenrodyellow', 'mediumslateblue',   'pink',          'skyblue',     'white',
+        'blanchedalmond', 'darkorange',     'gray',        'lightgreen',           'mediumspringgreen', 'plum',          'slateblue',   'whitesmoke',
+        'blue',           'darkorchid',     'green',       'lightgrey',            'mediumturquoise',   'powderblue',    'slategray',   'yellow',
+        'blueviolet',     'darkred',        'greenyellow', 'lightpink',            'mediumvioletred',   'purple',        'snow',        'yellowgreen',
+        'brown',          'darksalmon',     'honeydew',    'lightsalmon',          'midnightblue',      'rebeccapurple', 'springgreen',
+        'burlywood',      'darkseagreen',   'hotpink',     'lightseagreen',        'mintcream',         'red',           'steelblue',
+        'cadetblue',      'darkslateblue',  'indianred',   'lightskyblue',         'mistyrose',         'rosybrown',
+        'chartreuse',     'darkslategray',  'indigo',      'lightslategray',       'moccasin',          'royalblue',
+        'chocolate',      'darkturquoise',  'ivory',       'lightsteelblue',       'navajowhite',
+        'coral',          'darkviolet',     'khaki',       'lightyellow',          'navy',
+        'cornflowerblue', 'deeppink',                      'lime',                 'oldlace',
+        'cornsilk',       'deepskyblue',                   'limegreen',            'olive',
+        'crimson',        'dimgray',                       'linen',                'olivedrab',
+        'cyan',           'dodgerblue',                                            'orange',
+                                                                                   'orangered',
+                                                                                   'orchid',
+    ];
+
     # hash performance (5 million iterations):
     # ┌────────────────────────╥─────────────┬────────┬─────────────────────────┐
     # │ function               ║ time (sec.) │ is hex │ has 32-bit sign problem │
@@ -249,7 +275,14 @@ abstract class Security {
     }
 
     static function validate_css_color($value) {
-        return filter_var($value, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '%^\\#[a-fA-F0-9]{3}$|^\\#[a-fA-F0-9]{6}$|^[a-zA-Z]{3,20}$%S']]); # examples: "#ff0", "#a1b2c3", "Red", "LightGoldenrodYellow"
+        # examples: "Red", "LightGoldenrodYellow"
+        if (Core::in_array(strtolower($value), static::CSS_COLORS))
+            return $value;
+        # examples: "#ff0", "#a1b2c3"
+        return filter_var($value, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' =>
+            '%^\\#[a-fA-F0-9]{3}$'.'|'.
+             '^\\#[a-fA-F0-9]{6}$'.'%S'
+        ]]);
     }
 
     static function validate_css_float($value) {
@@ -273,7 +306,7 @@ abstract class Security {
         return filter_var($value, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' =>
             '%^(?<sign>[\\-]{0,1})'. # examples: "-1px", "1234.567em", ".5%", "-.567px" | fake values: "-", ".", "px", "123.", "123-", "12-3", "12--3", "12..3", "1-2-3", "1.2.3"
               '(?<value>[0-9]{0,4}[\\.]{0,1}[0-9]{1,3})'.
-              '(?<dimension>px|em|\\%|)$%S']]);
+              '(?<dimension>px|cm|mm|in|pt|pc|em|ex|ch|rem|vw|vh|vmin|vmax|\\%|)$%S']]);
     }
 
 }

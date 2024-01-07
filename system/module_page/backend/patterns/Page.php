@@ -101,7 +101,12 @@ class Page extends Node implements has_Data_cache {
         # global styles
         $file_global_cssd = new File(Dynamic::DIR_FILES.'global.cssd');
         if ($file_global_cssd->is_exists()) {
-            Frontend::insert('page_all__global__page', null, 'styles', ['path' => '/dynamic/files/global.cssd', 'attributes' => ['rel' => 'stylesheet', 'media' => 'all'], 'weight' => -600], 'page_style', 'page');
+            Frontend::insert('page_all__global__page', null, 'styles', [
+                'path' => '/dynamic/files/global.cssd',
+                'attributes' => [
+                    'rel'   => 'stylesheet',
+                    'media' => 'all'],
+                'weight' => -600], 'page_style', 'page');
         }
 
         # render page

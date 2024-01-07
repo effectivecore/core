@@ -326,4 +326,12 @@ abstract class Events_File {
         }
     }
 
+    # ─────────────────────────────────────────────────────────────────────
+    # virtual files
+    # ─────────────────────────────────────────────────────────────────────
+
+    static function on_load_virtual_not_found($event, &$type_info, &$file) {
+        Response::send_header_and_exit('file_not_found');
+    }
+
 }

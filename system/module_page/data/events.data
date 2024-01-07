@@ -44,6 +44,10 @@ events
       for: static
       weight: +500
       handler: \effcore\modules\page\Events_File::on_load_static_video
+  - virtual_not_found|Event
+      for: virtual
+      weight: -600
+      handler: \effcore\modules\page\Events_File::on_load_virtual_not_found
   # ◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦
   on_form_build
   - instance_update__page|Event

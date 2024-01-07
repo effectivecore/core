@@ -3,7 +3,6 @@ request_settings
   - =: animation
   - =: back
   - =: color
-  - =: color_fire
   - =: cover
   - =: manage_layout
   - =: opacity

@@ -305,8 +305,8 @@ class File_container {
     ### static declarations ###
     ###########################
 
-    static function __data___pack($data) {return    serialize($data);}
-    static function __data_unpack($data) {return @unserialize($data);}
+    static function __data___pack($data) {return    serialize     ($data) ;}
+    static function __data_unpack($data) {return @unserialize(trim($data));}
 
     static function __path_parse($path) {
         if (strlen((string)$path)) {

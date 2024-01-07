@@ -60,7 +60,7 @@ class Group_Radiobuttons extends Control implements Control_complex {
                     $c_field->element_attributes = $c_info->element_attributes + $this->attributes_select('element_attributes') + $c_field->attributes_select('element_attributes');
                     $c_field->build();
                                   $this->child_insert($c_field, $c_value);
-                } else $c_field = $this->child_select($c_value);
+                } else $c_field = $this->child_select(          $c_value);
                 $c_field->required_set(isset($this->required[$c_value]));
                 $c_field-> checked_set(isset($this->checked [$c_value]));
                 $c_field->disabled_set(isset($this->disabled[$c_value])); }
@@ -85,7 +85,7 @@ class Group_Radiobuttons extends Control implements Control_complex {
     function name_get_complex($trim = true) {
         # try to find the name in 'element_attributes'
         $element_attributes_name = $this->attributes_select('element_attributes')['name'] ?? '';
-        $element_attributes_name = $trim ? rtrim($element_attributes_name, '[]') : $element_attributes_name;
+        if ($trim) $element_attributes_name = Field::trim_name($element_attributes_name);
         if ($element_attributes_name) {
             return $element_attributes_name;
         }

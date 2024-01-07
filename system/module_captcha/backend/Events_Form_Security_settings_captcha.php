@@ -21,7 +21,12 @@ abstract class Events_Form_Security_settings_captcha {
 
     static function on_init($event, $form, $items) {
         if (!Frontend::select('form_all__captcha'))
-             Frontend::insert('form_all__captcha', null, 'styles', ['path' => 'frontend/captcha.css', 'attributes' => ['rel' => 'stylesheet', 'media' => 'all'], 'weight' => -300], 'form_style', 'captcha');
+             Frontend::insert('form_all__captcha', null, 'styles', [
+                 'path' => 'frontend/captcha.css',
+                 'attributes' => [
+                     'rel'   => 'stylesheet',
+                     'media' => 'all'],
+                 'weight' => -300], 'form_style', 'captcha');
         $settings_captcha = Captcha::settings_get();
         $items['#length']->value_set($settings_captcha->length);
         $items['main/glyphs']->children_delete();

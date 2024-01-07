@@ -759,7 +759,7 @@ translations
     - Reload this page and make changes again to prevent inconsistency.: Перезавантажте цю сторінку та знову внесіть зміни, щоб запобігти неузгодженості дій.
     - Report: Звіт
     - required for modules: потрібно для модулів
-    - reset: скидання
+    - reset: скинути
     - restore repository: відновити репозиторій
     - Restore the storage credentials in "%%_file" or reinstall this system on the page\: %%_link: Відновити облікові дані сховища в "%%_file" або перевстановіть цю систему на сторінці: %%_link
     - review: огляд

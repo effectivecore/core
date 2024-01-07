@@ -25,8 +25,8 @@ class Language {
     ### static declarations ###
     ###########################
 
-    protected static $cache;
     protected static $current;
+    protected static $cache;
 
     static function cache_cleaning() {
         static::$cache = null;
