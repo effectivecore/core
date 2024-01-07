@@ -101,14 +101,41 @@
 
 /* menu visualization for management */
 
-[role='tree'][data-visualization-mode] ul {margin: 0; padding: 0; list-style: none}
-[role='tree'][data-visualization-mode] li {margin: 0; padding: 6px 0 6px 40px}
+[role='tree'][data-manage-mode] ul {margin: 0; padding: 0; list-style: none}
+[role='tree'][data-manage-mode] li {margin: 0; padding: 0 0 0 40px}
+[role='tree'][data-manage-mode] li            {background: url('pictures/tree-hline.svgd?color=%%_return_if_token_color_is_dark(color__text|black|white)') no-repeat 0 -15px, url('pictures/tree-vline.svgd?color=%%_return_if_token_color_is_dark(color__text|black|white)') repeat-y         }
+[role='tree'][data-manage-mode] li:last-child {background: url('pictures/tree-hline.svgd?color=%%_return_if_token_color_is_dark(color__text|black|white)') no-repeat 0 -15px, url('pictures/tree-vline.svgd?color=%%_return_if_token_color_is_dark(color__text|black|white)') no-repeat 0 -61px}
 
-[role='tree'][data-visualization-mode] x-item {display: block; padding: 1px 0 1px 5px; min-height: 44px; border-left: 5px solid %%_color__main}
-[role='tree'][data-visualization-mode] x-item x-title {display: inline-block; margin-right: 1em; font-size: 1.2em; color: %%_color__text}
-[role='tree'][data-visualization-mode] x-item x-extra {display: inline-block}
-[role='tree'][data-visualization-mode] x-item x-url   {display: block; line-height: 1.4em; color: %%_color__text; opacity: .5}
-[role='tree'][data-visualization-mode] x-item x-url[data-no-url] {opacity: .2}
+[role='tree'][data-manage-mode] x-item {display: grid; grid-template-columns: 40px auto}
+[role='tree'][data-manage-mode] x-item x-info {display: block}
+[role='tree'][data-manage-mode] x-item x-info x-title {display: inline-block; margin-right: .5em; font-size: 1.2em}
+[role='tree'][data-manage-mode] x-item x-info x-extra {display: inline-block}
+[role='tree'][data-manage-mode] x-item x-info x-url {display: block; line-height: 1.4em; opacity: .5}
+[role='tree'][data-manage-mode] x-item[data-no-url] x-info x-url {opacity: .2}
 
-[role='tree'][data-visualization-mode] li            {background: url('pictures/tree-hline.svgd?color=%%_return_if_token_color_is_dark(color__text|black|white)') no-repeat 0 -15px, url('pictures/tree-vline.svgd?color=%%_return_if_token_color_is_dark(color__text|black|white)') repeat-y         }
-[role='tree'][data-visualization-mode] li:last-child {background: url('pictures/tree-hline.svgd?color=%%_return_if_token_color_is_dark(color__text|black|white)') no-repeat 0 -15px, url('pictures/tree-vline.svgd?color=%%_return_if_token_color_is_dark(color__text|black|white)') no-repeat 0 -61px}
+
+
+[role='tree'][data-manage-mode='rearrangeable'] x-icon {position: relative; z-index: 100; display: block; width: 30px; height: 44px; cursor: not-allowed; opacity: .2; background: %%_color__main url('/system/module_page/frontend/pictures/icons-drag_and_drop.svgd?color=%%_return_token_color_encoded(color__main)') 50% 50%}
+[role='tree'][data-manage-mode='rearrangeable'] x-icon[draggable='true'] {cursor: move; opacity: 1}
+
+[role='tree'][data-manage-mode='rearrangeable'] x-droppable-area[data-position='before']   {background: %%_color__warning; display: block; position: relative; height:  6px; margin-bottom: 1px}
+[role='tree'][data-manage-mode='rearrangeable'] x-droppable-area[data-position='in'    ]   {background: %%_color__warning; display: block; position: absolute; height: 44px; width: 38px; z-index: 200; opacity: .5}
+[role='tree'][data-manage-mode='rearrangeable'] x-droppable-area[data-position='after' ]   {background: %%_color__warning; display: block; position: relative; height:  6px; margin-top: 1px}
+[role='tree'][data-manage-mode='rearrangeable'] x-droppable-area[data-droppable-is-active] {background: %%_color__ok}
+
+[role='tree'][data-manage-mode='rearrangeable'][data-js-is-processed]         li:not(:last-child)                   > x-droppable-area[data-position='after']  {visibility: hidden; height: 1px; margin: 0}
+[role='tree'][data-manage-mode='rearrangeable'][data-js-is-processed]         li                                      x-droppable-area                         {visibility: hidden}
+[role='tree'][data-manage-mode='rearrangeable'][data-rearrangeable-is-active] li                                      x-droppable-area                         {visibility: visible}
+[role='tree'][data-manage-mode='rearrangeable'][data-rearrangeable-is-active] li[data-rearrangeable-is-active]        x-droppable-area                         {visibility: hidden}
+[role='tree'][data-manage-mode='rearrangeable'][data-rearrangeable-is-active] li[data-rearrangeable-is-active] + li > x-droppable-area[data-position='before'] {visibility: hidden}
+
+[role='tree'][data-manage-mode='rearrangeable'][data-rearrangeable-is-active] * {
+  user-select: none;
+ -webkit-user-select: none;
+}
+
+
+
+[role='tree'][data-manage-mode='decorated'] x-item {grid-template-columns: min-content auto; padding-top: 7px}
+[role='tree'][data-manage-mode='decorated'] x-item x-icon {display: block; width: 26px; height: 20px; margin: 11px 5px 0 2px; background: url('/system/module_page/frontend/pictures/icons-file.svg') no-repeat 3px 100%}
+[role='tree'][data-manage-mode='decorated'] x-item[data-no-url] x-icon {background-position: 0 0}

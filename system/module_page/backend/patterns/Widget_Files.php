@@ -88,7 +88,7 @@ class Widget_Files extends Widget_Items {
             'title' => new Markup('x-title', [], ['text' => $item->title ?? $item->object->file]),
             'id'    => new Markup('x-id'   , [], ['text' => $id_markup])]);
         # grouping of previous elements in widget 'manage'
-        $result->child_insert($info_markup, 'info');
+        $result->child_select('body')->child_insert($info_markup, 'info');
         return $result;
     }
 

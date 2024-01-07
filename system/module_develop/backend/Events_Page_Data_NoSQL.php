@@ -107,7 +107,7 @@ abstract class Events_Page_Data_NoSQL {
             $tree = Tree::select($id);
             $tree_managing_id = 'managed-'.$id;
             $tree_managing = Tree::insert($tree->description ?? null, $tree_managing_id, null, [], 0, 'develop');
-            $tree_managing->visualization_mode = 'decorated';
+            $tree_managing->manage_mode = 'decorated';
             foreach (Tree_item::select_all_by_id_tree($id) as $c_item) {
                 $c_tree_item = Tree_item::insert($c_item->title,
                     $tree_managing_id.'-'.$c_item->id, $c_item->id_parent !== null ?

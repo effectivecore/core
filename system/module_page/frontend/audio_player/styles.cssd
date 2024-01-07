@@ -42,7 +42,7 @@ x-audio-player x-timeline {
 }
 
 x-audio-player[data-is-loadedmetadata] x-timeline {cursor: pointer}
-x-audio-player[data-is-progressing]    x-timeline {background-image: url('pictures/lines.svgd?animation=true'); background-size: 20px 20px}
+x-audio-player[data-is-progressing]    x-timeline {background-image: url('../pictures/lines.svgd?animation=true'); background-size: 20px 20px}
 
 x-audio-player x-timeline x-track-position {
   display: block;

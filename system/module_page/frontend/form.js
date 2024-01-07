@@ -99,48 +99,45 @@ document.addEventListener('DOMContentLoaded', function () {
     // rearrangeable
     // ─────────────────────────────────────────────────────────────────────
 
-    document.querySelectorAll('[data-has-rearrangeable]').forEach(function (c_has_rearrangeable) {
-        c_has_rearrangeable.setAttribute('data-js-is-processed', '');
+    document.querySelectorAll('x-widgets-group[data-rearrangeable]').forEach(function (c_rearrangeable_group) {
+        c_rearrangeable_group.setAttribute('data-js-is-processed', '');
+        c_rearrangeable_group.querySelectorAll('[data-rearrangeable-item]').forEach(function (c_rearrangeable) {
 
-        c_has_rearrangeable.querySelectorAll('[data-rearrangeable]').forEach(function (c_rearrangeable) {
-
-            var draggable_icon = document.createElement('x-draggable-icon');
+            let draggable_icon = c_rearrangeable.querySelector('x-icon');
                 draggable_icon.setAttribute('draggable', 'true');
-                draggable_icon.addEventListener('dragstart', function (event) { window._effDataTransferNode = this; c_has_rearrangeable.   setAttribute('data-has-rearrangeable-is-active', ''); c_rearrangeable.   setAttribute('data-rearrangeable-is-active', ''); });
-                draggable_icon.addEventListener('dragend'  , function (event) { window._effDataTransferNode = null; c_has_rearrangeable.removeAttribute('data-has-rearrangeable-is-active'    ); c_rearrangeable.removeAttribute('data-rearrangeable-is-active'    ); });
-            c_rearrangeable.prepend(draggable_icon);
+                draggable_icon.addEventListener('dragstart', function (event) { window._effDataTransferNode = this; c_rearrangeable_group.   setAttribute('data-rearrangeable-is-active', ''); c_rearrangeable.   setAttribute('data-rearrangeable-is-active', ''); });
+                draggable_icon.addEventListener('dragend'  , function (event) { window._effDataTransferNode = null; c_rearrangeable_group.removeAttribute('data-rearrangeable-is-active'    ); c_rearrangeable.removeAttribute('data-rearrangeable-is-active'    ); });
 
-            var handler_on_dragover  = function (event) { event.preventDefault();                               };
-            var handler_on_dragenter = function (event) { this.   setAttribute('data-droppable-is-active', ''); };
-            var handler_on_dragleave = function (event) { this.removeAttribute('data-droppable-is-active'    ); };
-            var handler_on_drop      = function (event) { this.removeAttribute('data-droppable-is-active'    );
-                var position = this.getAttribute('data-position');
-                var drop     = this.parentNode;
-                var drag     = window._effDataTransferNode.parentNode;
-                var c_weight = 0;
+            let handler_on_dragover  = function (event) { event.preventDefault();                               };
+            let handler_on_dragenter = function (event) { this.   setAttribute('data-droppable-is-active', ''); };
+            let handler_on_dragleave = function (event) { this.removeAttribute('data-droppable-is-active'    ); };
+            let handler_on_drop      = function (event) { this.removeAttribute('data-droppable-is-active'    );
+                let position = this.getAttribute('data-position');
+                let drop     = this.parentNode;
+                let drag     = window._effDataTransferNode.parentNode;
+                let c_weight = 0;
                 if (position === 'before') drop.parentNode.insertBefore(drag, drop            );
                 if (position === 'after' ) drop.parentNode.insertBefore(drag, drop.nextSibling);
-                c_has_rearrangeable.querySelectorAll('x-field[data-type="weight"] input').forEach(function (c_input) {
+                c_rearrangeable_group.querySelectorAll('x-field[data-type="weight"] input').forEach(function (c_input) {
                     c_input.value = c_weight;
                     c_weight -= 5;
                 });
             };
 
-            var droppable_area_0 = document.createElement('x-droppable-area');
-            var droppable_area_N = document.createElement('x-droppable-area');
-            droppable_area_0.setAttribute('data-position', 'before');
-            droppable_area_N.setAttribute('data-position', 'after' );
+            let droppable_area_0 = document.createElement('x-droppable-area');
+            let droppable_area_N = document.createElement('x-droppable-area');
+                droppable_area_0.setAttribute('data-position', 'before');
+                droppable_area_N.setAttribute('data-position', 'after' );
             [droppable_area_0, droppable_area_N].forEach(function (droppable_area) {
                 droppable_area.addEventListener('dragover' , handler_on_dragover );
                 droppable_area.addEventListener('dragenter', handler_on_dragenter);
                 droppable_area.addEventListener('dragleave', handler_on_dragleave);
-                droppable_area.addEventListener('drop'     , handler_on_drop  );
+                droppable_area.addEventListener('drop'     , handler_on_drop     );
             });
             c_rearrangeable.prepend(droppable_area_0);
             c_rearrangeable.append (droppable_area_N);
 
         });
-
     });
 
 });

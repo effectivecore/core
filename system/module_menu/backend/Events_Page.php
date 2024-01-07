@@ -71,19 +71,13 @@ abstract class Events_Page {
                      'rel'   => 'stylesheet',
                      'media' => 'all'],
                  'weight' => +400], 'tree_style', 'menu');
-        if ($tree->visualization_mode === 'decorated-rearrangeable') {
-            if (!Frontend::select('tree_rearrangeable__menu')) {
-                 Frontend::insert('tree_rearrangeable__menu', null, 'scripts', [
-                    'path' => 'frontend/tree-rearrangeable.js',
-                    'attributes' => [
-                        'defer' => true],
-                    'weight' => +300], 'tree_script', 'menu');
-                 Frontend::insert('tree_rearrangeable__menu', null, 'styles', [
-                    'path' => 'frontend/tree-rearrangeable.cssd',
-                    'attributes' => [
-                        'rel'   => 'stylesheet',
-                        'media' => 'all'],
-                    'weight' => +300], 'tree_style', 'menu');
+        if ($tree->manage_mode === 'rearrangeable') {
+            if (!Frontend::select('tree_manage__menu')) {
+                 Frontend::insert('tree_manage__menu', null, 'scripts', [
+                     'path' => 'frontend/tree-manage.js',
+                     'attributes' => [
+                         'defer' => true],
+                     'weight' => +300], 'tree_script', 'menu');
             }
         }
     }

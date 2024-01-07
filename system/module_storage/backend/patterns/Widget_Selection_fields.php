@@ -118,8 +118,8 @@ class Widget_Selection_fields extends Widget_Items {
             $widget_settings = new Widget_Selection_field_settings($widget, $item, $c_row_id);
             $widget_settings->build();
             # grouping of previous elements in widget 'manage'
-            $result->child_insert($info_markup    , 'info');
-            $result->child_insert($widget_settings, 'widget_settings');
+            $result->child_select('body')->child_insert($info_markup    , 'info');
+            $result->child_select('foot')->child_insert($widget_settings, 'widget_settings');
         }
         # handler markup
         if ($item->type === 'handler') {
@@ -131,8 +131,8 @@ class Widget_Selection_fields extends Widget_Items {
             $widget_settings = new Widget_Selection_field_settings($widget, $item, $c_row_id);
             $widget_settings->build();
             # grouping of previous elements in widget 'manage'
-            $result->child_insert($info_markup    , 'info');
-            $result->child_insert($widget_settings, 'widget_settings');
+            $result->child_select('body')->child_insert($info_markup    , 'info');
+            $result->child_select('foot')->child_insert($widget_settings, 'settings');
         }
         return $result;
     }
