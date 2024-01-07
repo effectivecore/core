@@ -210,6 +210,10 @@ class Url {
         return static::$cache;
     }
 
+    static function set_current($url) {
+        static::$cache = new static($url);
+    }
+
     static function is_absolute($url) {
         if (strlen($url) && $url[0] !== '/') return true;
         else return false;
