@@ -38,11 +38,11 @@ translations
     - Action: Дзеянне
     - actions: дзеянні
     - Actions: Дзеянні
+    - Activate: Актываваць
     - Additional controls will become available after appending.: Дадатковыя элементы кіравання стануць даступныя пасля дадання.
     - Administrators: Адміністратары
     - After exceeding the "Number of login attempts" value, the login will be blocked for the specified time.: Пасля перавышэння значэння "Колькасць спробаў ўваходу" будзе заблакавана магчымасць ўваходу на паказаны час.
     - All caches was reset.: Усе кэшы былі скінутыя.
-    - All colors: Усе колеры
     - An empty line was found.: Знойдзены пусты радок.
     - An error in parsing the "data" format was found!: Памылка разбору фармату "data" была знойдзена!
     - An error occurred during installation!: Адбылася памылка пры ўсталёўцы!
@@ -76,6 +76,7 @@ translations
     - Avatar paths: Шляхі аватара
     - Avatar: Аватар
     - B: Б
+    - Background: Фон
     - Be careful, your mistake may lead to XSS injection.: Будзьце асцярожныя, ваша памылка можа прывесці да ўкаранення XSS.
     - Belarusian: Беларуская
     - big: вялікі
@@ -118,12 +119,11 @@ translations
     - click to open the menu item "%%_title": націсніце, каб адкрыць пункт меню "%%_title"
     - click to open the tab "%%_title": націсніце, каб адкрыць укладку "%%_title"
     - color ID = "%%_id" and value = "%%_value": ID колеру = "%%_id" і значэнне = "%%_value"
-    - Color settings have been changed.: Каляровыя налады былі змененыя.
-    - Color settings have not been changed!: Каляровыя налады не былі змененыя!
+    - Color profile was activated.: Каляровы профіль быў актываваны.
+    - Color profile was not activated!: Каляровы профіль не быў актываваны!
+    - Color profile: Каляровы профіль
     - Color should be in the format "#abcdef", where "ab" is the value of the red component, "cd" — green and "ef" — blue.: Колер павінен быць у фармаце "#abcdef", дзе "ab" — гэта значэнне чырвонай кампаненты, "cd" — зялёнай і "ef" — сіняй.
     - Color: Колер
-    - Colors was applied.: Колеры былі ўжыты.
-    - Colors was not applied!: Колеры не былі ўжыты!
     - Colors: Колеры
     - Combination of values should be unique.: Камбінацыя значэнняў павінна быць унікальнай.
     - Conditions: Умовы
@@ -158,7 +158,7 @@ translations
     - Current language: Бягучая мова
     - Current page information: Інфармацыя бягучай старонкі
     - Current password: Бягучы пароль
-    - Current: Бягучыя
+    - Dark, blue palette: Цёмная, сіняя палітра
     - Data hash: Хэш дадзеных
     - Data ID: ID дадзеных
     - Data update #%%_number for module "%%_title" (%%_id) was applied.: Абнаўленне дадзеных №%%_number для модуля "%%_title" (%%_id) было ўжыта.
@@ -170,6 +170,8 @@ translations
     - Date/Time: Дата/Час
     - Decimal point: Дзесятковая кропка
     - Decorator settings: Налады афармлення
+    - Default color profile was activated.: Каляровы профіль па змаўчанні быў актываваны.
+    - Default color profile was not activated!: Каляровы профіль па змаўчанні не быў актываваны!
     - Definition list: Спіс азначэнняў
     - Delete item of type "%%_type" with ID = "%%_id"?: Выдаліць элемент тыпу "%%_type" з ID = "%%_id"?
     - delete: выдаліць
@@ -352,12 +354,10 @@ translations
     - Files from repository: Файлы з рэпазітара
     - files: файлы
     - Files: Файлы
-    - First remove the dependent elements.: Спачатку выдаліце ​​залежныя элементы.
+    - First remove the dependent elements.: Спачатку выдаліце залежныя элементы.
     - fix: выправіць
     - Form elements: Элементы формы
-    - Form for сolor assignment: Форма для прызначэння колеру
     - Form for adding data: Форма дадання дадзеных
-    - Form for applying color presets: Форма для прымянення каляровых перадусталёвак
     - Form for changing data: Форма для змены дадзеных
     - Form for changing user data: Форма для змены дадзеных карыстальніка
     - Form for console configuration: Форма для налады кансолі
@@ -386,6 +386,8 @@ translations
     - Form for updating the cache: Форма для абнаўлення кэша
     - Form for view customization: Форма для налады выгляду
     - Form for voting: Форма для галасавання
+    - Form for working with color profiles: Форма для працы з каляровымі профілямі
+    - Form for working with color settings: Форма для працы з настройкамі колеру
     - form: форма
     - Form: Форма
     - Format: Фармат
@@ -518,7 +520,7 @@ translations
     - left to right: злева направа
     - Length: Даўжыня
     - License agreement: Ліцэнзійнае пагадненне
-    - Light preset: Светлая перадусталёўка
+    - Light, blue palette: Светлая, сіняя палітра
     - Limit: Ліміт
     - Line\: %%_line: Радок: %%_line
     - Linear diagram: Лінейная дыяграма

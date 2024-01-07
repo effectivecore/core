@@ -69,9 +69,9 @@ tests
         on_failure
         - return_result|Test_step_Return
             value: 0
-    # page "Management → View → Colors → Current"
+    # page "Management → View → Colors → Settings"
     - request_url-view|Test_step_Request
-        url: /manage/view/colors/current
+        url: /manage/view/colors/settings
         headers
         - cookie: %%_test_response_cookies
         is_https|Param_from_form
@@ -303,9 +303,9 @@ tests
         on_failure
         - return_result|Test_step_Return
             value: 0
-    # page "Management → View → Colors → Current"
+    # page "Management → View → Colors → Settings"
     - request_url-view-registered|Test_step_Request
-        url: /manage/view/colors/current
+        url: /manage/view/colors/settings
         headers
         - cookie: %%_test_response_cookies
         is_https|Param_from_form
@@ -507,9 +507,9 @@ tests
         on_failure
         - return_result|Test_step_Return
             value: 0
-    # page "Management → View → Colors → Current"
+    # page "Management → View → Colors → Settings"
     - request_url-view-registered-role|Test_step_Request
-        url: /manage/view/colors/current
+        url: /manage/view/colors/settings
         headers
         - cookie: %%_test_response_cookies
         is_https|Param_from_form

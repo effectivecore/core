@@ -4,6 +4,7 @@ request_settings
   - =: back
   - =: col_count
   - =: color
+  - =: color_profile
   - =: cover
   - =: manage_layout
   - =: opacity

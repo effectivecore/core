@@ -1,0 +1,27 @@
+forms
+- color_profile|Form
+    attributes
+    - id: color_profile
+    - method: post
+    - novalidate: true
+    children
+    - data|Node
+    - button_save|Button
+        title: save
+        attributes
+        - value: save
+        - disabled: true
+        weight: -500
+    - button_reset|Button
+        title: reset
+        break_on_validate: true
+        attributes
+        - value: reset
+        - disabled: true
+        weight: -520
+    - button_activate|Button
+        title: Activate
+        attributes
+        - value: activate
+        - disabled: true
+        weight: -540

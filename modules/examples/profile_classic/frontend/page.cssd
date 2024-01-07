@@ -14,9 +14,9 @@ body[data-layout-id='original_classic'] {
 
 /* page layout */
 
-body[data-layout-id='original_classic'] [data-area][data-group-id='head'] {display: block; padding: 0 30px; box-sizing: border-box; padding-top:  0  ; padding-bottom:  0  ; color: black;        background: %%_color_custom__head}
-body[data-layout-id='original_classic'] [data-area][data-group-id='body'] {display: block; padding: 0 30px; box-sizing: border-box; padding-top: 10px; padding-bottom: 40px; color: %%_color__text; background: %%_color__page url('pictures/page-bg.svg') 50% 0}
-body[data-layout-id='original_classic'] [data-area][data-group-id='foot'] {display: block; padding: 0 30px; box-sizing: border-box; padding-top: 10px; padding-bottom: 10px; color: black;        background: %%_color_custom__foot; font-size: .8em}
+body[data-layout-id='original_classic'] [data-area][data-group-id='head'] {display: block; padding: 0 30px; box-sizing: border-box; padding-top:  0  ; padding-bottom:  0  ; color: %%_color(head_text); background: %%_color(head)}
+body[data-layout-id='original_classic'] [data-area][data-group-id='body'] {display: block; padding: 0 30px; box-sizing: border-box; padding-top: 10px; padding-bottom: 40px; color: %%_color(text);      background: %%_color(page) url('pictures/page-bg.svg') 50% 0}
+body[data-layout-id='original_classic'] [data-area][data-group-id='foot'] {display: block; padding: 0 30px; box-sizing: border-box; padding-top: 10px; padding-bottom: 10px; color: %%_color(foot_text); background: %%_color(foot); font-size: .8em}
 
 body[data-layout-id='original_classic'] [data-area][data-wrapper]::after {content: ''; clear: both; display: block}
 body[data-layout-id='original_classic'] [data-area][data-wrapper] {
@@ -45,8 +45,8 @@ body[data-layout-id='original_classic'] [data-block][data-id^='block__picture_sq
 body[data-layout-id='original_classic'] [data-block][data-id^='block__picture_sql__logotype'] a[data-id^='picture-logotype'] img {display: block}
 body[data-layout-id='original_classic'] [data-block][data-id^='block__picture_sql__logotype'] a[data-id^='picture-logotype'] img[src=''] {
   padding: 10px;
-  border: 1px dotted %%_color__main;
-  color: %%_color__main;
+  border: 1px dotted %%_color(main);
+  color: %%_color(main);
   font-size: 1.5em;
 }
 
@@ -69,17 +69,17 @@ body[data-layout-id='original_classic'] h3 {margin: 2em 0 1em 0}
 /* pre|code */
 
 body[data-layout-id='original_classic'] pre {
-  border: 1px solid %%_return_if_token_color_is_dark(color__page|rgba\(255,255,255,.3\)|rgba\(0,0,0,.3\));
-  %%_return_if_token_color_is_dark(color__page|background-color: rgba\(255,255,255,.1\)|background-color: rgba\(0,0,0,.1\))
-  %%_return_if_token(color__page|transparent|background-color: rgba\(0,0,0,.1\)|)
+  border: 1px solid %%_return_if_scope_is_dark(page|rgba\(255,255,255,.3\)|rgba\(0,0,0,.3\));
+  %%_return_if_scope_is_dark(page|background-color: rgba\(255,255,255,.1\)|background-color: rgba\(0,0,0,.1\))
+  %%_return_if_token(color\(page\)|transparent|background-color: rgba\(0,0,0,.1\)|)
 }
 
 body[data-layout-id='original_classic'] :not(pre) > code {
   padding: 2px 5px;
   border-radius: 5px;
-  border: 1px solid %%_return_if_token_color_is_dark(color__page|rgba\(255,255,255,.3\)|rgba\(0,0,0,.3\));
-  %%_return_if_token_color_is_dark(color__page|background-color: rgba\(255,255,255,.1\)|background-color: rgba\(0,0,0,.1\))
-  %%_return_if_token(color__page|transparent|background-color: rgba\(0,0,0,.1\)|)
+  border: 1px solid %%_return_if_scope_is_dark(page|rgba\(255,255,255,.3\)|rgba\(0,0,0,.3\));
+  %%_return_if_scope_is_dark(page|background-color: rgba\(255,255,255,.1\)|background-color: rgba\(0,0,0,.1\))
+  %%_return_if_token(color\(page\)|transparent|background-color: rgba\(0,0,0,.1\)|)
 }
 
 

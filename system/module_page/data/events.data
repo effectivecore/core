@@ -53,6 +53,9 @@ events
       handler: \effcore\modules\page\Events_File::on_load_virtual_style__grid_custom
   # ◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦
   on_form_build
+  - color_profile|Event
+      for: color_profile
+      handler: \effcore\modules\page\Events_Form_Color_profile::on_build
   - layout|Event
       for: layout
       handler: \effcore\modules\page\Events_Form_Layout::on_build
@@ -61,12 +64,12 @@ events
       weight: +300
       handler: \effcore\modules\page\Events_Form_Instance_update::on_build
   on_form_init
-  - colors|Event
+  - color_settings|Event
       for: colors
-      handler: \effcore\modules\page\Events_Form_Colors::on_init
-  - colors_preset|Event
-      for: colors_preset
-      handler: \effcore\modules\page\Events_Form_Colors_preset::on_init
+      handler: \effcore\modules\page\Events_Form_Color_settings::on_init
+  - color_profile|Event
+      for: color_profile
+      handler: \effcore\modules\page\Events_Form_Color_profile::on_init
   - layout|Event
       for: layout
       handler: \effcore\modules\page\Events_Form_Layout::on_init
@@ -106,12 +109,12 @@ events
       weight: +300
       handler: \effcore\modules\page\Events_Form_Instance_update::on_validate
   on_form_submit
-  - colors|Event
+  - color_settings|Event
       for: colors
-      handler: \effcore\modules\page\Events_Form_Colors::on_submit
-  - colors_preset|Event
-      for: colors_preset
-      handler: \effcore\modules\page\Events_Form_Colors_preset::on_submit
+      handler: \effcore\modules\page\Events_Form_Color_settings::on_submit
+  - color_profile|Event
+      for: color_profile
+      handler: \effcore\modules\page\Events_Form_Color_profile::on_submit
   - layout|Event
       for: layout
       handler: \effcore\modules\page\Events_Form_Layout::on_submit

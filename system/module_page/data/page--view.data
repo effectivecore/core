@@ -3,8 +3,8 @@ pages
     id: view
     title: View
     url: %^(?<base>/manage/view)
->>>>>>>>>(/(?<type>colors/current|
->>>>>>>>>>>>>>>>>>>colors/presets|
+>>>>>>>>>(/(?<type>colors/settings|
+>>>>>>>>>>>>>>>>>>>colors/profiles|
 >>>>>>>>>>>>>>>>>>>layouts|
 >>>>>>>>>>>>>>>>>>>global_css|
 >>>>>>>>>>>>>>>>>>>settings)
@@ -44,28 +44,28 @@ pages
           source: tabs/page/view
     # ◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦
     - content
-      - block__form__colors|Block
-          title: Form for сolor assignment
+      - block__form__color_settings|Block
+          title: Form for working with color settings
           title_is_visible: false
           attributes
-          - data-id: block__form__colors
+          - data-id: block__form__color_settings
           display
             check: page_args
             where: type
-            match: %^colors/current$%
+            match: %^colors/settings$%
           type: link
-          source: forms/page/colors
-      - block__form__colors_preset|Block
-          title: Form for applying color presets
+          source: forms/page/color_settings
+      - block__form__color_profile|Block
+          title: Form for working with color profiles
           title_is_visible: false
           attributes
-          - data-id: block__form__colors_preset
+          - data-id: block__form__color_profile
           display
             check: page_args
             where: type
-            match: %^colors/presets$%
+            match: %^colors/profiles$%
           type: link
-          source: forms/page/colors_preset
+          source: forms/page/color_profile
       - block__form__layout|Block
           title: Form for editing the layout
           title_is_visible: false

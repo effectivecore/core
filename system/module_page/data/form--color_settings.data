@@ -1,0 +1,25 @@
+forms
+- color_settings|Form
+    attributes
+    - id: color_settings
+    - method: post
+    - novalidate: true
+    children
+    - colors_main|Fieldset
+        title: Main settings
+        children
+        - message|Text
+            text: UNDER CONSTRUCTION
+    - button_save|Button
+        title: save
+        attributes
+        - value: save
+        - disabled: true
+        weight: -500
+    - button_reset|Button
+        title: reset
+        break_on_validate: true
+        attributes
+        - value: reset
+        - disabled: true
+        weight: -520

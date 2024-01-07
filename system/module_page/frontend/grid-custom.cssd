@@ -4,7 +4,7 @@
 [data-area][data-type='grid-custom'][data-manage-mode='customizable'] {
   margin: 0 3px;
   padding: 20px;
-  background: %%_color__ok(0|0|0|.1);
+  background: %%_color(ok|o=.1);
 }
 
 [data-area][data-type='grid-custom'] [data-grid-manager] * {
@@ -22,10 +22,10 @@
   min-width: 87px;
   margin: 1px;
   padding: 20px;
-  color: %%_color__text;
+  color: %%_color(text);
   text-align: center;
-  border: 1px solid %%_color__ok;
-  background: %%_color__fieldset;
+  border: 1px solid %%_color(ok);
+  background: %%_color(fieldset);
 }
 
 

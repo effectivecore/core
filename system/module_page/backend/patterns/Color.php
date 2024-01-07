@@ -34,15 +34,15 @@ class Color {
         }
     }
 
-    function filter_shift($r_offset, $g_offset, $b_offset, $opacity = 1, $return_mode = self::RETURN_RGB) {
+    function filter_shift($r_shift, $g_shift, $b_shift, $opacity = 1, $return_mode = self::RETURN_RGB) {
         $rgb = $this->rgb_get();
         if ($rgb) {
-            $new_r = max(min($rgb['r'] + (int)$r_offset, 255), 0);
-            $new_g = max(min($rgb['g'] + (int)$g_offset, 255), 0);
-            $new_b = max(min($rgb['b'] + (int)$b_offset, 255), 0);
-            $new_opacity = max(min($opacity, 1), 0);
+            $new_r = Core::to_valid_range(0, 255, (int)$rgb['r'] + (int)$r_shift);
+            $new_g = Core::to_valid_range(0, 255, (int)$rgb['g'] + (int)$g_shift);
+            $new_b = Core::to_valid_range(0, 255, (int)$rgb['b'] + (int)$b_shift);
+            $new_o = Core::to_valid_range(0, 1, $opacity);
             if ($return_mode === static::RETURN_RGB ) return  'rgb('.$new_r.','.$new_g.','.$new_b.')';
-            if ($return_mode === static::RETURN_RGBA) return 'rgba('.$new_r.','.$new_g.','.$new_b.','.$new_opacity.')';
+            if ($return_mode === static::RETURN_RGBA) return 'rgba('.$new_r.','.$new_g.','.$new_b.','.$new_o.')';
             if ($return_mode === static::RETURN_HEX ) {
                 return '#'.str_pad(dechex($new_r), 2, '0', STR_PAD_LEFT).
                            str_pad(dechex($new_g), 2, '0', STR_PAD_LEFT).
@@ -88,8 +88,7 @@ class Color {
             }
         }
         if (count($custom_colors)) {
-            static::$cache =
-            static::$cache + $custom_colors;
+            static::$cache += $custom_colors;
         }
     }
 

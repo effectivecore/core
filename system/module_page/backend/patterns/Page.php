@@ -104,9 +104,7 @@ class Page extends Node implements has_Data_cache {
         }
 
         # page palette is dark or light
-        $colors = Color::get_all();
-        $color_page = $colors[$settings->color__page_id] ?? null;
-        $is_dark_palette = $color_page && $color_page->is_dark();
+        $is_dark_palette = Color_profile::get_current()->is_dark ?? true;
 
         # global styles
         $file_global_cssd = new File(Dynamic::DIR_FILES.'global.cssd');
