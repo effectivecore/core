@@ -90,7 +90,7 @@ class Group_Radiobuttons extends Control implements Control_complex {
             return $element_attributes_name;
         }
         # search in first child (instance of field_class)
-        else foreach ($this->children_select() as $c_child) {
+        else foreach ($this->children_select_recursive() as $c_child) {
             if (is_object($c_child) && $c_child instanceof $this->field_class) {
                 return $c_child->name_get($trim);
             }
@@ -98,7 +98,7 @@ class Group_Radiobuttons extends Control implements Control_complex {
     }
 
     function value_get() {
-        foreach ($this->children_select() as $c_child) {
+        foreach ($this->children_select_recursive() as $c_child) {
             if (is_object($c_child)                    &&
                 $c_child instanceof $this->field_class &&
                 $c_child->checked_get() === true) {
@@ -110,8 +110,8 @@ class Group_Radiobuttons extends Control implements Control_complex {
 
     function value_set($value) {
         $this->value_set_initial($value);
-        foreach ($this->children_select() as $c_child) if (is_object($c_child) && $c_child instanceof $this->field_class) $c_child->checked_set(false);
-        foreach ($this->children_select() as $c_child) if (is_object($c_child) && $c_child instanceof $this->field_class) {
+        foreach ($this->children_select_recursive() as $c_child) if (is_object($c_child) && $c_child instanceof $this->field_class) $c_child->checked_set(false);
+        foreach ($this->children_select_recursive() as $c_child) if (is_object($c_child) && $c_child instanceof $this->field_class) {
             if ((string)$c_child->value_get() === (string)$value) {
                 $c_child->checked_set(true);
                 return true;
