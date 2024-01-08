@@ -21,7 +21,6 @@ class Field_Select_color_profile extends Field_Select {
     function build() {
         if (!$this->is_builded) {
             $this->items = ['not_selected' => $this->title__not_selected] + static::items_generate();
-            $this->is_builded = false;
             parent::build();
         }
     }
@@ -33,7 +32,7 @@ class Field_Select_color_profile extends Field_Select {
     static function items_generate() {
         $result = [];
         $profiles = Color_profile::get_all();
-        Core::array_sort_by_string($profiles, 'title', Core::SORT_DSC);
+        Core::array_sort_by_string($profiles);
         foreach ($profiles as $c_profile) {
             $result[$c_profile->id] = $c_profile->title;
         }

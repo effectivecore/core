@@ -764,6 +764,7 @@ entities
           control
             class: \effcore\Field_Select_color_profile
             properties
+            - title__not_selected: - system value -
             - weight: +300
             element_attributes_on_update
             - required: null
