@@ -5,7 +5,7 @@ tree_items
     id_tree: system
     title: Locale
     url: /manage/locale
-    weight: +440
+    weight: -15
     access
       roles
       - =: admins

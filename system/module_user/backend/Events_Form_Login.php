@@ -17,6 +17,10 @@ use effcore\URL;
 
 abstract class Events_Form_Login {
 
+    static function on_build($event, $form) {
+        $form->env['session'] = Session::select();
+    }
+
     static function on_init($event, $form, $items) {
         $settings = Module::settings_get('user');
         $items['#session_params:is_long_session']->attributes['title'] = new Text_multiline([
@@ -28,6 +32,9 @@ abstract class Events_Form_Login {
                 'Cookies are disabled. You cannot log in!',
                 'Enable cookies before login.']), 'warning'
             );
+        }
+        if (!$form->env['session']) {
+            $items['~login']->disabled_set(false);
         }
     }
 

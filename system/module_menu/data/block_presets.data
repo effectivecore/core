@@ -3,8 +3,6 @@ block_presets
     id: block__tree__system
     managing_group: Menus
     managing_title: System menu
-    in_areas
-    - =: system
     type: link
     source: trees/core/system
     title: System menu

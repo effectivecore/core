@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd ../
+cd "$(dirname "$0")/../"
 
 while true; do
     read -p 'Do "git reset --hard" before creating the bundle? [y/n]: ' answer

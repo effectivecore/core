@@ -8,7 +8,7 @@ namespace effcore;
 
 #[\AllowDynamicProperties]
 
-class Group_Radiobuttons extends Control implements Control_complex {
+class Group_Radiobuttons extends Control implements Controls_Group {
 
     public $tag_name = 'x-group';
     public $attributes = [
@@ -91,7 +91,7 @@ class Group_Radiobuttons extends Control implements Control_complex {
 
     # ◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦
 
-    function name_get_complex($trim = true) {
+    function group_name_get($trim = true) {
         # try to find the name in 'element_attributes'
         $element_attributes_name = $this->attributes_select('element_attributes')['name'] ?? '';
         if ($trim) $element_attributes_name = Field::trim_name($element_attributes_name);

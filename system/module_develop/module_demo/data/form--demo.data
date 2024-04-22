@@ -277,7 +277,7 @@ forms
             title: Texts
             item_title: Text
             state: opened
-            name_complex: files_texts
+            group_name: files_texts
             upload_dir: demo/
             types_allowed
             - =: txt
@@ -285,7 +285,7 @@ forms
         - files_pictures|Widget_Files_pictures
             title: Pictures
             state: opened
-            name_complex: files_pictures
+            group_name: files_pictures
             upload_dir: demo/
             types_allowed
             - =: jpg
@@ -300,7 +300,7 @@ forms
         - files_audios|Widget_Files_audios
             title: Audios
             state: opened
-            name_complex: files_audios
+            group_name: files_audios
             upload_dir: demo/
             audio_player_on_manage_is_visible: true
             cover_is_allowed: true
@@ -310,7 +310,7 @@ forms
         - files_videos|Widget_Files_videos
             title: Videos
             state: opened
-            name_complex: files_videos
+            group_name: files_videos
             upload_dir: demo/
             poster_is_allowed: true
             types_allowed

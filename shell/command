@@ -57,7 +57,7 @@ print str_repeat('-', 80).effcore\NL;
 
 if (empty($command_args['no_strict'])) { # each warning is an error
     set_error_handler(
-        function($errno, $message, $file_path, $line_number) {
+        function ($errno, $message, $file_path, $line_number) {
             throw new \ErrorException(
                 $message, /* code = */ 0,
                 $errno,

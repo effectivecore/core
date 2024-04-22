@@ -18,12 +18,12 @@ class Field_Select_block_preset extends Field_Select {
         'data-type' => 'block_preset'];
     public $element_attributes = [
         'name'     => 'block_preset',
-        'required' => true];
-    public $id_area = null;
+        'required' => true
+    ];
 
     function build() {
         if (!$this->is_builded) {
-            $this->items = ['not_selected' => $this->title__not_selected] + static::items_generate($this->id_area);
+            $this->items = ['not_selected' => $this->title__not_selected] + static::items_generate();
             parent::build();
         }
     }
@@ -32,9 +32,9 @@ class Field_Select_block_preset extends Field_Select {
     ### static declarations ###
     ###########################
 
-    static function items_generate($id_area) {
+    static function items_generate() {
         $result = [];
-        $presets = Block_preset::select_all($id_area);
+        $presets = Block_preset::select_all();
         Core::array_sort_by_string($presets, 'managing_group');
         foreach ($presets as $c_preset) {
             $c_group_id = Security::sanitize_id($c_preset->managing_group);

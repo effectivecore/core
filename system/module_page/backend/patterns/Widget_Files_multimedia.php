@@ -18,7 +18,7 @@ class Widget_Files_multimedia extends Widget_Files {
     public $item_title = 'Multimedia';
     public $attributes = [
         'data-type' => 'items-files-multimedia'];
-    public $name_complex = 'widget_files_multimedia';
+    public $group_name = 'widget_files_multimedia';
     # ◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦
     public $upload_dir = 'multimedia/';
     public $fixed_name = 'multimedia-multiple-%%_item_id_context';
@@ -71,14 +71,14 @@ class Widget_Files_multimedia extends Widget_Files {
 
     # ◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦
 
-    static function widget_manage_get($widget, $item, $c_row_id) {
-        if (Media::media_class_get($item->object->type) === 'picture') return Widget_Files_pictures::widget_manage_get($widget, $item, $c_row_id);
-        if (Media::media_class_get($item->object->type) === 'audio'  ) return Widget_Files_audios  ::widget_manage_get($widget, $item, $c_row_id);
-        if (Media::media_class_get($item->object->type) === 'video'  ) return Widget_Files_videos  ::widget_manage_get($widget, $item, $c_row_id);
-        return parent::widget_manage_get($widget, $item, $c_row_id);
+    static function widget_markup__item($widget, $item, $c_row_id) {
+        if (Media::media_class_get($item->object->type) === 'picture') return Widget_Files_pictures::widget_markup__item($widget, $item, $c_row_id);
+        if (Media::media_class_get($item->object->type) === 'audio'  ) return Widget_Files_audios  ::widget_markup__item($widget, $item, $c_row_id);
+        if (Media::media_class_get($item->object->type) === 'video'  ) return Widget_Files_videos  ::widget_markup__item($widget, $item, $c_row_id);
+        return parent::widget_markup__item($widget, $item, $c_row_id);
     }
 
-    static function widget_insert_get($widget) {
+    static function widget_markup__insert($widget) {
         $result = new Markup('x-widget', ['data-type' => 'insert']);
         $media_type = new Micro_tabs;
         $media_type->element_attributes['name'] = 'media_type';
@@ -90,9 +90,9 @@ class Widget_Files_multimedia extends Widget_Files {
         $fieldset_pictures->state = 'closed';
         $fieldset_audio   ->state = 'closed';
         $fieldset_video   ->state = 'closed';
-        $fieldset_pictures->children_update(Widget_Files_pictures::widget_insert_get($widget, 'picture')->children_select());
-        $fieldset_audio   ->children_update(Widget_Files_audios  ::widget_insert_get($widget, 'audio'  )->children_select());
-        $fieldset_video   ->children_update(Widget_Files_videos  ::widget_insert_get($widget, 'video'  )->children_select());
+        $fieldset_pictures->children_update(Widget_Files_pictures::widget_markup__insert($widget, 'picture')->children_select());
+        $fieldset_audio   ->children_update(Widget_Files_audios  ::widget_markup__insert($widget, 'audio'  )->children_select());
+        $fieldset_video   ->children_update(Widget_Files_videos  ::widget_markup__insert($widget, 'video'  )->children_select());
         $widget->controls['*fieldset_pictures'] = $fieldset_pictures;
         $widget->controls['*fieldset_audio'   ] = $fieldset_audio;
         $widget->controls['*fieldset_video'   ] = $fieldset_video;

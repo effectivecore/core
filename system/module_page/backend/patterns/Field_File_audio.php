@@ -35,7 +35,7 @@ class Field_File_audio extends Field_File {
     ### static declarations ###
     ###########################
 
-    static function widget_manage_action_text_get($field, $item, $id, $scope) {
+    static function controls_markup__manage__item_title($field, $item, $id, $scope) {
         if ($field->audio_player_on_manage_is_visible) {
             $player_markup = new Markup('audio', ['src' => Core::to_url_from_path($item->get_current_path(true))] + $field->audio_player_on_manage_settings, [], +450);
                return new Node([], [$player_markup, new Text('audio "%%_audio"', ['audio' => $item->file])]);

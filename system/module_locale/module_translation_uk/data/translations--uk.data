@@ -62,6 +62,8 @@ translations
     - append: додати
     - apply: застосувати
     - Architecture: Архітектура
+    - area: область
+    - Area: Область
     - ascending: по зростанню
     - Assign colors: Призначити кольори
     - Attribute: Атрибут
@@ -1050,6 +1052,7 @@ translations
     - wrong category: неправильна категорія
     - wrong cron key: неправильний ключ cron
     - wrong entity name: неправильне ім'я сутності
+    - wrong instance key (not present): неправильний ключ екземпляра (не представлений)
     - wrong instance key: неправильний ключ екземпляра
     - wrong management group: неправильна група керування
     - wrong number of instance keys: неправильна кількість ключів екземпляра

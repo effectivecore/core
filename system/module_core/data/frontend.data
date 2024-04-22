@@ -5,8 +5,18 @@ frontend
       where: path
       match: %^.*$%
     scripts
+    - polyfills
+        path: frontend/polyfills.js
+        weight: +800
+        attributes
+        - defer: true
     - class__Core
-        path: frontend/components/Core.jsd
+        path: frontend/components/Core.js
+        weight: +700
+        attributes
+        - type: module
+    - class__Token
+        path: frontend/components/Token.jsd
         weight: +600
         attributes
         - type: module
@@ -20,8 +30,13 @@ frontend
         weight: +600
         attributes
         - type: module
-    - polyfills
-        path: frontend/polyfills.js
+    - class__BaseComponent
+        path: frontend/components/BaseComponent.js
         weight: +600
         attributes
-        - defer: true
+        - type: module
+    - class__Rearrange
+        path: frontend/components/Rearrange.js
+        weight: +600
+        attributes
+        - type: module

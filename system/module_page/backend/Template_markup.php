@@ -40,7 +40,7 @@ class Template_markup extends Template {
     }
 
     static function attributes_render_html($data, $is_xml_attr_style = false, $name_wrapper = '', $value_wrapper = '"', $relation = '=', $delimiter = ' ') {
-        $func_render_item = function($name, $item) use ($is_xml_attr_style, $name_wrapper, $value_wrapper, $relation) {
+        $func_render_item = function ($name, $item) use ($is_xml_attr_style, $name_wrapper, $value_wrapper, $relation) {
             switch (gettype($item)) {
                 case 'array':
                     if (count($item)) {
@@ -107,7 +107,7 @@ class Template_markup extends Template {
     }
 
     static function attributes_render_json($data, $is_xml_attr_style = false, $name_wrapper = '"', $value_wrapper = '"', $relation = ':', $delimiter = ',', $group_start = '{', $group_end = '}') {
-        $func_render_item = function($name, $item) use ($is_xml_attr_style, $name_wrapper, $value_wrapper, $relation) {
+        $func_render_item = function ($name, $item) use ($is_xml_attr_style, $name_wrapper, $value_wrapper, $relation) {
             switch (gettype($item)) {
                 case 'array':
                     if (count($item)) {

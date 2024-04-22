@@ -299,6 +299,7 @@ instances
     - id_parent: null
     - id_tree: user_anonymous
     - title: User
+    - weight: +0
     - access
         roles
         - =: anonymous
@@ -310,7 +311,7 @@ instances
     - id_tree: user_anonymous
     - title: Login
     - url: /login
-    - weight: +500
+    - weight: +0
     - access
         roles
         - =: anonymous
@@ -322,6 +323,7 @@ instances
     - id_tree: user_anonymous
     - title: Registration
     - url: /registration
+    - weight: -5
     - access
         roles
         - =: anonymous
@@ -333,7 +335,7 @@ instances
     - id_tree: user_anonymous
     - title: Recovery
     - url: /recovery
-    - weight: -500
+    - weight: -10
     - access
         roles
         - =: anonymous
@@ -346,6 +348,7 @@ instances
     - id_tree: user_registered
     - title: %%_nickname
     - url: /user/%%_nickname
+    - weight: +0
     - access
         roles
         - =: registered
@@ -357,7 +360,7 @@ instances
     - id_tree: user_registered
     - title: Edit
     - url: /user/%%_nickname/edit
-    - weight: +500
+    - weight: +0
     - access
         roles
         - =: registered
@@ -369,7 +372,7 @@ instances
     - id_tree: user_registered
     - title: Logout
     - url: /logout
-    - weight: -500
+    - weight: -5
     - access
         roles
         - =: registered

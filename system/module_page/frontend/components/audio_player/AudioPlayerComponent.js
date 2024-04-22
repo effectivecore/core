@@ -5,7 +5,7 @@
 
 'use strict';
 
-import BaseComponent from '../BaseComponent.js';
+import BaseComponent from '/system/module_core/frontend/components/BaseComponent.js';
 
 export default class AudioPlayerComponent extends BaseComponent {
 
@@ -24,19 +24,20 @@ export default class AudioPlayerComponent extends BaseComponent {
     }
 
     mount() {
-        return this.controller.parentNode.insertBefore(this.template, this.controller);
+        this.controller.setAttribute('data-player-audio-default-is-processed', '');
+        this.controller.parentNode.insertBefore(this.template, this.controller);
     }
 
     //////////////////////////////////////////////////////////////////
 
     template_get() {
-        return this.Markup('x-audio-player', {}, [
-            this.Markup('button', {'type' : 'button', 'value': 'play', 'onclick': 'on_click_play'}),
-            this.Markup('x-timeline', {'onclick': 'on_click_timeline'},
-                this.Markup('x-track-position')),
-            this.Markup('x-time', {}, [
-                this.Markup('x-time-elapsed', {}, '-:--:--'),
-                this.Markup('x-time-total'  , {}, '-:--:--')
+        return this.markup('x-audio-player', {}, [
+            this.markup('button', {'type' : 'button', 'value': 'play', 'onclick': 'on_click_play'}),
+            this.markup('x-timeline', {'onclick': 'on_click_timeline'},
+                this.markup('x-track-position')),
+            this.markup('x-time', {}, [
+                this.markup('x-time-elapsed', {}, '-:--:--'),
+                this.markup('x-time-total'  , {}, '-:--:--')
             ])
         ]);
     }

@@ -14,6 +14,15 @@ events
       handler: \effcore\modules\user\Events_Module::on_cron_run
   # ═════════════════════════════════════════════════════════════════════
   on_form_build
+  - login|Event
+      for: login
+      handler: \effcore\modules\user\Events_Form_Login::on_build
+  - registration|Event
+      for: registration
+      handler: \effcore\modules\user\Events_Form_Registration::on_build
+  - recovery|Event
+      for: recovery
+      handler: \effcore\modules\user\Events_Form_Recovery::on_build
   - instance_insert__user|Event
       for: instance_insert
       weight: +300
@@ -32,6 +41,9 @@ events
   - registration|Event
       for: registration
       handler: \effcore\modules\user\Events_Form_Registration::on_init
+  - recovery|Event
+      for: recovery
+      handler: \effcore\modules\user\Events_Form_Recovery::on_init
   - instance_insert__user|Event
       for: instance_insert
       weight: +300

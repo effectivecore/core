@@ -17,6 +17,7 @@ use effcore\User;
 abstract class Events_Form_Logout {
 
     static function on_build($event, $form) {
+        $form->env['session'] = Session::select();
         $selection = Selection::get('user_sessions');
         $selection = Core::deep_clone($selection);
         $selection->build();
@@ -25,9 +26,12 @@ abstract class Events_Form_Logout {
     }
 
     static function on_init($event, $form, $items) {
-        $session_active = Session::select();
-        if (isset($items['#is_checked:'.$session_active->id])) {
-            $items['#is_checked:'.$session_active->id]->checked_set();
+        if ($form->env['session'] &&
+            $form->env['session']->id_user) {
+            $items['~logout']->disabled_set(false);
+            if (isset($items['#is_checked:'.$form->env['session']->id])) {
+                $items['#is_checked:'.$form->env['session']->id]->checked_set();
+            }
         }
     }
 

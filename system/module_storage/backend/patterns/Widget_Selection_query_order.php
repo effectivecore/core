@@ -16,7 +16,7 @@ class Widget_Selection_query_order extends Widget_Items {
     public $item_title = 'order';
     public $attributes = [
         'data-type' => 'items-query-order'];
-    public $name_complex = 'widget_selection_query_order';
+    public $group_name = 'widget_selection_query_order';
     public $state = 'closed';
     public $_instance;
 
@@ -64,8 +64,8 @@ class Widget_Selection_query_order extends Widget_Items {
     ### static declarations ###
     ###########################
 
-    static function widget_manage_get($widget, $item, $c_row_id) {
-        $result = parent::widget_manage_get($widget, $item, $c_row_id);
+    static function widget_markup__item($widget, $item, $c_row_id) {
+        $result = parent::widget_markup__item($widget, $item, $c_row_id);
         # control for order field name
         $field_select_field = new Field_Select_entity_field;
         $field_select_field->cform = $widget->cform;
@@ -74,7 +74,7 @@ class Widget_Selection_query_order extends Widget_Items {
         $field_select_field->description_state = 'hidden';
         $field_select_field->title = 'Field';
         $field_select_field->build($widget->_instance->main_entity_name);
-        $field_select_field->name_set($widget->name_get_complex().'__field_name__'.$c_row_id);
+        $field_select_field->name_set($widget->group_control_name_get([$c_row_id, 'field_name']));
         $field_select_field->value_set($item->field_name ?? null);
         # control for order type
         $field_select_type = new Field_Select;
@@ -88,7 +88,7 @@ class Widget_Selection_query_order extends Widget_Items {
             'asc'          => 'ascending',
             'desc'         => 'descending']);
         $field_select_type->build();
-        $field_select_type->name_set($widget->name_get_complex().'__type__'.$c_row_id);
+        $field_select_type->name_set($widget->group_control_name_get([$c_row_id, 'type']));
         $field_select_type->value_set($item->type ?? null);
         # relate new controls with the widget
         $widget->controls['#field_name__'.$c_row_id] = $field_select_field;

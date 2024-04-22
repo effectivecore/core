@@ -90,8 +90,10 @@ body[data-layout-id='original_classic'] [role='tree'][data-style~='dropdown'][da
 body[data-layout-id='original_classic'] [role='tree'][data-style~='dropdown'][data-id='system'] li li a {padding: 0}
 body[data-layout-id='original_classic'] [role='tree'][data-style~='dropdown'][data-id='system'] li[data-id='front'] {display: none}
 
-                       body[data-layout-id='original_classic'] [role='tree'][data-style~='dropdown'][data-id^='user'] li                          a,
-[data-user-has-avatar] body[data-layout-id='original_classic'] [role='tree'][data-style~='dropdown'][data-id^='user'] li[data-id^='registered'] > a {padding: 7px 10px 7px 48px; background-size: 37px; background-position: 0}
+                       body[data-layout-id='original_classic'] [role='tree'][data-style~='dropdown'][data-id^='user'] li                        > a {padding: 7px 10px; background-size: 37px 37px; background-position: 0}
+                       body[data-layout-id='original_classic'] [role='tree'][data-style~='dropdown'][data-id^='user'] li[data-id^='anonymous' ] > a {padding-left: 46px}
+                       body[data-layout-id='original_classic'] [role='tree'][data-style~='dropdown'][data-id^='user'] li[data-id^='registered'] > a {padding-left: 46px}
+[data-user-has-avatar] body[data-layout-id='original_classic'] [role='tree'][data-style~='dropdown'][data-id^='user'] li[data-id^='registered'] > a {padding-left: 46px}
                        body[data-layout-id='original_classic'] [role='tree'][data-style~='dropdown'][data-id^='user'] li li a {padding: 0}
 
 body[data-layout-id='original_classic'] [role='tree'][data-id^='languages'] {margin: 6px 20px}

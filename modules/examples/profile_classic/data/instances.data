@@ -1981,6 +1981,7 @@ instances
     - id_parent: null
     - id_tree: user_anonymous
     - title: User
+    - weight: +0
     - access
         roles
         - =: anonymous
@@ -1992,7 +1993,7 @@ instances
     - id_tree: user_anonymous
     - title: Login
     - url: /login
-    - weight: +500
+    - weight: +0
     - access
         roles
         - =: anonymous
@@ -2004,6 +2005,7 @@ instances
     - id_tree: user_anonymous
     - title: Registration
     - url: /registration
+    - weight: -5
     - access
         roles
         - =: anonymous
@@ -2015,7 +2017,7 @@ instances
     - id_tree: user_anonymous
     - title: Recovery
     - url: /recovery
-    - weight: -500
+    - weight: -10
     - access
         roles
         - =: anonymous
@@ -2027,6 +2029,7 @@ instances
     - id_parent: null
     - id_tree: user_anonymous_ru
     - title: Пользователь
+    - weight: +0
     - access
         roles
         - =: anonymous
@@ -2038,7 +2041,7 @@ instances
     - id_tree: user_anonymous_ru
     - title: Вход
     - url: /ru/login
-    - weight: +500
+    - weight: +0
     - access
         roles
         - =: anonymous
@@ -2050,6 +2053,7 @@ instances
     - id_tree: user_anonymous_ru
     - title: Регистрация
     - url: /ru/registration
+    - weight: -5
     - access
         roles
         - =: anonymous
@@ -2061,7 +2065,7 @@ instances
     - id_tree: user_anonymous_ru
     - title: Восстановление
     - url: /ru/recovery
-    - weight: -500
+    - weight: -10
     - access
         roles
         - =: anonymous
@@ -2074,6 +2078,7 @@ instances
     - id_tree: user_registered
     - title: %%_nickname
     - url: /user/%%_nickname
+    - weight: +0
     - access
         roles
         - =: registered
@@ -2085,7 +2090,7 @@ instances
     - id_tree: user_registered
     - title: Edit
     - url: /user/%%_nickname/edit
-    - weight: +500
+    - weight: +0
     - access
         roles
         - =: registered
@@ -2097,7 +2102,7 @@ instances
     - id_tree: user_registered
     - title: Logout
     - url: /logout
-    - weight: -500
+    - weight: -5
     - access
         roles
         - =: registered
@@ -2110,6 +2115,7 @@ instances
     - id_tree: user_registered_ru
     - title: %%_nickname
     - url: /ru/user/%%_nickname
+    - weight: +0
     - access
         roles
         - =: registered
@@ -2121,7 +2127,7 @@ instances
     - id_tree: user_registered_ru
     - title: Редактировать
     - url: /ru/user/%%_nickname/edit
-    - weight: +500
+    - weight: +0
     - access
         roles
         - =: registered
@@ -2133,7 +2139,7 @@ instances
     - id_tree: user_registered_ru
     - title: Выход
     - url: /ru/logout?back=%2Fru
-    - weight: -500
+    - weight: -5
     - access
         roles
         - =: registered
@@ -2162,7 +2168,7 @@ instances
     - id_tree: languages
     - title: Russian
     - url: /ru
-    - weight: -1
+    - weight: -5
     - link_attributes
       - 0
           weight: +0
@@ -2188,7 +2194,7 @@ instances
     - id_tree: main
     - title: Gallery
     - url: /gallery
-    - weight: -1
+    - weight: -5
 - tree_item_contact|Instance
     entity_name: tree_item
     values
@@ -2197,7 +2203,7 @@ instances
     - id_tree: main
     - title: Contact Us
     - url: /contact
-    - weight: -2
+    - weight: -10
 # ── menu: main_ru ────────────────────────────────────────────────────
 - tree_item_about_ru|Instance
     entity_name: tree_item
@@ -2216,7 +2222,7 @@ instances
     - id_tree: main_ru
     - title: Галерея
     - url: /ru/gallery
-    - weight: -1
+    - weight: -5
 - tree_item_contact_ru|Instance
     entity_name: tree_item
     values
@@ -2225,7 +2231,7 @@ instances
     - id_tree: main_ru
     - title: Связь
     - url: /ru/contact
-    - weight: -2
+    - weight: -10
 # ─────────────────────────────────────────────────────────────────────
 # galleries
 # ─────────────────────────────────────────────────────────────────────

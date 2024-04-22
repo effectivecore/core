@@ -62,8 +62,8 @@ class Field_File extends Field {
     public $characters_allowed_for_decsription = '"a-z", "A-Z", "0-9", "_", "-", "."';
     public $types_allowed = [
         'txt' => 'txt'];
-    public $has_widget_insert = true;
-    public $has_widget_manage = true;
+    public $has_controls_insert = true;
+    public $has_controls_manage = true;
     public $result;
     public $is_debug_mode = false;
 
@@ -72,10 +72,10 @@ class Field_File extends Field {
             parent::build();
             if ($this->is_debug_mode)
                 $this->attribute_insert('data-debug', true);
-            if ($this->has_widget_insert)
-                $this->child_insert(static::widget_insert_get($this), 'insert');
-            if ($this->has_widget_manage)
-                static::widget_manage_build($this);
+            if ($this->has_controls_insert)
+                $this->child_insert(static::controls_markup__insert($this), 'insert');
+            if ($this->has_controls_manage)
+                static::controls_markup__manage($this);
             $this->accept_set($this->render_attribut_accept());
         }
     }
@@ -169,7 +169,7 @@ class Field_File extends Field {
     ### static declarations ###
     ###########################
 
-    static function widget_insert_get($field) {
+    static function controls_markup__insert($field) {
         $button = new Button(null, ['data-style' => 'insert', 'title' => new Text('insert')]);
         $button->break_on_validate = true;
         $button->build();
@@ -180,18 +180,18 @@ class Field_File extends Field {
         return $button;
     }
 
-    static function widget_manage_build($field) {
+    static function controls_markup__manage($field) {
         $field->child_delete('manager_fin');
         $field->child_delete('manager_pre');
-        $field->controls['*manager_fin'] = new Markup('x-widget', ['data-type' => 'delete+fin']);
-        $field->controls['*manager_pre'] = new Markup('x-widget', ['data-type' => 'delete+pre']);
+        $field->controls['*manager_fin'] = new Markup('x-controls', ['data-type' => 'delete+fin']);
+        $field->controls['*manager_pre'] = new Markup('x-controls', ['data-type' => 'delete+pre']);
         $field->child_insert($field->controls['*manager_fin'], 'manager_fin');
         $field->child_insert($field->controls['*manager_pre'], 'manager_pre');
         $items_fin = $field->items_get('fin');
         $items_pre = $field->items_get('pre');
-        foreach ($items_fin as $c_id => $c_item) static::widget_manage_action_insert($field, $c_item, $c_id, 'fin');
-        foreach ($items_pre as $c_id => $c_item) static::widget_manage_action_insert($field, $c_item, $c_id, 'pre');
-        # widget_insert reaction
+        foreach ($items_fin as $c_id => $c_item) static::controls_markup__manage__item($field, $c_item, $c_id, 'fin');
+        foreach ($items_pre as $c_id => $c_item) static::controls_markup__manage__item($field, $c_item, $c_id, 'pre');
+        # insert reaction
         if ($field->disabled_get() === false) {
             $is_over = count($items_fin) + count($items_pre) >= $field->max_files_number;
             if ($field->is_debug_mode !== true                     ) $field->controls['~insert']->disabled_set($is_over);
@@ -200,7 +200,7 @@ class Field_File extends Field {
         }
     }
 
-    static function widget_manage_action_insert($field, $item, $id, $scope) {
+    static function controls_markup__manage__item($field, $item, $id, $scope) {
         $button_delete = new Button(null, ['data-style' => 'delete little', 'title' => new Text('delete')], +500);
         $button_delete->break_on_validate = true;
         $button_delete->build();
@@ -210,11 +210,11 @@ class Field_File extends Field {
         $button_delete->_scope = $scope;
         $button_delete->_id = $id;
         $field->controls['~delete_'.$scope.'_'.$id] = $button_delete;
-        if ($scope === 'fin') $field->controls['*manager_fin']->child_insert(new Markup('x-item', ['data-id' => $id], [$button_delete, static::widget_manage_action_text_get($field, $item, $id, $scope)]), $id);
-        if ($scope === 'pre') $field->controls['*manager_pre']->child_insert(new Markup('x-item', ['data-id' => $id], [$button_delete, static::widget_manage_action_text_get($field, $item, $id, $scope)]), $id);
+        if ($scope === 'fin') $field->controls['*manager_fin']->child_insert(new Markup('x-item', ['data-id' => $id], [$button_delete, static::controls_markup__manage__item_title($field, $item, $id, $scope)]), $id);
+        if ($scope === 'pre') $field->controls['*manager_pre']->child_insert(new Markup('x-item', ['data-id' => $id], [$button_delete, static::controls_markup__manage__item_title($field, $item, $id, $scope)]), $id);
     }
 
-    static function widget_manage_action_text_get($field, $item, $id, $scope) {
+    static function controls_markup__manage__item_title($field, $item, $id, $scope) {
         return new Markup('x-title', [], new Text('file "%%_file"', ['file' => $item->file]));
     }
 

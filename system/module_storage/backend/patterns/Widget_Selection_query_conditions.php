@@ -16,7 +16,7 @@ class Widget_Selection_query_conditions extends Widget_Items {
     public $item_title = 'condition';
     public $attributes = [
         'data-type' => 'items-query-conditions'];
-    public $name_complex = 'widget_selection_query_conditions';
+    public $group_name = 'widget_selection_query_conditions';
     public $state = 'closed';
     public $_instance;
 
@@ -86,8 +86,8 @@ class Widget_Selection_query_conditions extends Widget_Items {
     ### static declarations ###
     ###########################
 
-    static function widget_manage_get($widget, $item, $c_row_id) {
-        $result = parent::widget_manage_get($widget, $item, $c_row_id);
+    static function widget_markup__item($widget, $item, $c_row_id) {
+        $result = parent::widget_markup__item($widget, $item, $c_row_id);
         # control for condition field name
         $field_select_entity_field = new Field_Select_entity_field;
         $field_select_entity_field->cform = $widget->cform;
@@ -96,7 +96,7 @@ class Widget_Selection_query_conditions extends Widget_Items {
         $field_select_entity_field->description_state = 'hidden';
         $field_select_entity_field->title = 'Field';
         $field_select_entity_field->build($widget->_instance->main_entity_name);
-        $field_select_entity_field->name_set($widget->name_get_complex().'__field_name__'.$c_row_id);
+        $field_select_entity_field->name_set($widget->group_control_name_get([$c_row_id, 'field_name']));
         $field_select_entity_field->value_set($item->field_name ?? null);
         # control for condition operator
         $field_select_operator = new Field_Select;
@@ -120,7 +120,7 @@ class Widget_Selection_query_conditions extends Widget_Items {
             'is null'      => 'IS NULL',
             'is not null'  => 'IS NOT NULL']);
         $field_select_operator->build();
-        $field_select_operator->name_set($widget->name_get_complex().'__operator__'.$c_row_id);
+        $field_select_operator->name_set($widget->group_control_name_get([$c_row_id, 'operator']));
         $field_select_operator->value_set($item->operator ?? null);
         # control for condition value
         $field_text_value = new Field_Text;
@@ -129,7 +129,7 @@ class Widget_Selection_query_conditions extends Widget_Items {
         $field_text_value->description_state = 'hidden';
         $field_text_value->title = 'Value';
         $field_text_value->build();
-        $field_text_value->name_set($widget->name_get_complex().'__value__'.$c_row_id);
+        $field_text_value->name_set($widget->group_control_name_get([$c_row_id, 'value']));
         $field_text_value->minlength_set(0);
         $field_text_value->maxlength_set(10000);
         $field_text_value->value_set($item->value ?? null);

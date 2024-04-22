@@ -40,8 +40,8 @@ abstract class Events_Form_Instance_select_multiple {
                     $form->_selection->fields['code']['extra']->closure = function ($c_cell_id, $c_row, $c_instance, $origin = []) {
                         return new Node([], [
                             'actions'       => $c_row['actions']['value'],
-                            'hidden_parent' => new Field_Hidden('parent-'.$c_instance->id, $c_instance->id_parent, ['data-type' => 'parent']),
-                            'hidden_weight' => new Field_Hidden('weight-'.$c_instance->id, $c_instance->weight   , ['data-type' => 'weight'])
+                            'hidden_parent' => new Field_Hidden('parent-'.$c_instance->id, $c_instance->id_parent, ['data-role' => 'parent']),
+                            'hidden_weight' => new Field_Hidden('weight-'.$c_instance->id, $c_instance->weight   , ['data-role' => 'weight'])
                         ]);
                     };
                     $form->_selection->build();

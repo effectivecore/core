@@ -26,7 +26,7 @@ class Field_File_video extends Field_File {
     ### static declarations ###
     ###########################
 
-    static function widget_manage_action_text_get($field, $item, $id, $scope) {
+    static function controls_markup__manage__item_title($field, $item, $id, $scope) {
         return new Text('video "%%_video"', ['video' => $item->file]);
     }
 

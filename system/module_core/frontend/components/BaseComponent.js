@@ -11,7 +11,7 @@ export default class BaseComponent {
         this.pool = {};
     }
 
-    Markup(tag_name = 'div', attributes = {}, children = null, ignore_pool = false) {
+    markup(tag_name = 'div', attributes = {}, children = null, ignore_pool = false) {
         let element = document.createElement(tag_name);
         for (let c_key in attributes)
             if (!c_key.startsWith('on'))

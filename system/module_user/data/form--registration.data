@@ -34,4 +34,5 @@ forms
         title: register
         attributes
         - value: register
+        - disabled: true
         weight: -500

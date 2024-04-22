@@ -8,7 +8,9 @@ namespace effcore;
 
 #[\AllowDynamicProperties]
 
-class Widget_Selection_query extends Control implements Control_complex {
+class Widget_Selection_query extends Control implements Controls_Group {
+
+    use Controls_Group__Shared;
 
     public $tag_name = 'x-widget';
     public $title_tag_name = 'label';
@@ -18,7 +20,7 @@ class Widget_Selection_query extends Control implements Control_complex {
     public $content_attributes = [
         'data-widget-content' => true,
         'data-nested-content' => true];
-    public $name_complex = 'query_settings';
+    public $group_name = 'query_settings';
     public $attributes = [
         'data-type' => 'query-settings',
         'role'      => 'group'];
@@ -75,10 +77,6 @@ class Widget_Selection_query extends Control implements Control_complex {
         }
     }
 
-    function name_get_complex() {
-        return $this->name_complex;
-    }
-
     function disabled_get() {
         return false;
     }
@@ -98,7 +96,7 @@ class Widget_Selection_query extends Control implements Control_complex {
             $field_textarea_data_conditions->title = null;
             $field_textarea_data_conditions->element_attributes['rows'] = 10;
             $field_textarea_data_conditions->build();
-            $field_textarea_data_conditions->name_set($widget->name_get_complex().'__conditions_data');
+            $field_textarea_data_conditions->name_set($widget->group_control_name_get(['conditions_data']));
             $field_textarea_data_conditions->required_set(false);
             $field_textarea_data_conditions->minlength_set(null);
             $field_textarea_data_conditions->maxlength_set(10000);
@@ -141,7 +139,7 @@ class Widget_Selection_query extends Control implements Control_complex {
         $field_number_limit->attributes['data-role'] = 'limit';
         $field_number_limit->title = 'Limit';
         $field_number_limit->build();
-        $field_number_limit->name_set($widget->name_get_complex().'__limit');
+        $field_number_limit->name_set($widget->group_control_name_get(['limit']));
         $field_number_limit->min_set(1);
         $field_number_limit->max_set(10000);
         $field_number_limit->value_set(50);

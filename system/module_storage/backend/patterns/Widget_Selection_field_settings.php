@@ -28,7 +28,7 @@ class Widget_Selection_field_settings extends Container {
 
     function build() {
         if (!$this->is_builded) {
-            $this->child_insert(static::widget_manage_get($this, $this->item, $this->c_row_id), 'manage');
+            $this->child_insert(static::widget_markup($this, $this->item, $this->c_row_id), 'manage');
             $this->is_builded = true;
         }
     }
@@ -42,7 +42,7 @@ class Widget_Selection_field_settings extends Container {
     function render_opener() {
         if ($this->state === 'opened' ||
             $this->state === 'closed') {
-            $html_name    = $this->parent_widget->name_get_complex().'__settings_opener__'.$this->c_row_id;
+            $html_name    = $this->parent_widget->group_control_name_get(['settings_opener', $this->c_row_id]);
             $is_submited  = Form::is_posted();
             $submit_value = Request::value_get($html_name);
             $has_error    = $this->has_error_in();
@@ -60,12 +60,12 @@ class Widget_Selection_field_settings extends Container {
     ### static declarations ###
     ###########################
 
-    static function widget_manage_get($widget, $item, $c_row_id) {
+    static function widget_markup($widget, $item, $c_row_id) {
         $result = new Node;
         # control for title
         $widget_text_object_title = new Widget_Text_object;
         $widget_text_object_title->cform = $widget->parent_widget->cform;
-        $widget_text_object_title->name_complex = $widget->parent_widget->name_get_complex().'__title__'.$c_row_id;
+        $widget_text_object_title->group_name = $widget->parent_widget->group_control_name_get(['title', $c_row_id]);
         $widget_text_object_title->attributes['data-role'] = 'title';
         $widget_text_object_title->field_text_title = 'Title';
         $widget_text_object_title->field_text_required = false;
@@ -92,13 +92,13 @@ class Widget_Selection_field_settings extends Container {
             'datetime_utc'  => ' datetime_utc']);
         $field_format->build();
         $field_format->required_set(false);
-        $field_format->name_set($widget->parent_widget->name_get_complex().'__format__'.$c_row_id);
+        $field_format->name_set($widget->parent_widget->group_control_name_get(['format', $c_row_id]));
         $field_format->value_set($item->format ?? '');
         # control for value settings
         $group_value_settings = new Group_Checkboxes;
         $group_value_settings->title = 'Value settings';
         $group_value_settings->attributes['data-role'] = 'value-settings';
-        $group_value_settings->element_attributes['name'] = $widget->parent_widget->name_get_complex().'__value_settings__'.$c_row_id.'[]';
+        $group_value_settings->element_attributes['name'] = $widget->parent_widget->group_control_name_get(['value_settings', $c_row_id], '[]');
         $group_value_settings->items_set([
             'is_apply_translation' => 'Is apply translation',
             'is_apply_tokens'      => 'Is apply tokens',

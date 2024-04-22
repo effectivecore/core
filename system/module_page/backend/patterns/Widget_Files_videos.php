@@ -16,7 +16,7 @@ class Widget_Files_videos extends Widget_Files {
     public $item_title = 'Video';
     public $attributes = [
         'data-type' => 'items-files-videos'];
-    public $name_complex = 'widget_files_videos';
+    public $group_name = 'widget_files_videos';
     # ◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦
     public $upload_dir = 'videos/';
     public $fixed_name = 'video-multiple-%%_item_id_context';
@@ -78,8 +78,8 @@ class Widget_Files_videos extends Widget_Files {
 
     # ◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦
 
-    static function widget_manage_get($widget, $item, $c_row_id) {
-        $result = parent::widget_manage_get($widget, $item, $c_row_id);
+    static function widget_markup__item($widget, $item, $c_row_id) {
+        $result = parent::widget_markup__item($widget, $item, $c_row_id);
         $result->child_select('head')->child_select('button_delete')->_kind = 'video';
         $result->attribute_insert('data-is-new', $item->object->get_current_state() === 'pre' ? 'true' : 'false');
         if (Media::media_class_get($item->object->type) === 'video') {
@@ -98,7 +98,7 @@ class Widget_Files_videos extends Widget_Files {
         return $result;
     }
 
-    static function widget_insert_get($widget, $group = '') {
+    static function widget_markup__insert($widget, $group = '') {
         $result = new Markup('x-widget', ['data-type' => 'insert']);
         # control for upload new video
         $field_file_video = new Field_File_video;
@@ -111,7 +111,9 @@ class Widget_Files_videos extends Widget_Files {
         $field_file_video->has_widget_insert = false;
         $field_file_video->has_widget_manage = false;
         $field_file_video->build();
-        $field_file_video->name_set($widget->name_get_complex().'__file'.($group ? '_'.$group : ''));
+        $field_file_video->name_set(
+            $widget->group_control_name_get(['file', $group])
+        );
         # control for upload new video poster
         $field_file_picture_poster = new Field_File_picture;
         $field_file_picture_poster->title             = 'Poster';
@@ -123,12 +125,16 @@ class Widget_Files_videos extends Widget_Files {
         $field_file_picture_poster->has_widget_insert = false;
         $field_file_picture_poster->has_widget_manage = false;
         $field_file_picture_poster->build();
-        $field_file_picture_poster->name_set($widget->name_get_complex().'__poster');
+        $field_file_picture_poster->name_set(
+            $widget->group_control_name_get(['poster', $group])
+        );
         # button for insertion of the new item
         $button_insert = new Button(null, ['data-style' => 'insert', 'title' => new Text('insert')]);
         $button_insert->break_on_validate = true;
         $button_insert->build();
-        $button_insert->value_set($widget->name_get_complex().'__insert'.($group ? '_'.$group : ''));
+        $button_insert->value_set(
+            $widget->group_control_name_get(['insert', $group])
+        );
         $button_insert->_type = 'insert';
         $button_insert->_kind = 'video';
         # relate new controls with the widget

@@ -10,4 +10,5 @@ forms
         title: logout
         attributes
         - value: logout
+        - disabled: true
         weight: -500

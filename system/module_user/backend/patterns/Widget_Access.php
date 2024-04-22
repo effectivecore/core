@@ -8,14 +8,16 @@ namespace effcore;
 
 #[\AllowDynamicProperties]
 
-class Widget_Access extends Control implements Control_complex {
+class Widget_Access extends Control implements Controls_Group {
+
+    use Controls_Group__Shared;
 
     public $tag_name = 'x-group';
     public $title = 'Access';
     public $title_attributes = [
         'data-group-title' => true];
     public $description = 'Access settings are not applied if nothing is selected!';
-    public $name_complex = 'access';
+    public $group_name = 'access';
     public $checked_roles = [];
     public $attributes = [
         'data-type' => 'access',
@@ -24,7 +26,7 @@ class Widget_Access extends Control implements Control_complex {
 
     function build() {
         if (!$this->is_builded) {
-            $this->child_insert(static::widget_manage_get($this), 'manage');
+            $this->child_insert(static::widget_markup($this), 'manage');
             $this->is_builded = true;
         }
     }
@@ -56,10 +58,6 @@ class Widget_Access extends Control implements Control_complex {
                                    implode(', ', $value->users) : null
             );
         }
-    }
-
-    function name_get_complex() {
-        return $this->name_complex;
     }
 
     function disabled_get() {
@@ -111,11 +109,11 @@ class Widget_Access extends Control implements Control_complex {
 
     # ◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦
 
-    static function widget_manage_get($widget) {
+    static function widget_markup($widget) {
         $result = new Node;
         # control for roles
         $group_roles = new Group_Switchers;
-        $group_roles->element_attributes['name'] = $widget->name_get_complex().'__roles[]';
+        $group_roles->element_attributes['name'] = $widget->group_control_name_get(['roles'], '[]');
         $group_roles_items = [];
         foreach (Role::get_all() as $c_role)
             $group_roles_items[$c_role->id] = $c_role->title;
@@ -125,7 +123,7 @@ class Widget_Access extends Control implements Control_complex {
         $field_users = new Field_Text('User IDs');
         $field_users->cform = $widget->cform;
         $field_users->build();
-        $field_users->name_set($widget->name_get_complex().'__users');
+        $field_users->name_set($widget->group_control_name_get(['users']));
         $field_users->pattern_set('^[0-9, ]*$');
         $field_users->maxlength_set(65535);
         $field_users->required_set(false);

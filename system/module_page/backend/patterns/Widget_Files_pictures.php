@@ -16,7 +16,7 @@ class Widget_Files_pictures extends Widget_Files {
     public $item_title = 'Picture';
     public $attributes = [
         'data-type' => 'items-files-pictures'];
-    public $name_complex = 'widget_files_pictures';
+    public $group_name = 'widget_files_pictures';
     # ◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦
     public $upload_dir = 'pictures/';
     public $fixed_name = 'picture-multiple-%%_item_id_context';
@@ -76,8 +76,8 @@ class Widget_Files_pictures extends Widget_Files {
 
     # ◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦
 
-    static function widget_manage_get($widget, $item, $c_row_id) {
-        $result = parent::widget_manage_get($widget, $item, $c_row_id);
+    static function widget_markup__item($widget, $item, $c_row_id) {
+        $result = parent::widget_markup__item($widget, $item, $c_row_id);
         $result->child_select('head')->child_select('button_delete')->_kind = 'picture';
         $result->attribute_insert('data-is-new', $item->object->get_current_state() === 'pre' ? 'true' : 'false');
         if (Media::media_class_get($item->object->type) === 'picture') {
@@ -94,7 +94,7 @@ class Widget_Files_pictures extends Widget_Files {
         return $result;
     }
 
-    static function widget_insert_get($widget, $group = '') {
+    static function widget_markup__insert($widget, $group = '') {
         $result = new Markup('x-widget', ['data-type' => 'insert']);
         # control for upload new picture
         $field_file_picture = new Field_File_picture;
@@ -108,12 +108,16 @@ class Widget_Files_pictures extends Widget_Files {
         $field_file_picture->has_widget_manage = false;
         $field_file_picture->build();
         $field_file_picture->multiple_set();
-        $field_file_picture->name_set($widget->name_get_complex().'__file'.($group ? '_'.$group : '').'[]');
+        $field_file_picture->name_set(
+            $widget->group_control_name_get(['file', $group], '[]')
+        );
         # button for insertion of the new item
         $button_insert = new Button(null, ['data-style' => 'insert', 'title' => new Text('insert')]);
         $button_insert->break_on_validate = true;
         $button_insert->build();
-        $button_insert->value_set($widget->name_get_complex().'__insert'.($group ? '_'.$group : ''));
+        $button_insert->value_set(
+            $widget->group_control_name_get(['insert', $group])
+        );
         $button_insert->_type = 'insert';
         $button_insert->_kind = 'picture';
         # relate new controls with the widget

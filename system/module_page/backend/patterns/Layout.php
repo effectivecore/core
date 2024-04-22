@@ -66,6 +66,30 @@ class Layout extends Node implements has_Data_cache {
         return static::$cache[$id];
     }
 
+    static function select_area_all($id) {
+        $result = [];
+        $layout = static::select($id);
+        if ($layout) {
+            foreach ($layout->children_select_recursive() as $c_area) {
+                if ($c_area instanceof Area ||
+                    $c_area instanceof Area_group) {
+                    $c_area->states_set(
+                        $c_area->id &&
+                        isset($layout->states[$c_area->id]) ?
+                              $layout->states[$c_area->id] : []);
+                    $c_area->build();
+                }
+            }
+            foreach ($layout->children_select_recursive() as $c_area) {
+                if ($c_area instanceof Area && $c_area->id) {
+                    $result[$c_area->id] =
+                            $c_area->id;
+                }
+            }
+        }
+        return $result;
+    }
+
     static function changes_store($module_id, $layout_id, $states = []) {
         $result = true;
         foreach ($states as $c_state) {

@@ -15,22 +15,31 @@ class Form extends Markup implements has_Data_cache {
 
     public $tag_name = 'form';
     public $template = 'form';
+
     public $attributes = [
-        'accept-charset' => 'UTF-8'];
+        'accept-charset' => 'UTF-8'
+    ];
+
     public $title;
     public $title_tag_name = 'h2';
     public $title_is_visible = 1;
     public $title_attributes = [
-        'data-form-title' => true];
+        'data-form-title' => true
+    ];
+
     public $clicked_button;
     public $number;
+
     public $validation_id;
     public $validation_cache;
     public $validation_cache_hash;
     public $validation_cache_is_persistent = false;
+
     public $has_no_fields = false;
     public $has_no_items = false;
     public $has_error_on_build = false;
+
+    public $env = [];
     protected $items = [];
 
     function build() {
@@ -65,18 +74,29 @@ class Form extends Markup implements has_Data_cache {
 
                     # call "on_request_value_set" method
                     if (empty($this->clicked_button->break_on_request_value_set)) {
+
+                        # field "on_request_value_set"
                         foreach ($this->children_select_recursive(null, '', true) as $c_npath => $c_child) {
                             if (is_object($c_child) && method_exists($c_child, 'on_request_value_set')) {
                                 $c_result = Event::start_local('on_request_value_set', $c_child, ['form' => $this, 'npath' => $c_npath]);
-                                Console::log_insert('form', 'value_set', $c_npath);
+                                Console::log_insert('form',    'on_request_value_set', $c_npath);
                             }
                         }
+
+                        # field "on_request_value_set_after"
+                        foreach ($this->children_select_recursive(null, '', true) as $c_npath => $c_child) {
+                            if (is_object($c_child) && method_exists($c_child, 'on_request_value_set_after')) {
+                                $c_result = Event::start_local('on_request_value_set_after', $c_child, ['form' => $this, 'npath' => $c_npath]);
+                                Console::log_insert('form',    'on_request_value_set_after', $c_npath);
+                            }
+                        }
+
                     }
 
                     # call "on_validate" handlers (parent should be at the end)
                     if (empty($this->clicked_button->break_on_validate)) {
 
-                        # field validation
+                        # field "on_validate"
                         foreach ($this->children_select_recursive(null, '', true) as $c_npath => $c_child) {
                             if (is_object($c_child) && method_exists($c_child, 'on_validate')) {
                                 $c_result = Event::start_local('on_validate', $c_child, ['form' => $this, 'npath' => $c_npath]);
@@ -84,7 +104,7 @@ class Form extends Markup implements has_Data_cache {
                             }
                         }
 
-                        # field validation after validation (for example, to avoid making requests if the "Nickname" field has an incorrect value)
+                        # field "on_validate_after" (for example, to avoid making requests if the "Nickname" field has an incorrect value)
                         foreach ($this->children_select_recursive(null, '', true) as $c_npath => $c_child) {
                             if (is_object($c_child) && method_exists($c_child, 'on_validate_after')) {
                                 $c_result = Event::start_local('on_validate_after', $c_child, ['form' => $this, 'npath' => $c_npath]);
@@ -92,12 +112,12 @@ class Form extends Markup implements has_Data_cache {
                             }
                         }
 
-                        # form validation
+                        # form "on_form_validate"
                         Event::start('on_form_validate', $id, [
                             'form' => &$this, 'items' => &$this->items]
                         );
 
-                        # final field validation (for example, for files)
+                        # field "on_validate_final" (for example, for files)
                         foreach ($this->children_select_recursive(null, '', true) as $c_npath => $c_child) {
                             if (is_object($c_child) && method_exists($c_child, 'on_validate_final')) {
                                 $c_result = Event::start_local('on_validate_final', $c_child, ['form' => $this, 'npath' => $c_npath]);
@@ -156,10 +176,9 @@ class Form extends Markup implements has_Data_cache {
     }
 
     function components_init() {
-        Event::start('on_form_init', $this->id_get(), ['form' => &$this, 'items' => &$this->items],
-            /* on_before_step */ function ($event, $form, $items) {$form->items_update();},
-            /* on_after_step */  function ($event, $form, $items) {$form->items_update();}
-        );
+        $this->items_update();
+        Event::start('on_form_init', $this->id_get(), ['form' => &$this, 'items' => &$this->items]);
+        $this->items_update();
     }
 
     function render() {
@@ -208,12 +227,12 @@ class Form extends Markup implements has_Data_cache {
         $this->items = [];
         $groups      = [];
         foreach ($this->children_select_recursive(null, '', true) as $c_npath => $c_child) {
-            if ($c_child instanceof Container                                      ) $this->items[    $c_npath                                                ] = $c_child;
-            if ($c_child instanceof Button                                         ) $this->items['~'.$c_child->value_get       ()                            ] = $c_child;
-            if ($c_child instanceof Field_Hidden                                   ) $this->items['!'.$c_child->name_get        ()                            ] = $c_child;
-            if ($c_child instanceof Field                                          ) $groups     ['#'.$c_child->name_get        ()                          ][] = $c_child;
-            if ($c_child instanceof Field_Radiobutton                              ) $groups     ['#'.$c_child->name_get        ().':'.$c_child->value_get()][] = $c_child;
-            if ($c_child instanceof Control_complex && $c_child->name_get_complex()) $groups     ['*'.$c_child->name_get_complex()                          ][] = $c_child;
+            if ($c_child instanceof Container                                   ) $this->items[    $c_npath                                              ] = $c_child;
+            if ($c_child instanceof Button                                      ) $this->items['~'.$c_child->value_get     ()                            ] = $c_child;
+            if ($c_child instanceof Field_Hidden                                ) $this->items['!'.$c_child->name_get      ()                            ] = $c_child;
+            if ($c_child instanceof Field                                       ) $groups     ['#'.$c_child->name_get      ()                          ][] = $c_child;
+            if ($c_child instanceof Field_Radiobutton                           ) $groups     ['#'.$c_child->name_get      ().':'.$c_child->value_get()][] = $c_child;
+            if ($c_child instanceof Controls_Group && $c_child->group_name_get()) $groups     ['*'.$c_child->group_name_get()                          ][] = $c_child;
         }
         foreach ($groups as $c_name => $c_group) {
             if (count($c_group) === 1) $this->items[$c_name] = reset($c_group);

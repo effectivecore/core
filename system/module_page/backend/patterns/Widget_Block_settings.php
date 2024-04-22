@@ -28,7 +28,7 @@ class Widget_Block_settings extends Container {
 
     function build() {
         if (!$this->is_builded) {
-            $this->child_insert(static::widget_manage_get($this, $this->item, $this->c_row_id), 'manage');
+            $this->child_insert(static::widget_markup($this, $this->item, $this->c_row_id), 'manage');
             $this->is_builded = true;
         }
     }
@@ -42,7 +42,7 @@ class Widget_Block_settings extends Container {
     function render_opener() {
         if ($this->state === 'opened' ||
             $this->state === 'closed') {
-            $html_name    = $this->parent_widget->name_get_complex().'__settings_opener__'.$this->c_row_id;
+            $html_name    = $this->parent_widget->group_control_name_get([$this->c_row_id, 'settings_opener']);
             $is_submited  = Form::is_posted();
             $submit_value = Request::value_get($html_name);
             $has_error    = $this->has_error_in();
@@ -60,12 +60,12 @@ class Widget_Block_settings extends Container {
     ### static declarations ###
     ###########################
 
-    static function widget_manage_get($widget, $item, $c_row_id) {
+    static function widget_markup($widget, $item, $c_row_id) {
         $result = new Node;
         # control for title
         $field_title = new Widget_Text_object;
         $field_title->cform = $widget->parent_widget->cform;
-        $field_title->name_complex = $widget->parent_widget->name_get_complex().'__title__'.$c_row_id;
+        $field_title->group_name = $widget->parent_widget->group_control_name_get([$c_row_id, 'title']);
         $field_title->attributes['data-role'] = 'title';
         $field_title->field_text_title = 'Title';
         $field_title->field_text_required = false;
@@ -81,7 +81,7 @@ class Widget_Block_settings extends Container {
         $field_title_is_visible->attributes['data-role'] = 'title-is_visible';
         $field_title_is_visible->title = 'Title is visible';
         $field_title_is_visible->build();
-        $field_title_is_visible->name_set($widget->parent_widget->name_get_complex().'__title_is_visible__'.$c_row_id);
+        $field_title_is_visible->name_set($widget->parent_widget->group_control_name_get([$c_row_id, 'title_is_visible']));
         $field_title_is_visible->value_set($item->title_is_visible ?? false);
         # control for attributes
         $field_textarea_data_attributes = new Field_Textarea_data;
@@ -92,7 +92,7 @@ class Widget_Block_settings extends Container {
         $field_textarea_data_attributes->classes_allowed['Text_simple'] = 'Text_simple';
         $field_textarea_data_attributes->data_validator_id = 'attributes';
         $field_textarea_data_attributes->build();
-        $field_textarea_data_attributes->name_set($widget->parent_widget->name_get_complex().'__attributes__'.$c_row_id);
+        $field_textarea_data_attributes->name_set($widget->parent_widget->group_control_name_get([$c_row_id, 'attributes']));
         $field_textarea_data_attributes->value_data_set($item->attributes ?? null, 'attributes');
         $field_textarea_data_attributes->required_set(false);
         $field_textarea_data_attributes->maxlength_set(0xffff);

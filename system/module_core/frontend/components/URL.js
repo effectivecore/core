@@ -5,7 +5,7 @@
 
 'use strict';
 
-import Core from './Core.jsd';
+import Core from './Core.js';
 
 // ─────────────────────────────────────────────────────────────────────
 // URL class
@@ -57,7 +57,7 @@ export default class URL {
         }
     }
 
-    relativeGet() {
+    relative_get() {
         if (!this.has_error) {
             let result = this.path;
             if (this.query ) result+= `?${this.query}`;
@@ -66,7 +66,7 @@ export default class URL {
         }
     }
 
-    absoluteGet() {
+    absolute_get() {
         if (!this.has_error) {
             let result = this.protocol + `://${this.domain}${this.path}`;
             if (this.query ) result+= `?${this.query}`;
@@ -75,15 +75,15 @@ export default class URL {
         }
     }
 
-    queryArgSelect(name       ) {if (this.has_error) return; let args = URL.parseQuery(this.query); return args[name] ?? null;}
-    queryArgInsert(name, value) {if (this.has_error) return; let args = URL.parseQuery(this.query);        args[name] = value; this.query = URL.buildQuery(args); return this;}
-    queryArgDelete(name       ) {if (this.has_error) return; let args = URL.parseQuery(this.query); delete args[name];         this.query = URL.buildQuery(args); return this;}
+    query_arg_select(name       ) {if (this.has_error) return; let args = URL.parse_query(this.query); return args[name] ?? null;}
+    query_arg_insert(name, value) {if (this.has_error) return; let args = URL.parse_query(this.query);        args[name] = value; this.query = URL.build_query(args); return this;}
+    query_arg_delete(name       ) {if (this.has_error) return; let args = URL.parse_query(this.query); delete args[name];         this.query = URL.build_query(args); return this;}
 
     ///////////////////////////
     /// static declarations ///
     ///////////////////////////
 
-    static parseQuery(value) {
+    static parse_query(value) {
         let result = {};
         value.split('&').forEach((c_param_raw) => {
             if (c_param_raw.length) {
@@ -100,8 +100,8 @@ export default class URL {
                     let c_pointer;
                     let c_key_group = decodeURIComponent(c_key_group_raw);
                     if (result[c_key_group] === undefined                                                     ) c_pointer = result[c_key_group] = {};
-                    if (result[c_key_group] !== undefined && Core.getType(result[c_key_group]) === 'String') c_pointer = result[c_key_group] = {};
-                    if (result[c_key_group] !== undefined && Core.getType(result[c_key_group]) !== 'String') c_pointer = result[c_key_group];
+                    if (result[c_key_group] !== undefined && Core.get_type(result[c_key_group]) === 'String') c_pointer = result[c_key_group] = {};
+                    if (result[c_key_group] !== undefined && Core.get_type(result[c_key_group]) !== 'String') c_pointer = result[c_key_group];
                     for (let i = 0; i < c_group_indexes.length; i++) {
                         let is_last = !(i < c_group_indexes.length - 1);
                         let c_group_index = c_group_indexes[i];
@@ -122,14 +122,14 @@ export default class URL {
         return result;
     }
 
-    static buildQuery(data, path = null) {
+    static build_query(data, path = null) {
         let result = {};
         let c_path;
         for (let c_key in data) {
             c_path = path ? path + '[' + encodeURIComponent(c_key) + ']' :
                                          encodeURIComponent(c_key);
-            if (Core.getType(data[c_key]) === 'Object') Object.assign(result, this.buildQuery(data[c_key], c_path));
-            if (Core.getType(data[c_key]) !== 'Object') result[c_path] = encodeURIComponent(data[c_key]);
+            if (Core.get_type(data[c_key]) === 'Object') Object.assign(result, this.build_query(data[c_key], c_path));
+            if (Core.get_type(data[c_key]) !== 'Object') result[c_path] = encodeURIComponent(data[c_key]);
         }
         if (path !== null) return result;
         if (path === null) {

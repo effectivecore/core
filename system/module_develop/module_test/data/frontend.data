@@ -12,6 +12,6 @@ frontend
         - type: module
     - mount__test
         path: frontend/components/test-mount.js
-        weight: +500
+        weight: +300
         attributes
         - type: module

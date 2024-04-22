@@ -5,7 +5,7 @@
 
 'use strict';
 
-import Core from '/system/module_core/frontend/components/Core.jsd';
+import Core from '/system/module_core/frontend/components/Core.js';
 import Test from './Test.js';
 
 document.addEventListener('DOMContentLoaded', () => {

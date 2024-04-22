@@ -23,7 +23,7 @@ abstract class Events_Form_Instance_insert {
             if ($entity->name === 'poll') {
                 $widget_answers = new Widget_Texts;
                 $widget_answers->cform = $form;
-                $widget_answers->name_complex = 'widget_answers';
+                $widget_answers->group_name = 'widget_answers';
                 $widget_answers->title = 'Answers';
                 $widget_answers->item_title = 'Answer';
                 $widget_answers->weight = -500;

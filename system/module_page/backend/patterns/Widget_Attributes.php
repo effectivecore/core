@@ -16,7 +16,7 @@ class Widget_Attributes extends Widget_Items {
     public $item_title = 'Attribute';
     public $attributes = [
         'data-type' => 'items-attributes'];
-    public $name_complex = 'widget_attributes';
+    public $group_name = 'widget_attributes';
     public $state = 'closed';
     public $attribute_name_maxlength = 0xff;
     public $attribute_value_maxlength = 0xffff;
@@ -47,8 +47,8 @@ class Widget_Attributes extends Widget_Items {
 
     # ◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦
 
-    static function widget_manage_get($widget, $item, $c_row_id) {
-        $result = parent::widget_manage_get($widget, $item, $c_row_id);
+    static function widget_markup__item($widget, $item, $c_row_id) {
+        $result = parent::widget_markup__item($widget, $item, $c_row_id);
         # control for attribute name
         $field_text_name = new Field_Text('Name', null, [], +400);
         $field_text_name->cform = $widget->cform;
@@ -56,13 +56,13 @@ class Widget_Attributes extends Widget_Items {
         $field_text_name->attributes['data-style'] = 'inline';
         $field_text_name->description_state = 'hidden';
         $field_text_name->build();
-        $field_text_name->name_set($widget->name_get_complex().'__name__'.$c_row_id);
+        $field_text_name->name_set($widget->group_control_name_get([$c_row_id, 'name']));
         $field_text_name->maxlength_set($widget->attribute_name_maxlength);
         $field_text_name->value_set($item->name);
         # control for attribute value
         $widget_text_object_value = new Widget_Text_object;
         $widget_text_object_value->cform = $widget->cform;
-        $widget_text_object_value->name_complex = $widget->name_get_complex().'__'.$c_row_id;
+        $widget_text_object_value->group_name = $widget->group_control_name_get([$c_row_id]);
         $widget_text_object_value->attributes['data-role'] = 'value';
         $widget_text_object_value->field_text_title = null;
         $widget_text_object_value->field_text_maxlength = $widget->attribute_value_maxlength;

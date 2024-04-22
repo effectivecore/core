@@ -101,7 +101,7 @@ entities
           control
             class: \effcore\Widget_Attributes
             properties
-            - name_complex: attributes
+            - group_name: attributes
             - weight: +340
     - fields
         title: Fields
@@ -117,7 +117,7 @@ entities
           control
             class: \effcore\Widget_Selection_fields
             properties
-            - name_complex: fields
+            - group_name: fields
             - weight: +320
     - query_settings
         title: Query settings
@@ -133,7 +133,7 @@ entities
           control
             class: \effcore\Widget_Selection_query
             properties
-            - name_complex: query_settings
+            - group_name: query_settings
             - weight: +300
     - decorator_settings
         title: Decorator settings
@@ -149,7 +149,7 @@ entities
           control
             class: \effcore\Widget_Selection_decorator
             properties
-            - name_complex: decorator_settings
+            - group_name: decorator_settings
             - weight: +280
     - created
         title: Created

@@ -27,7 +27,7 @@ class Group_Palette extends Group_Radiobuttons {
     }
 
     function render_self() {
-        $html_name = 'f_opener_'.$this->name_get_complex();
+        $html_name = 'f_opener_'.$this->group_name_get();
         if ($this->title && (bool)$this->title_is_visible !== true) return $this->render_opener().(new Markup($this->title_tag_name, $this->title_attributes + ['for' => $html_name, 'aria-hidden' => 'true'], is_string($this->title) ? new Text($this->title, [], $this->title_is_apply_translation, $this->title_is_apply_tokens) : $this->title))->render();
         if ($this->title && (bool)$this->title_is_visible === true) return $this->render_opener().(new Markup($this->title_tag_name, $this->title_attributes + ['for' => $html_name                         ], is_string($this->title) ? new Text($this->title, [], $this->title_is_apply_translation, $this->title_is_apply_tokens) : $this->title))->render();
     }
@@ -35,7 +35,7 @@ class Group_Palette extends Group_Radiobuttons {
     function render_opener() {
         $color_id        = $this->value_get() ?: 'white';
         $color_value_hex = Color::get($color_id)->value_hex ?: '#ffffff';
-        $html_name       = 'f_opener_'.$this->name_get_complex();
+        $html_name       = 'f_opener_'.$this->group_name_get();
         $is_submited     = Form::is_posted();
         $submit_value    = Request::value_get($html_name);
         $has_error       = $this->has_error_in();

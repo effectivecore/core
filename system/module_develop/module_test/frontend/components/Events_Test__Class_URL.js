@@ -5,7 +5,7 @@
 
 'use strict';
 
-import Core from '/system/module_core/frontend/components/Core.jsd';
+import Core from '/system/module_core/frontend/components/Core.js';
 import Translation from '/system/module_locale/frontend/components/Translation.jsd';
 import URL from '/system/module_core/frontend/components/URL.js';
 
@@ -126,11 +126,11 @@ export default class Events_Test__Class_URL {
                            c_url.path     === c_expected.path     &&
                            c_url.query    === c_expected.query    &&
                            c_url.anchor   === c_expected.anchor;
-            if (c_result === true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_value, 'result' : Translation.get('success')});
-            if (c_result !== true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_value, 'result' : Translation.get('failure')});
+            if (c_result === true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_value, 'result' : Translation.get('success')});
+            if (c_result !== true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_value, 'result' : Translation.get('failure')});
             if (c_result !== true) {
-                yield Core.argsApply(Translation.get('expected value: %%_value'), {'value' : JSON.stringify(c_expected)});
-                yield Core.argsApply(Translation.get('received value: %%_value'), {'value' : JSON.stringify(c_url)});
+                yield Core.args_apply(Translation.get('expected value: %%_value'), {'value' : JSON.stringify(c_expected)});
+                yield Core.args_apply(Translation.get('received value: %%_value'), {'value' : JSON.stringify(c_url)});
                 yield false;
             }
         }
@@ -153,11 +153,11 @@ export default class Events_Test__Class_URL {
             let c_expected = true;
             let с_received = c_url.has_error;
             let c_result = с_received === c_expected;
-            if (c_result === true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_value, 'result' : Translation.get('success')});
-            if (c_result !== true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_value, 'result' : Translation.get('failure')});
+            if (c_result === true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_value, 'result' : Translation.get('success')});
+            if (c_result !== true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_value, 'result' : Translation.get('failure')});
             if (c_result !== true) {
-                yield Core.argsApply(Translation.get('expected value: %%_value'), {'value' : JSON.stringify(c_expected)});
-                yield Core.argsApply(Translation.get('received value: %%_value'), {'value' : JSON.stringify(с_received)});
+                yield Core.args_apply(Translation.get('expected value: %%_value'), {'value' : JSON.stringify(c_expected)});
+                yield Core.args_apply(Translation.get('received value: %%_value'), {'value' : JSON.stringify(с_received)});
                 yield false;
             }
         }
@@ -319,11 +319,11 @@ export default class Events_Test__Class_URL {
             let c_expected = expected[c_value];
             let с_received = c_url.has_error;
             let c_result   = с_received === c_expected;
-            if (c_result === true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_value, 'result' : Translation.get('success')});
-            if (c_result !== true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_value, 'result' : Translation.get('failure')});
+            if (c_result === true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_value, 'result' : Translation.get('success')});
+            if (c_result !== true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_value, 'result' : Translation.get('failure')});
             if (c_result !== true) {
-                yield Core.argsApply(Translation.get('expected value: %%_value'), {'value' : JSON.stringify(c_expected)});
-                yield Core.argsApply(Translation.get('received value: %%_value'), {'value' : JSON.stringify(с_received)});
+                yield Core.args_apply(Translation.get('expected value: %%_value'), {'value' : JSON.stringify(c_expected)});
+                yield Core.args_apply(Translation.get('received value: %%_value'), {'value' : JSON.stringify(с_received)});
                 yield false;
             }
         }
@@ -485,11 +485,11 @@ export default class Events_Test__Class_URL {
             let c_expected = expected[c_value];
             let с_received = c_url.has_error;
             let c_result = с_received === c_expected;
-            if (c_result === true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_value, 'result' : Translation.get('success')});
-            if (c_result !== true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_value, 'result' : Translation.get('failure')});
+            if (c_result === true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_value, 'result' : Translation.get('success')});
+            if (c_result !== true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_value, 'result' : Translation.get('failure')});
             if (c_result !== true) {
-                yield Core.argsApply(Translation.get('expected value: %%_value'), {'value' : JSON.stringify(c_expected)});
-                yield Core.argsApply(Translation.get('received value: %%_value'), {'value' : JSON.stringify(с_received)});
+                yield Core.args_apply(Translation.get('expected value: %%_value'), {'value' : JSON.stringify(c_expected)});
+                yield Core.args_apply(Translation.get('received value: %%_value'), {'value' : JSON.stringify(с_received)});
                 yield false;
             }
         }
@@ -529,13 +529,13 @@ export default class Events_Test__Class_URL {
         for (let c_value in data) {
             let c_expected = data[c_value];
             let c_url = new URL(c_value);
-            let с_received = c_url.absoluteGet();
+            let с_received = c_url.absolute_get();
             let c_result = с_received === c_expected;
-            if (c_result === true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_value, 'result' : Translation.get('success')});
-            if (c_result !== true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_value, 'result' : Translation.get('failure')});
+            if (c_result === true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_value, 'result' : Translation.get('success')});
+            if (c_result !== true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_value, 'result' : Translation.get('failure')});
             if (c_result !== true) {
-                yield Core.argsApply(Translation.get('expected value: %%_value'), {'value' : c_expected});
-                yield Core.argsApply(Translation.get('received value: %%_value'), {'value' : с_received});
+                yield Core.args_apply(Translation.get('expected value: %%_value'), {'value' : c_expected});
+                yield Core.args_apply(Translation.get('received value: %%_value'), {'value' : с_received});
                 yield false;
             }
         }
@@ -575,13 +575,13 @@ export default class Events_Test__Class_URL {
         for (let c_value in data) {
             let c_expected = data[c_value];
             let c_url = new URL(c_value);
-            let с_received = c_url.relativeGet();
+            let с_received = c_url.relative_get();
             let c_result = с_received === c_expected;
-            if (c_result === true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_value, 'result' : Translation.get('success')});
-            if (c_result !== true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_value, 'result' : Translation.get('failure')});
+            if (c_result === true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_value, 'result' : Translation.get('success')});
+            if (c_result !== true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_value, 'result' : Translation.get('failure')});
             if (c_result !== true) {
-                yield Core.argsApply(Translation.get('expected value: %%_value'), {'value' : c_expected});
-                yield Core.argsApply(Translation.get('received value: %%_value'), {'value' : с_received});
+                yield Core.args_apply(Translation.get('expected value: %%_value'), {'value' : c_expected});
+                yield Core.args_apply(Translation.get('received value: %%_value'), {'value' : с_received});
                 yield false;
             }
         }
@@ -590,9 +590,9 @@ export default class Events_Test__Class_URL {
     static *test_step_code__query_args(dpath) {
         let url, data, value, received, expected, result;
 
-        //////////////////
-        /// buildQuery ///
-        //////////////////
+        ///////////////////
+        /// build_query ///
+        ///////////////////
 
         data = {
             'main' : {
@@ -621,13 +621,13 @@ export default class Events_Test__Class_URL {
                    '%D0%BA%D0%BB%D1%8E%D1%87%201=%D0%B7%D0%BD%D0%B0%D1%87%D0%B5%D0%BD%D0%B8%D0%B5%201&' +
                    'no_value=';
 
-        received = URL.buildQuery(data);
+        received = URL.build_query(data);
         result = received === expected;
-        if (result === true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : 'buildQuery', 'result' : Translation.get('success')});
-        if (result !== true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : 'buildQuery', 'result' : Translation.get('failure')});
+        if (result === true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : 'build_query', 'result' : Translation.get('success')});
+        if (result !== true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : 'build_query', 'result' : Translation.get('failure')});
         if (result !== true) {
-            yield Core.argsApply(Translation.get('expected value: %%_value'), {'value' : expected});
-            yield Core.argsApply(Translation.get('received value: %%_value'), {'value' : received});
+            yield Core.args_apply(Translation.get('expected value: %%_value'), {'value' : expected});
+            yield Core.args_apply(Translation.get('received value: %%_value'), {'value' : received});
             yield false;
         }
 
@@ -668,236 +668,236 @@ export default class Events_Test__Class_URL {
 
         for (let c_value in data) {
             let c_expected = data[c_value];
-            let с_received = URL.parseQuery(c_value);
+            let с_received = URL.parse_query(c_value);
             let c_result = JSON.stringify(с_received) === JSON.stringify(c_expected);
-            if (c_result === true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (c_value.length < 80 ? c_value : c_value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
-            if (c_result !== true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (c_value.length < 80 ? c_value : c_value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
+            if (c_result === true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (c_value.length < 80 ? c_value : c_value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
+            if (c_result !== true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (c_value.length < 80 ? c_value : c_value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
             if (c_result !== true) {
-                yield Core.argsApply(Translation.get('expected value: %%_value'), {'value' : JSON.stringify(c_expected)});
-                yield Core.argsApply(Translation.get('received value: %%_value'), {'value' : JSON.stringify(с_received)});
+                yield Core.args_apply(Translation.get('expected value: %%_value'), {'value' : JSON.stringify(c_expected)});
+                yield Core.args_apply(Translation.get('received value: %%_value'), {'value' : JSON.stringify(с_received)});
                 yield false;
             }
         }
 
-        //////////////////////
-        /// queryArgSelect ///
-        //////////////////////
+        ////////////////////////
+        /// query_arg_select ///
+        ////////////////////////
 
         value = 'http://example.com/?scalar=encode_%5B%5D%3D_value&array[0]=value%201&array[string]=value%202&%D0%BA%D0%BB%D1%8E%D1%87_1=%D0%B7%D0%BD%D0%B0%D1%87%D0%B5%D0%BD%D0%B8%D0%B5%201';
         url = new URL(value);
         expected = 'encode_[]=_value';
-        received = url.queryArgSelect('scalar');
+        received = url.query_arg_select('scalar');
         result = received === expected;
-        if (result === true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
-        if (result !== true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
+        if (result === true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
+        if (result !== true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
         if (result !== true) {
-            yield Core.argsApply(Translation.get('expected value: %%_value'), {'value' : expected});
-            yield Core.argsApply(Translation.get('received value: %%_value'), {'value' : received});
+            yield Core.args_apply(Translation.get('expected value: %%_value'), {'value' : expected});
+            yield Core.args_apply(Translation.get('received value: %%_value'), {'value' : received});
             yield false;
         }
 
         expected = {0 : 'value 1', 'string' : 'value 2'};
-        received = url.queryArgSelect('array');
+        received = url.query_arg_select('array');
         result = JSON.stringify(received) === JSON.stringify(expected);
-        if (result === true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
-        if (result !== true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
+        if (result === true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
+        if (result !== true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
         if (result !== true) {
-            yield Core.argsApply(Translation.get('expected value: %%_value'), {'value' : JSON.stringify(expected)});
-            yield Core.argsApply(Translation.get('received value: %%_value'), {'value' : JSON.stringify(received)});
+            yield Core.args_apply(Translation.get('expected value: %%_value'), {'value' : JSON.stringify(expected)});
+            yield Core.args_apply(Translation.get('received value: %%_value'), {'value' : JSON.stringify(received)});
             yield false;
         }
 
         expected = 'значение 1';
-        received = url.queryArgSelect('ключ_1');
+        received = url.query_arg_select('ключ_1');
         result = JSON.stringify(received) === JSON.stringify(expected);
-        if (result === true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
-        if (result !== true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
+        if (result === true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
+        if (result !== true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
         if (result !== true) {
-            yield Core.argsApply(Translation.get('expected value: %%_value'), {'value' : JSON.stringify(expected)});
-            yield Core.argsApply(Translation.get('received value: %%_value'), {'value' : JSON.stringify(received)});
+            yield Core.args_apply(Translation.get('expected value: %%_value'), {'value' : JSON.stringify(expected)});
+            yield Core.args_apply(Translation.get('received value: %%_value'), {'value' : JSON.stringify(received)});
             yield false;
         }
 
-        //////////////////////
-        /// queryArgInsert ///
-        //////////////////////
+        ////////////////////////
+        /// query_arg_insert ///
+        ////////////////////////
 
         value = 'http://example.com/';
         expected = 'http://example.com/?scalar=encode_%5B%5D%3D_value';
         url = new URL(value);
-        url.queryArgInsert('scalar', 'encode_[]=_value');
-        received = url.absoluteGet();
+        url.query_arg_insert('scalar', 'encode_[]=_value');
+        received = url.absolute_get();
         result = received === expected;
-        if (result === true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
-        if (result !== true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
+        if (result === true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
+        if (result !== true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
         if (result !== true) {
-            yield Core.argsApply(Translation.get('expected value: %%_value'), {'value' : expected});
-            yield Core.argsApply(Translation.get('received value: %%_value'), {'value' : received});
+            yield Core.args_apply(Translation.get('expected value: %%_value'), {'value' : expected});
+            yield Core.args_apply(Translation.get('received value: %%_value'), {'value' : received});
             yield false;
         }
 
         value = 'http://example.com/';
         expected = 'http://example.com/?array[0]=value%201&array[string]=value%202';
         url = new URL(value);
-        url.queryArgInsert('array', {0 : 'value 1', 'string' : 'value 2'});
-        received = url.absoluteGet();
+        url.query_arg_insert('array', {0 : 'value 1', 'string' : 'value 2'});
+        received = url.absolute_get();
         result = received === expected;
-        if (result === true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
-        if (result !== true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
+        if (result === true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
+        if (result !== true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
         if (result !== true) {
-            yield Core.argsApply(Translation.get('expected value: %%_value'), {'value' : expected});
-            yield Core.argsApply(Translation.get('received value: %%_value'), {'value' : received});
+            yield Core.args_apply(Translation.get('expected value: %%_value'), {'value' : expected});
+            yield Core.args_apply(Translation.get('received value: %%_value'), {'value' : received});
             yield false;
         }
 
         value = 'http://example.com/';
         expected = 'http://example.com/?scalar=encode_%5B%5D%3D_value&array[0]=value%201&array[string]=value%202';
         url = new URL(value);
-        url.queryArgInsert('scalar', 'encode_[]=_value');
-        url.queryArgInsert('array', {0 : 'value 1', 'string' : 'value 2'});
-        received = url.absoluteGet();
+        url.query_arg_insert('scalar', 'encode_[]=_value');
+        url.query_arg_insert('array', {0 : 'value 1', 'string' : 'value 2'});
+        received = url.absolute_get();
         result = received === expected;
-        if (result === true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
-        if (result !== true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
+        if (result === true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
+        if (result !== true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
         if (result !== true) {
-            yield Core.argsApply(Translation.get('expected value: %%_value'), {'value' : expected});
-            yield Core.argsApply(Translation.get('received value: %%_value'), {'value' : received});
+            yield Core.args_apply(Translation.get('expected value: %%_value'), {'value' : expected});
+            yield Core.args_apply(Translation.get('received value: %%_value'), {'value' : received});
             yield false;
         }
 
         value = 'http://example.com/';
         expected = 'http://example.com/?%D0%BA%D0%BB%D1%8E%D1%87_1=%D0%B7%D0%BD%D0%B0%D1%87%D0%B5%D0%BD%D0%B8%D0%B5%201';
         url = new URL(value);
-        url.queryArgInsert('ключ_1', 'значение 1');
-        received = url.absoluteGet();
+        url.query_arg_insert('ключ_1', 'значение 1');
+        received = url.absolute_get();
         result = received === expected;
-        if (result === true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
-        if (result !== true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
+        if (result === true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
+        if (result !== true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
         if (result !== true) {
-            yield Core.argsApply(Translation.get('expected value: %%_value'), {'value' : expected});
-            yield Core.argsApply(Translation.get('received value: %%_value'), {'value' : received});
+            yield Core.args_apply(Translation.get('expected value: %%_value'), {'value' : expected});
+            yield Core.args_apply(Translation.get('received value: %%_value'), {'value' : received});
             yield false;
         }
 
-        ////////////////////////////////
-        /// queryArgInsert (replace) ///
-        ////////////////////////////////
+        //////////////////////////////////
+        /// query_arg_insert (replace) ///
+        //////////////////////////////////
 
         value = 'http://example.com/?scalar=encode_%5B%5D%3D_value';
         expected = 'http://example.com/?scalar=encode_%5B%5D%3D_new_value';
         url = new URL(value);
-        url.queryArgInsert('scalar', 'encode_[]=_new_value');
-        received = url.absoluteGet();
+        url.query_arg_insert('scalar', 'encode_[]=_new_value');
+        received = url.absolute_get();
         result = received === expected;
-        if (result === true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
-        if (result !== true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
+        if (result === true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
+        if (result !== true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
         if (result !== true) {
-            yield Core.argsApply(Translation.get('expected value: %%_value'), {'value' : expected});
-            yield Core.argsApply(Translation.get('received value: %%_value'), {'value' : received});
+            yield Core.args_apply(Translation.get('expected value: %%_value'), {'value' : expected});
+            yield Core.args_apply(Translation.get('received value: %%_value'), {'value' : received});
             yield false;
         }
 
         value = 'http://example.com/?array[0]=value%201&array[string]=value%202';
         expected = 'http://example.com/?array[0]=new%20value%201&array[string]=new%20value%202';
         url = new URL(value);
-        url.queryArgInsert('array', {0 : 'new value 1', 'string' : 'new value 2'});
-        received = url.absoluteGet();
+        url.query_arg_insert('array', {0 : 'new value 1', 'string' : 'new value 2'});
+        received = url.absolute_get();
         result = received === expected;
-        if (result === true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
-        if (result !== true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
+        if (result === true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
+        if (result !== true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
         if (result !== true) {
-            yield Core.argsApply(Translation.get('expected value: %%_value'), {'value' : expected});
-            yield Core.argsApply(Translation.get('received value: %%_value'), {'value' : received});
+            yield Core.args_apply(Translation.get('expected value: %%_value'), {'value' : expected});
+            yield Core.args_apply(Translation.get('received value: %%_value'), {'value' : received});
             yield false;
         }
 
         value = 'http://example.com/?scalar=encode_%5B%5D%3D_value&array[0]=value%201&array[string]=value%202';
         expected = 'http://example.com/?scalar=encode_%5B%5D%3D_new_value&array[0]=new%20value%201&array[string]=new%20value%202';
         url = new URL(value);
-        url.queryArgInsert('scalar', 'encode_[]=_new_value');
-        url.queryArgInsert('array', {0 : 'new value 1', 'string' : 'new value 2'});
-        received = url.absoluteGet();
+        url.query_arg_insert('scalar', 'encode_[]=_new_value');
+        url.query_arg_insert('array', {0 : 'new value 1', 'string' : 'new value 2'});
+        received = url.absolute_get();
         result = received === expected;
-        if (result === true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
-        if (result !== true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
+        if (result === true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
+        if (result !== true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
         if (result !== true) {
-            yield Core.argsApply(Translation.get('expected value: %%_value'), {'value' : expected});
-            yield Core.argsApply(Translation.get('received value: %%_value'), {'value' : received});
+            yield Core.args_apply(Translation.get('expected value: %%_value'), {'value' : expected});
+            yield Core.args_apply(Translation.get('received value: %%_value'), {'value' : received});
             yield false;
         }
 
         value = 'http://example.com/?%D0%BA%D0%BB%D1%8E%D1%87_1=%D0%B7%D0%BD%D0%B0%D1%87%D0%B5%D0%BD%D0%B8%D0%B5%201';
         expected = 'http://example.com/?%D0%BA%D0%BB%D1%8E%D1%87_1=%D0%B7%D0%BD%D0%B0%D1%87%D0%B5%D0%BD%D0%B8%D0%B5%202';
         url = new URL(value);
-        url.queryArgInsert('ключ_1', 'значение 2');
-        received = url.absoluteGet();
+        url.query_arg_insert('ключ_1', 'значение 2');
+        received = url.absolute_get();
         result = received === expected;
-        if (result === true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
-        if (result !== true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
+        if (result === true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
+        if (result !== true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
         if (result !== true) {
-            yield Core.argsApply(Translation.get('expected value: %%_value'), {'value' : expected});
-            yield Core.argsApply(Translation.get('received value: %%_value'), {'value' : received});
+            yield Core.args_apply(Translation.get('expected value: %%_value'), {'value' : expected});
+            yield Core.args_apply(Translation.get('received value: %%_value'), {'value' : received});
             yield false;
         }
 
-        //////////////////////
-        /// queryArgDelete ///
-        //////////////////////
+        ////////////////////////
+        /// query_arg_delete ///
+        ////////////////////////
 
         value = 'http://example.com/?scalar=encode_%5B%5D%3D_value&array[0]=value%201&array[string]=value%202';
         expected = 'http://example.com/?array[0]=value%201&array[string]=value%202';
         url = new URL(value);
-        url.queryArgDelete('scalar');
-        received = url.absoluteGet();
+        url.query_arg_delete('scalar');
+        received = url.absolute_get();
         result = received === expected;
-        if (result === true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
-        if (result !== true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
+        if (result === true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
+        if (result !== true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
         if (result !== true) {
-            yield Core.argsApply(Translation.get('expected value: %%_value'), {'value' : expected});
-            yield Core.argsApply(Translation.get('received value: %%_value'), {'value' : received});
+            yield Core.args_apply(Translation.get('expected value: %%_value'), {'value' : expected});
+            yield Core.args_apply(Translation.get('received value: %%_value'), {'value' : received});
             yield false;
         }
 
         value = 'http://example.com/?scalar=encode_%5B%5D%3D_value&array[0]=value%201&array[string]=value%202';
         expected = 'http://example.com/?scalar=encode_%5B%5D%3D_value';
         url = new URL(value);
-        url.queryArgDelete('array');
-        received = url.absoluteGet();
+        url.query_arg_delete('array');
+        received = url.absolute_get();
         result = received === expected;
-        if (result === true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
-        if (result !== true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
+        if (result === true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
+        if (result !== true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
         if (result !== true) {
-            yield Core.argsApply(Translation.get('expected value: %%_value'), {'value' : expected});
-            yield Core.argsApply(Translation.get('received value: %%_value'), {'value' : received});
+            yield Core.args_apply(Translation.get('expected value: %%_value'), {'value' : expected});
+            yield Core.args_apply(Translation.get('received value: %%_value'), {'value' : received});
             yield false;
         }
 
         value = 'http://example.com/?scalar=encode_%5B%5D%3D_value&array[0]=value%201&array[string]=value%202';
         expected = 'http://example.com';
         url = new URL(value);
-        url.queryArgDelete('scalar');
-        url.queryArgDelete('array');
-        received = url.absoluteGet();
+        url.query_arg_delete('scalar');
+        url.query_arg_delete('array');
+        received = url.absolute_get();
         result = received === expected;
-        if (result === true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
-        if (result !== true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
+        if (result === true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
+        if (result !== true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
         if (result !== true) {
-            yield Core.argsApply(Translation.get('expected value: %%_value'), {'value' : expected});
-            yield Core.argsApply(Translation.get('received value: %%_value'), {'value' : received});
+            yield Core.args_apply(Translation.get('expected value: %%_value'), {'value' : expected});
+            yield Core.args_apply(Translation.get('received value: %%_value'), {'value' : received});
             yield false;
         }
 
         value = 'http://example.com/?%D0%BA%D0%BB%D1%8E%D1%87_1=%D0%B7%D0%BD%D0%B0%D1%87%D0%B5%D0%BD%D0%B8%D0%B5%201';
         expected = 'http://example.com';
         url = new URL(value);
-        url.queryArgDelete('ключ_1');
-        received = url.absoluteGet();
+        url.query_arg_delete('ключ_1');
+        received = url.absolute_get();
         result = received === expected;
-        if (result === true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
-        if (result !== true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
+        if (result === true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('success')});
+        if (result !== true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : (value.length < 80 ? value : value.substring(0, 80) + '…'), 'result' : Translation.get('failure')});
         if (result !== true) {
-            yield Core.argsApply(Translation.get('expected value: %%_value'), {'value' : expected});
-            yield Core.argsApply(Translation.get('received value: %%_value'), {'value' : received});
+            yield Core.args_apply(Translation.get('expected value: %%_value'), {'value' : expected});
+            yield Core.args_apply(Translation.get('received value: %%_value'), {'value' : received});
             yield false;
         }
 

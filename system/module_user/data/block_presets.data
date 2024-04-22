@@ -3,8 +3,6 @@ block_presets
     id: block__form__login
     managing_group: Forms
     managing_title: Form for login
-    in_areas
-    - =: content
     type: copy
     source: forms/user/login
     title: Form for login
@@ -15,8 +13,6 @@ block_presets
     id: block__form__logout
     managing_group: Forms
     managing_title: Form for logout
-    in_areas
-    - =: content
     type: copy
     source: forms/user/logout
     title: Form for logout
@@ -27,8 +23,6 @@ block_presets
     id: block__form__recovery
     managing_group: Forms
     managing_title: Form for restoring access
-    in_areas
-    - =: content
     type: copy
     source: forms/user/recovery
     title: Form for restoring access
@@ -39,8 +33,6 @@ block_presets
     id: block__form__registration
     managing_group: Forms
     managing_title: Form for registration
-    in_areas
-    - =: content
     type: copy
     source: forms/user/registration
     title: Form for registration
@@ -51,8 +43,6 @@ block_presets
     id: block__form__instance_insert__feedback
     managing_group: Forms
     managing_title: Form for feedback
-    in_areas
-    - =: content
     type: copy
     source: forms/storage/instance_insert
     properties
@@ -65,8 +55,6 @@ block_presets
     id: block__form__instance_update__user
     managing_group: Forms
     managing_title: Form for changing user data
-    in_areas
-    - =: content
     type: copy
     source: forms/storage/instance_update
     properties

@@ -18,7 +18,7 @@ class Widget_Selection_fields extends Widget_Items {
     public $attributes = [
         'data-type' => 'items-entity_fields',
         'data-with-settings' => true];
-    public $name_complex = 'widget_selection_fields';
+    public $group_name = 'widget_selection_fields';
     public $_instance;
 
     protected $value_join;
@@ -106,8 +106,8 @@ class Widget_Selection_fields extends Widget_Items {
     ### static declarations ###
     ###########################
 
-    static function widget_manage_get($widget, $item, $c_row_id) {
-        $result = parent::widget_manage_get($widget, $item, $c_row_id);
+    static function widget_markup__item($widget, $item, $c_row_id) {
+        $result = parent::widget_markup__item($widget, $item, $c_row_id);
         # main markup
         if ($item->type === 'main') {
             $entity = Entity::get($item->entity_name);
@@ -139,20 +139,20 @@ class Widget_Selection_fields extends Widget_Items {
         return $result;
     }
 
-    static function widget_insert_get($widget) {
+    static function widget_markup__insert($widget) {
         $result = new Markup('x-widget', ['data-type' => 'insert']);
         # control with type of new item
         $field_select_selection_field = new Field_Select_selection_field('New field');
         $field_select_selection_field->cform = $widget->cform;
         $field_select_selection_field->title__not_selected = $widget->title__not_selected__widget_insert;
         $field_select_selection_field->build($widget->_instance->main_entity_name);
-        $field_select_selection_field->name_set($widget->name_get_complex().'__insert');
+        $field_select_selection_field->name_set($widget->group_control_name_get(['insert']));
         $field_select_selection_field->required_set(false);
         # button for insertion of the new item
         $button_insert = new Button(null, ['data-style' => 'insert', 'title' => new Text('insert')]);
         $button_insert->break_on_validate = true;
         $button_insert->build();
-        $button_insert->value_set($widget->name_get_complex().'__insert');
+        $button_insert->value_set($widget->group_control_name_get(['insert']));
         $button_insert->_type = 'insert';
         # relate new controls with the widget
         $widget->controls['#insert'] = $field_select_selection_field;

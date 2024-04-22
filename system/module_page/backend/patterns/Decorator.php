@@ -310,7 +310,8 @@ class Decorator extends Markup {
                             $c_tree_item = Tree_item::insert($c_title,
                                 $c_id_tree.'-'.$c_id, $c_id_parent !== null ?
                                 $c_id_tree.'-'.$c_id_parent : null,
-                                $c_id_tree,    $c_url, $c_access, ['data-real-id' => $c_id], [], $c_weight, 'page');
+                                $c_id_tree,    $c_url, $c_access, [], [], $c_weight, 'page');
+                            $c_tree_item->id_real = $c_id;
                             $c_tree_item->extra = $c_extra;
                         }
                         $result->child_insert(

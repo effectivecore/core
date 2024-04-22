@@ -28,7 +28,9 @@ abstract class Events_Form_Instance_update {
                     Form_part::get('form_instance_update__page_width'), 'page_width'
                 );
                 # layout and its blocks
-                $form->_layout = Core::deep_clone(Layout::select($form->_instance->id_layout));
+                $form->_layout = Core::deep_clone(
+                    Layout::select($form->_instance->id_layout)
+                );
                 if ($form->_layout) {
                     # prepare each area
                     foreach ($form->_layout->children_select_recursive() as $c_area) {
@@ -42,17 +44,24 @@ abstract class Events_Form_Instance_update {
                             $c_area->build();
                         }
                     }
-                    # prepare each block
+                    # make area list
+                    $form->_area_list = [];
+                    foreach ($form->_layout->children_select_recursive() as $c_area) {
+                        if ($c_area instanceof Area && $c_area->id) {
+                            $form->_area_list[$c_area->id] =
+                                              $c_area->id;
+                        }
+                    }
+                    # build each widget with blocks for each area
                     foreach ($form->_layout->children_select_recursive() as $c_area) {
                         if ($c_area instanceof Area) {
                             if ($c_area->id) {
                                 $c_widget_blocks = new Widget_Blocks($c_area->id);
                                 $c_widget_blocks->cform = $form;
-                                $c_widget_blocks->name_complex = 'widget_blocks__'.$c_area->id;
+                                $c_widget_blocks->group_name = 'widget_blocks__'.$c_area->id;
                                 $c_widget_blocks->build();
-                                $c_widget_blocks->value_set($form->_instance->blocks[$c_area->id] ?? null, ['once' => true]);
                                 $c_area->child_insert($c_widget_blocks, 'widget_blocks');
-                                $form->_widgets_area[$c_area->id] = $c_widget_blocks;
+                                $form->_widgets[$c_area->id] = $c_widget_blocks;
                             }
                         }
                     }
@@ -88,8 +97,15 @@ abstract class Events_Form_Instance_update {
                     $items['#meta']->disabled_set(true);
                     $items['#is_use_global_meta']->disabled_set(true);
                 }
-                # when the layout is lost
-                if (!Layout::select($form->_instance->id_layout)) {
+                # init each widget with blocks for each area
+                if ($form->_layout) {
+                    foreach ($form->_widgets as $c_area_id => $c_widget_blocks) {
+                        $c_widget_blocks->value_set(
+                                   isset($form->_instance->blocks[$c_area_id]) ?
+                            array_values($form->_instance->blocks[$c_area_id]) : null, ['once' => true]
+                        );
+                    }
+                } else {
                     $items['~update']->disabled_set();
                 }
             }
@@ -101,8 +117,7 @@ abstract class Events_Form_Instance_update {
         switch ($form->clicked_button->value_get()) {
             case 'update':
                 if ($entity->name === 'page') {
-                    if ($items['#width_min']->value_get() >
-                        $items['#width_max']->value_get()) {
+                    if ($items['#width_min']->value_get() > $items['#width_max']->value_get()) {
                         $items['#width_min']->error_set();
                         $items['#width_max']->error_set();
                         $form->error_set('The minimum value cannot be greater than the maximum!');
@@ -123,16 +138,16 @@ abstract class Events_Form_Instance_update {
                     $data['width_max'] = $items['#width_max']->value_get();
                     $form->_instance->data = $data;
                     # save layout blocks
-                    if (Layout::select($form->_instance->id_layout)) {
-                        $all_blocks = [];
-                        foreach ($form->_widgets_area as $c_id_area => $c_widget) {
+                    if ($form->_layout) {
+                        $blocks = [];
+                        foreach ($form->_widgets as $c_area_id => $c_widget) {
                             $c_blocks_by_area = $c_widget->value_get();
                             if ($c_blocks_by_area) {
-                                $all_blocks[$c_id_area] = $c_blocks_by_area;
+                                $blocks[$c_area_id] = $c_blocks_by_area;
                             }
                         }
-                        if (count($all_blocks))
-                             $form->_instance->blocks = $all_blocks;
+                        if (count($blocks))
+                             $form->_instance->blocks = $blocks;
                         else $form->_instance->blocks = null;
                     }
                 }

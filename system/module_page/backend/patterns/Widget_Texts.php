@@ -14,22 +14,22 @@ class Widget_Texts extends Widget_Items {
 
     public $attributes = [
         'data-type' => 'items-texts'];
-    public $name_complex = 'widget_texts';
+    public $group_name = 'widget_texts';
 
     ###########################
     ### static declarations ###
     ###########################
 
-    static function widget_manage_get($widget, $item, $c_row_id) {
-        $result = parent::widget_manage_get($widget, $item, $c_row_id);
+    static function widget_markup__item($widget, $item, $c_row_id) {
+        $result = parent::widget_markup__item($widget, $item, $c_row_id);
         # control for text
         $field_text = new Field_Text;
         $field_text->cform = $widget->cform;
-        $field_text->attributes['data-role'] = 'question';
+        $field_text->attributes['data-role'] = 'text';
         $field_text->attributes['data-style'] = 'inline';
         $field_text->description_state = 'hidden';
         $field_text->build();
-        $field_text->name_set($widget->name_get_complex().'__text__'.$c_row_id);
+        $field_text->name_set($widget->group_control_name_get([$c_row_id, 'text']));
         $field_text->value_set($item->text ?? '');
         # relate new controls with the widget
         $widget->controls['#text__'.$c_row_id] = $field_text;

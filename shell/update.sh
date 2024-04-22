@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd ../
+cd "$(dirname "$0")/../"
 
 hostname
 whoami

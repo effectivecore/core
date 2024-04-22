@@ -24,4 +24,5 @@ forms
         title: login
         attributes
         - value: login
+        - disabled: true
         weight: -500

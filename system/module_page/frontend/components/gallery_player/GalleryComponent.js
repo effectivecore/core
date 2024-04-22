@@ -5,7 +5,7 @@
 
 'use strict';
 
-import BaseComponent from '../BaseComponent.js';
+import BaseComponent from '/system/module_core/frontend/components/BaseComponent.js';
 
 export default class GalleryComponent extends BaseComponent {
 
@@ -38,15 +38,15 @@ export default class GalleryComponent extends BaseComponent {
     //////////////////////////////////////////////////////////////////
 
     template_get() {
-        return this.Markup('x-gallery-player', {'aria-hidden': 'true'}, [
-            this.Markup('x-thumbnails', {}, this.data.map((item, num) =>
-                this.Markup('x-thumbnail', {'data-num': num, 'data-type': item.type, 'onclick': 'on_click_thumbnail'},
-                    this.Markup('img', {'src': item['thumbnail'], 'ondragstart': 'on_drag_thumbnail'}) ))),
-            this.Markup('x-button-c', {'onclick': 'on_click_close'}),
-            this.Markup('x-viewing-part', {}, [
-                this.Markup('x-button-l', {'onclick': 'on_click_previous'}),
-                this.Markup('x-viewing-area', {}, this.Markup('x-centerer')),
-                this.Markup('x-button-r', {'onclick': 'on_click_next'})
+        return this.markup('x-gallery-player', {'aria-hidden': 'true'}, [
+            this.markup('x-thumbnails', {}, this.data.map((item, num) =>
+                this.markup('x-thumbnail', {'data-num': num, 'data-type': item.type, 'onclick': 'on_click_thumbnail'},
+                    this.markup('img', {'src': item['thumbnail'], 'ondragstart': 'on_drag_thumbnail'}) ))),
+            this.markup('x-button-c', {'onclick': 'on_click_close'}),
+            this.markup('x-viewing-part', {}, [
+                this.markup('x-button-l', {'onclick': 'on_click_previous'}),
+                this.markup('x-viewing-area', {}, this.markup('x-centerer')),
+                this.markup('x-button-r', {'onclick': 'on_click_next'})
             ])
         ]);
     }
@@ -64,9 +64,9 @@ export default class GalleryComponent extends BaseComponent {
             if (cur === max) this.pool['x-button-r'][0].setAttribute('data-is-blocked', '');
             if (cur !== max) this.pool['x-button-r'][0].removeAttribute('data-is-blocked');
             this.pool['x-centerer'][0].innerHTML = '';
-            if (this.data[cur]['type']             && this.data[cur]['picture']) this.pool['x-centerer'][0].append(this.Markup( 'img',  this.data[cur]['picture'], null, true));
-            if (this.data[cur]['type'] === 'audio' && this.data[cur][ 'audio' ]) this.pool['x-centerer'][0].append(this.Markup('audio', this.data[cur][ 'audio' ], null, true));
-            if (this.data[cur]['type'] === 'video' && this.data[cur][ 'video' ]) this.pool['x-centerer'][0].append(this.Markup('video', this.data[cur][ 'video' ], null, true));
+            if (this.data[cur]['type']             && this.data[cur]['picture']) this.pool['x-centerer'][0].append(this.markup( 'img',  this.data[cur]['picture'], null, true));
+            if (this.data[cur]['type'] === 'audio' && this.data[cur][ 'audio' ]) this.pool['x-centerer'][0].append(this.markup('audio', this.data[cur][ 'audio' ], null, true));
+            if (this.data[cur]['type'] === 'video' && this.data[cur][ 'video' ]) this.pool['x-centerer'][0].append(this.markup('video', this.data[cur][ 'video' ], null, true));
             if (this.on_change) {
                 this.on_change.call(this, this.data[cur]['type'], this.pool['x-centerer'][0]);
             }

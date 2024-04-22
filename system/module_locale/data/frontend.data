@@ -1,0 +1,12 @@
+frontend
+- page_all__locale|Frontend
+    display
+      check: url
+      where: path
+      match: %^.*$%
+    scripts
+    - class__Translation
+        path: frontend/components/Translation.jsd
+        weight: +600
+        attributes
+        - type: module

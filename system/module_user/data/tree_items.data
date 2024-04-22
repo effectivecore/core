@@ -5,7 +5,7 @@ tree_items
     id_tree: system
     title: Security
     url: /manage/security
-    weight: +420
+    weight: -20
     access
       roles
       - =: admins

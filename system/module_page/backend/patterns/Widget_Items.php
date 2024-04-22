@@ -10,23 +10,36 @@ use stdClass;
 
 #[\AllowDynamicProperties]
 
-class Widget_Items extends Control implements Control_complex {
+class Widget_Items extends Control implements Controls_Group {
+
+    use Controls_Group__Shared;
 
     public $tag_name = 'x-widget';
+
     public $attributes = [
         'data-type' => 'items'];
+    public $attributes_item_group = [
+        'data-type' => 'manage'];
+    public $attributes_item = [
+        'data-row-id' => null
+    ];
+
     public $item_title = 'Item';
     public $title;
     public $title_tag_name = 'label';
     public $title_position = 'top'; # opener not working in 'bottom' mode
     public $title_attributes = [
-        'data-widget-title' => true];
+        'data-widget-title' => true
+    ];
+
     public $content_tag_name = 'x-widget-content';
     public $content_attributes = [
         'data-widget-content' => true,
-        'data-nested-content' => true];
+        'data-nested-content' => true
+    ];
+
     public $state = ''; # '' | opened | closed[checked]
-    public $name_complex = 'widget_items';
+    public $group_name = 'widget_items';
     public $controls = [];
     public $number;
 
@@ -36,24 +49,23 @@ class Widget_Items extends Control implements Control_complex {
 
     function build($rebuild = false) {
         if (!$this->is_builded || $rebuild) {
-            $this->child_insert(static::widget_manage_group_get($this), 'manage');
-            $this->child_insert(static::widget_insert_get      ($this), 'insert');
-            $this->build_widget_manage_group();
+            $this->child_insert(static::widget_markup__items_group($this), 'manage');
+            $this->child_insert(static::widget_markup__insert     ($this), 'insert');
+            $this->build__widget_items_group();
             if ($this->number === null)
                 $this->number = static::current_number_generate();
             $this->is_builded = true;
         }
     }
 
-    function build_widget_manage_group() {
+    function build__widget_items_group() {
         $group = $this->child_select('manage');
         $items = $this->items_get();
         # insert new and update existing widgets
         foreach ($this->items_get() as $c_row_id => $c_item) {
-            if ($group->child_select($c_row_id) === null) {$c_widget = static::widget_manage_get($this, $c_item, $c_row_id); $group->child_insert($c_widget, $c_row_id);}
-            if ($group->child_select($c_row_id) !== null) {$c_widget =                                                       $group->child_select(           $c_row_id);}
-            $c_weight = $c_widget->child_select('body')->child_select('field_weight')->value_get();
-            $c_widget->weight = (int)$c_weight;
+            if ($group->child_select($c_row_id) === null) {$c_widget = static::widget_markup__item($this, $c_item, $c_row_id); $group->child_insert($c_widget, $c_row_id);}
+            if ($group->child_select($c_row_id) !== null) {$c_widget =                                                         $group->child_select(           $c_row_id);}
+            $c_widget->weight = $c_item->weight;
         }
         # delete old widgets
         foreach ($group->children_select() as $c_row_id => $c_widget) {
@@ -62,8 +74,8 @@ class Widget_Items extends Control implements Control_complex {
             }
         }
         # message 'no items'
-        if ($group->children_select_count() !== 0) $group->child_delete(                                           'no_items');
-        if ($group->children_select_count() === 0) $group->child_insert(new Markup('x-no-items', [], 'No items.'), 'no_items');
+        if ($group->children_select_count() !== 0) $group->child_delete(                                        'no_items');
+        if ($group->children_select_count() === 0) $group->child_insert(static::widget_markup__no_items($this), 'no_items');
     }
 
     # ◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦
@@ -84,10 +96,6 @@ class Widget_Items extends Control implements Control_complex {
         }
     }
 
-    function name_get_complex() {
-        return $this->name_complex;
-    }
-
     function disabled_get() {
         return false;
     }
@@ -95,19 +103,19 @@ class Widget_Items extends Control implements Control_complex {
     # ◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦
 
     function items_get() {
-        return $this->cform->validation_cache_get($this->name_get_complex().'__items') ?: [];
+        return $this->cform->validation_cache_get($this->group_name_get().'__items') ?: [];
     }
 
     function items_set($items, $once = false) {
-        if ($once && $this->cform->validation_cache_get($this->name_get_complex().'__items') !== null) return;
+        if ($once && $this->cform->validation_cache_get($this->group_name_get().'__items') !== null) return;
         $this->cform->validation_cache_is_persistent = true;
-        $this->cform->validation_cache_set($this->name_get_complex().'__items', $items ?: []);
-        $this->build_widget_manage_group();
+        $this->cform->validation_cache_set($this->group_name_get().'__items', $items ?: []);
+        $this->build__widget_items_group();
     }
 
     function items_reset() {
         $this->cform->validation_cache_is_persistent = false;
-        $this->cform->validation_cache_set($this->name_get_complex().'__items', null);
+        $this->cform->validation_cache_set($this->group_name_get().'__items', null);
     }
 
     # ◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦
@@ -152,18 +160,18 @@ class Widget_Items extends Control implements Control_complex {
 
     # ◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦
 
-    static function widget_manage_group_get($widget) {
-        return new Markup('x-widgets-group', [
-            'data-type' => 'manage',
-            'data-rearrangeable' => true
-        ]);
+    static function widget_markup__items_group($widget) {
+        return new Markup(
+            'x-widgets-group', $widget->attributes_item_group
+        );
     }
 
-    static function widget_manage_get($widget, $item, $c_row_id) {
-        $result = new Markup('x-widget', [
-            'data-row-id' => $c_row_id,
-            'data-rearrangeable-item' => true], [
-            'icon' => new Markup('x-icon', [], [], +500),
+    static function widget_markup__no_items($widget) {
+        return new Markup('x-no-items', [], 'No items.');
+    }
+
+    static function widget_markup__item($widget, $item, $c_row_id) {
+        $result = new Markup('x-widget', ['data-row-id' => $c_row_id] + $widget->attributes_item, [
             'head' => new Markup('x-head', [], [], +400),
             'body' => new Markup('x-body', [], [], +300),
             'foot' => new Markup('x-foot', [], [], +200)
@@ -172,17 +180,16 @@ class Widget_Items extends Control implements Control_complex {
         $button_delete = new Button(null, ['data-style' => 'delete little', 'title' => new Text('delete')], -500);
         $button_delete->break_on_validate = true;
         $button_delete->build();
-        $button_delete->value_set($widget->name_get_complex().'__delete__'.$c_row_id);
+        $button_delete->value_set($widget->group_control_name_get(['delete', $c_row_id]));
         $button_delete->_type = 'delete';
         $button_delete->_id = $c_row_id;
         # control for weight
         $field_weight = new Field_Weight(null, null, [], +500);
         $field_weight->cform = $widget->cform;
-        $field_weight->attributes['data-role'] = 'weight';
         $field_weight->attributes['data-style'] = 'inline';
         $field_weight->description_state = 'hidden';
         $field_weight->build();
-        $field_weight->name_set($widget->name_get_complex().'__weight__'.$c_row_id);
+        $field_weight->name_set($widget->group_control_name_get([$c_row_id, 'weight']));
         $field_weight->required_set(false);
         $field_weight->value_set($item->weight);
         # relate new controls with the widget
@@ -193,13 +200,13 @@ class Widget_Items extends Control implements Control_complex {
         return $result;
     }
 
-    static function widget_insert_get($widget) {
+    static function widget_markup__insert($widget) {
         $result = new Markup('x-widget', ['data-type' => 'insert']);
         # button for insertion of the new item
         $button_insert = new Button('insert', ['title' => new Text('insert')]);
         $button_insert->break_on_validate = true;
         $button_insert->build();
-        $button_insert->value_set($widget->name_get_complex().'__insert');
+        $button_insert->value_set($widget->group_control_name_get(['insert']));
         $button_insert->_type = 'insert';
         # relate new controls with the widget
         $widget->controls['~insert'] = $button_insert;
@@ -238,9 +245,8 @@ class Widget_Items extends Control implements Control_complex {
 
     static function on_request_value_set($widget, $form, $npath) {
         $items = $widget->items_get();
-        foreach ($items as $c_row_id => $c_item)
-            if (isset($widget->controls['#weight__'.$c_row_id]))
-                $c_item->weight = (int)$widget->controls['#weight__'.$c_row_id]->value_get();
+        foreach ($items as $c_row_id => $c_item) {
+            $c_item->weight = (int)$widget->controls['#weight__'.$c_row_id]->value_get(); }
         $widget->items_set($items);
     }
 

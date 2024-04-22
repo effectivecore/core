@@ -18,7 +18,7 @@ class Widget_License_agreement extends Control {
 
     function build() {
         if (!$this->is_builded) {
-            $this->child_insert(static::widget_manage_get($this), 'manage');
+            $this->child_insert(static::widget_markup($this), 'manage');
             $this->is_builded = true;
         }
     }
@@ -27,7 +27,7 @@ class Widget_License_agreement extends Control {
     ### static declarations ###
     ###########################
 
-    static function widget_manage_get($widget) {
+    static function widget_markup($widget) {
         $result = new Fieldset($widget->title);
         $result->title = $widget->main_title;
         $result->state = 'closed';

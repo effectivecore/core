@@ -6,7 +6,7 @@
 
 namespace effcore;
 
-# indicates that the control is the complex element
-interface Control_complex {
-    function name_get_complex();
+# indicates that the control is the group of controls
+interface Controls_Group {
+    function group_name_get();
 }

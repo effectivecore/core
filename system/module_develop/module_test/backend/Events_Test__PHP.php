@@ -1050,7 +1050,7 @@ abstract class Events_Test__PHP {
 
         # case for console tests - each warning is an error
         set_error_handler(
-            function($errno, $message, $file_path, $line_number) {
+            function ($errno, $message, $file_path, $line_number) {
                 throw new \ErrorException(
                     $message, 0,
                     $errno,
@@ -1399,7 +1399,7 @@ abstract class Events_Test__PHP {
 
         # case for console tests - each warning is an error
         set_error_handler(
-            function($errno, $message, $file_path, $line_number) {
+            function ($errno, $message, $file_path, $line_number) {
                 throw new \ErrorException(
                     $message, 0,
                     $errno,

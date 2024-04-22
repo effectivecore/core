@@ -17,6 +17,7 @@ class Tree_item extends Node {
     public $id;
     public $id_parent;
     public $id_tree;
+    public $id_real;
     public $title;
     public $url;
     public $url_hidden;
@@ -72,10 +73,9 @@ class Tree_item extends Node {
             $rendered_self = $manage_mode ?
                 $this->render_self__in_manage_mode() :
                 $this->render_self();
-            $rendered_children = $manage_mode === 'rearrange' || $this->children_select_count() ?
-                (Template::make_new(Template::pick_name($this->template_children), [
-                    'children' => $this->render_children($this->children_select(true))]
-                ))->render() : '';
+            $rendered_children = '';
+            if ($manage_mode !== 'rearrange' && $this->children_select_count()) $rendered_children = (Template::make_new(Template::pick_name($this->template_children), ['children' => $this->render_children($this->children_select(true))                                                                             ] ))->render();
+            if ($manage_mode === 'rearrange'                                  ) $rendered_children = (Template::make_new(Template::pick_name($this->template_children), ['children' => $this->render_children($this->children_select(true)), 'attributes' => ['data-rearrange-parent-id' => $this->id_real ?? $this->id]] ))->render();
             return (Template::make_new(Template::pick_name($this->template), [
                 'attributes' => $this->render_attributes(),
                 'self'       => $rendered_self,
@@ -141,7 +141,7 @@ class Tree_item extends Node {
     static function init_sql($id_tree) {
         if (isset(static::$is_init_nosql_by_tree[$id_tree])) return;
         if (isset(static::$is_init___sql_by_tree[$id_tree])) return;
-        if (Tree::select($id_tree)         &&
+        if (Tree::select($id_tree) &&
             Tree::select($id_tree)->origin === 'sql') {
             static::$is_init___sql_by_tree[$id_tree] = true;
             $instances = Entity::get('tree_item')->instances_select([

@@ -5,7 +5,7 @@
 
 'use strict';
 
-import Core from '/system/module_core/frontend/components/Core.jsd';
+import Core from '/system/module_core/frontend/components/Core.js';
 import Message from '/system/module_core/frontend/components/Message.js';
 import Translation from '/system/module_locale/frontend/components/Translation.jsd';
 
@@ -18,7 +18,7 @@ export default class Test {
     static run(Events, output) {
         output.innerHTML = '';
         for (const c_method of Events.methods()) {
-            output.innerHTML += Core.argsApply(Translation.get('call "%%_call"'), {'call' : `${c_method.name}`}) + '<br>';
+            output.innerHTML += Core.args_apply(Translation.get('call "%%_call"'), {'call' : `${c_method.name}`}) + '<br>';
             output.innerHTML += `### ${c_method.name}<br>`;
             for (const c_tick of c_method(c_method.name)) {
                 if      (c_tick === true ) { Message.add(Translation.get('The test was successful.'));      return; }

@@ -156,7 +156,7 @@ if ($file instanceof File && $file->type) {
 #######################
 
 if (!Storage::get('sql')->is_installed()) {
-    if (!preg_match('%^/install(/[a-z]{2}|)$%', URL::get_current()->path)) {
+    if (!preg_match('%'.'^/install$'.'|'.'^/install/[a-z]{2}$'.'|'.'^/api/.*$'.'%', URL::get_current()->path)) {
         URL::go('/install/en');
     }
 }

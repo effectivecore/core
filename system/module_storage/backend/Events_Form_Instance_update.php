@@ -32,46 +32,48 @@ abstract class Events_Form_Instance_update {
         if ($form->managing_group_id === null || isset($groups[$form->managing_group_id])) {
             if ($entity) {
                 if ($entity->managing_is_enabled) {
-                    $id_keys   = $entity->id_get();
-                    $id_values = explode('+', $form->instance_id);
-                    if (count($id_keys) ===
-                        count($id_values)) {
-                        $conditions = array_combine($id_keys, $id_values);
-                        $form->_instance = new Instance($form->entity_name, $conditions);
-                        if ($form->_instance->select()) {
-                            $form->attribute_insert('data-entity_name', $form->entity_name);
-                            $form->attribute_insert('data-instance_id', $form->instance_id);
-                            $form->child_select('fields')->children_delete();
-                            foreach ($entity->fields as $c_name => $c_field) {
-                                if (!empty($c_field->managing->is_enabled_on_update) &&
-                                    !empty($c_field->managing->control->class)) {
-                                    $c_control = new $c_field->managing->control->class;
-                                    $c_control->cform = $form;
-                                    $c_control->title = $c_field->title;
-                                    $c_control->element_attributes['name'] = $c_name;
-                                    $c_control->element_attributes = ($c_field->managing->control->element_attributes           ?? []) + $c_control->element_attributes;
-                                    $c_control->element_attributes = ($c_field->managing->control->element_attributes_on_update ?? []) + $c_control->element_attributes;
-                                    if (isset($c_field->managing->control->properties          ) && is_array($c_field->managing->control->properties          )) foreach ($c_field->managing->control->properties           as $c_prop_name => $c_prop_value) $c_control->{$c_prop_name} = $c_prop_value;
-                                    if (isset($c_field->managing->control->properties_on_update) && is_array($c_field->managing->control->properties_on_update)) foreach ($c_field->managing->control->properties_on_update as $c_prop_name => $c_prop_value) $c_control->{$c_prop_name} = $c_prop_value;
-                                    $c_control->entity_name = $entity->name;
-                                    $c_control->entity_field_name = $c_name;
-                                    $form->child_select('fields')->child_insert($c_control, $c_name);
+                    if ($form->instance_id !== null) {
+                        $id_keys   = $entity->id_get();
+                        $id_values = explode('+', $form->instance_id);
+                        if (count($id_keys) ===
+                            count($id_values)) {
+                            $conditions = array_combine($id_keys, $id_values);
+                            $form->_instance = new Instance($form->entity_name, $conditions);
+                            if ($form->_instance->select()) {
+                                $form->attribute_insert('data-entity_name', $form->entity_name);
+                                $form->attribute_insert('data-instance_id', $form->instance_id);
+                                $form->child_select('fields')->children_delete();
+                                foreach ($entity->fields as $c_name => $c_field) {
+                                    if (!empty($c_field->managing->is_enabled_on_update) &&
+                                        !empty($c_field->managing->control->class)) {
+                                        $c_control = new $c_field->managing->control->class;
+                                        $c_control->cform = $form;
+                                        $c_control->title = $c_field->title;
+                                        $c_control->element_attributes['name'] = $c_name;
+                                        $c_control->element_attributes = ($c_field->managing->control->element_attributes           ?? []) + $c_control->element_attributes;
+                                        $c_control->element_attributes = ($c_field->managing->control->element_attributes_on_update ?? []) + $c_control->element_attributes;
+                                        if (isset($c_field->managing->control->properties          ) && is_array($c_field->managing->control->properties          )) foreach ($c_field->managing->control->properties           as $c_prop_name => $c_prop_value) $c_control->{$c_prop_name} = $c_prop_value;
+                                        if (isset($c_field->managing->control->properties_on_update) && is_array($c_field->managing->control->properties_on_update)) foreach ($c_field->managing->control->properties_on_update as $c_prop_name => $c_prop_value) $c_control->{$c_prop_name} = $c_prop_value;
+                                        $c_control->entity_name = $entity->name;
+                                        $c_control->entity_field_name = $c_name;
+                                        $form->child_select('fields')->child_insert($c_control, $c_name);
+                                    }
                                 }
-                            }
-                            # form messages
-                            if ($form->child_select('fields')->children_select_count() === 0) {
-                                $form->child_select('fields')->child_insert(new Markup('x-no-items', [], 'No fields.'), 'message_no_fields');
-                                $form->has_no_fields = true;
-                            }
-                            # prevent parallel update (organizational methods, not secure)
-                            if ($form->has_no_fields === false && $entity->has_parallel_checking && $entity->field_get('updated')) {
-                                $form->child_insert(new Field_Hidden('old_updated'), 'hidden_old_updated');
-                            }
-                        } else {$form->child_select('fields')->child_insert(new Markup('p', [], new Text('wrong instance key'                         )), 'message_error'); $form->has_error_on_build = true;}
-                    }     else {$form->child_select('fields')->child_insert(new Markup('p', [], new Text('wrong number of instance keys'              )), 'message_error'); $form->has_error_on_build = true;}
-                }         else {$form->child_select('fields')->child_insert(new Markup('p', [], new Text('management for this entity is not available')), 'message_error'); $form->has_error_on_build = true;}
-            }             else {$form->child_select('fields')->child_insert(new Markup('p', [], new Text('wrong entity name'                          )), 'message_error'); $form->has_error_on_build = true;}
-        }                 else {$form->child_select('fields')->child_insert(new Markup('p', [], new Text('wrong management group'                     )), 'message_error'); $form->has_error_on_build = true;}
+                                # form messages
+                                if ($form->child_select('fields')->children_select_count() === 0) {
+                                    $form->child_select('fields')->child_insert(new Markup('x-no-items', [], 'No fields.'), 'message_no_fields');
+                                    $form->has_no_fields = true;
+                                }
+                                # prevent parallel update (organizational methods, not secure)
+                                if ($form->has_no_fields === false && $entity->has_parallel_checking && $entity->field_get('updated')) {
+                                    $form->child_insert(new Field_Hidden('old_updated'), 'hidden_old_updated');
+                                }
+                            } else {$form->child_select('fields')->child_insert(new Markup('p', [], new Text('wrong instance key'                         )), 'message_error'); $form->has_error_on_build = true;}
+                        }     else {$form->child_select('fields')->child_insert(new Markup('p', [], new Text('wrong number of instance keys'              )), 'message_error'); $form->has_error_on_build = true;}
+                    }         else {$form->child_select('fields')->child_insert(new Markup('p', [], new Text('wrong instance key (not present)'           )), 'message_error'); $form->has_error_on_build = true;}
+                }             else {$form->child_select('fields')->child_insert(new Markup('p', [], new Text('management for this entity is not available')), 'message_error'); $form->has_error_on_build = true;}
+            }                 else {$form->child_select('fields')->child_insert(new Markup('p', [], new Text('wrong entity name'                          )), 'message_error'); $form->has_error_on_build = true;}
+        }                     else {$form->child_select('fields')->child_insert(new Markup('p', [], new Text('wrong management group'                     )), 'message_error'); $form->has_error_on_build = true;}
     }
 
     static function on_init($event, $form, $items) {
@@ -84,7 +86,7 @@ abstract class Events_Form_Instance_update {
                 if (!empty($c_field->managing->is_enabled_on_update) &&
                     !empty($c_field->managing->control->class)) {
                     $c_reflection = new ReflectionClass($c_field->managing->control->class);
-                    $c_prefix = $c_reflection->implementsInterface('\\effcore\\Control_complex') ? '*' : '#';
+                    $c_prefix = $c_reflection->implementsInterface('\\effcore\\Controls_Group') ? '*' : '#';
                     $c_control = $items[$c_prefix.$c_name];
                     $c_control->value_set_initial($form->_instance->{$c_name}, true);
                     if     (empty($c_field->managing->control->value_manual_set) && is_object($c_control) && $c_control instanceof Control && $c_control instanceof Field_Checkbox !== true) $c_control->  value_set($form->_instance->{$c_name}, ['once' => true]);
@@ -129,7 +131,7 @@ abstract class Events_Form_Instance_update {
                         !empty($c_field->managing->control->class)) {
                         $c_value = null;
                         $c_reflection = new ReflectionClass($c_field->managing->control->class);
-                        $c_prefix = $c_reflection->implementsInterface('\\effcore\\Control_complex') ? '*' : '#';
+                        $c_prefix = $c_reflection->implementsInterface('\\effcore\\Controls_Group') ? '*' : '#';
                         $c_control = $items[$c_prefix.$c_name];
                         if     (is_object($c_control) && $c_control instanceof Control && $c_control instanceof Field_Checkbox !== true) $c_value = $c_control->  value_get();
                         elseif (is_object($c_control) && $c_control instanceof Control && $c_control instanceof Field_Checkbox === true) $c_value = $c_control->checked_get() ? 1 : 0;

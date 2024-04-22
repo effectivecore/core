@@ -84,7 +84,7 @@ entities
           control
             class: \effcore\Widget_Attributes
             properties
-            - name_complex: attributes
+            - group_name: attributes
             - weight: +340
     - created
         title: Created
@@ -262,7 +262,7 @@ entities
           control
             class: \effcore\Widget_Attributes
             properties
-            - name_complex: attributes
+            - group_name: attributes
             - weight: +320
     - url
         title: URL
@@ -296,7 +296,7 @@ entities
           control
             class: \effcore\Widget_Attributes
             properties
-            - name_complex: link_attributes
+            - group_name: link_attributes
             - weight: +280
     - weight
         title: Weight
@@ -310,6 +310,8 @@ entities
             class: \effcore\Field_Weight
             properties
             - weight: +260
+            element_attributes_on_insert
+            - value: 1
     - created
         title: Created
         type: datetime

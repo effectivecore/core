@@ -107,7 +107,7 @@ abstract class Events_Form_Instance_insert {
                         !empty($c_field->managing->control->class)) {
                         $c_value = null;
                         $c_reflection = new ReflectionClass($c_field->managing->control->class);
-                        $c_prefix = $c_reflection->implementsInterface('\\effcore\\Control_complex') ? '*' : '#';
+                        $c_prefix = $c_reflection->implementsInterface('\\effcore\\Controls_Group') ? '*' : '#';
                         $c_control = $items[$c_prefix.$c_name];
                         if     (is_object($c_control) && $c_control instanceof Control && $c_control instanceof Field_Checkbox !== true) $c_value = $c_control->  value_get();
                         elseif (is_object($c_control) && $c_control instanceof Control && $c_control instanceof Field_Checkbox === true) $c_value = $c_control->checked_get() ? 1 : 0;

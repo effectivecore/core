@@ -18,6 +18,10 @@ use effcore\User;
 
 abstract class Events_Form_Registration {
 
+    static function on_build($event, $form) {
+        $form->env['session'] = Session::select();
+    }
+
     static function on_init($event, $form, $items) {
         $settings = Module::settings_get('user');
         $items['#session_params:is_long_session']->attributes['title'] = new Text_multiline([
@@ -27,6 +31,9 @@ abstract class Events_Form_Registration {
         $items['#password']->disabled_set((bool)$settings->send_password_to_email);
         $items['#email'   ]->value_set('');
         $items['#nickname']->value_set('');
+        if (!$form->env['session']) {
+            $items['~register']->disabled_set(false);
+        }
     }
 
     static function on_submit($event, $form, $items) {

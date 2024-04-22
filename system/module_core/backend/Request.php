@@ -226,6 +226,15 @@ abstract class Request {
         }
     }
 
+    static function values_clone($old_prefix, $new_prefix, $source = '_POST') {
+        global ${$source};
+        foreach (${$source} as $c_key => $c_value) {
+            if (str_starts_with($c_key, $old_prefix)) {
+                ${$source}[$new_prefix.substr($c_key, strlen($old_prefix))] = $c_value;
+            }
+        }
+    }
+
     # conversion matrix:
     # ┌──────────────────────────────────────────────────────────╥───────────────────────────────────────────────────────────────────────┐
     # │ input value (undefined | array)                          ║ result value                                                          │

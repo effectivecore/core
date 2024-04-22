@@ -8,7 +8,9 @@ namespace effcore;
 
 #[\AllowDynamicProperties]
 
-class Widget_Selection_decorator extends Control implements Control_complex {
+class Widget_Selection_decorator extends Control implements Controls_Group {
+
+    use Controls_Group__Shared;
 
     public $tag_name = 'x-widget';
     public $title_tag_name = 'label';
@@ -18,7 +20,7 @@ class Widget_Selection_decorator extends Control implements Control_complex {
     public $content_attributes = [
         'data-widget-content' => true,
         'data-nested-content' => true];
-    public $name_complex = 'decorator_settings';
+    public $group_name = 'decorator_settings';
     public $attributes = [
         'data-type' => 'decorator-settings',
         'role'      => 'group'];
@@ -26,7 +28,7 @@ class Widget_Selection_decorator extends Control implements Control_complex {
 
     function build() {
         if (!$this->is_builded) {
-            $this->child_insert(static::widget_manage_get($this), 'manage');
+            $this->child_insert(static::widget_markup($this), 'manage');
             $this->is_builded = true;
         }
     }
@@ -59,10 +61,6 @@ class Widget_Selection_decorator extends Control implements Control_complex {
         }
     }
 
-    function name_get_complex() {
-        return $this->name_complex;
-    }
-
     function disabled_get() {
         return false;
     }
@@ -71,7 +69,7 @@ class Widget_Selection_decorator extends Control implements Control_complex {
     ### static declarations ###
     ###########################
 
-    static function widget_manage_get($widget) {
+    static function widget_markup($widget) {
         $result = new Node;
 
         # control for type of view
@@ -90,7 +88,7 @@ class Widget_Selection_decorator extends Control implements Control_complex {
             'template'       => 'Template',
             'tree'           => 'Tree']);
         $field_select_view_type->build();
-        $field_select_view_type->name_set($widget->name_get_complex().'__view_type');
+        $field_select_view_type->name_set($widget->group_control_name_get(['view_type']));
         $field_select_view_type->value_set('table');
 
         ##############################
@@ -114,7 +112,7 @@ class Widget_Selection_decorator extends Control implements Control_complex {
         $field_select_template_selection->title = 'Template for selection';
         $field_select_template_selection->items_set(['not_selected' => '- select -'] + $templates_list);
         $field_select_template_selection->build();
-        $field_select_template_selection->name_set($widget->name_get_complex().'__template_selection');
+        $field_select_template_selection->name_set($widget->group_control_name_get(['template_selection']));
         $field_select_template_selection->value_set('markup_html');
 
         $field_select_template_decorator = new Field_Select;
@@ -123,7 +121,7 @@ class Widget_Selection_decorator extends Control implements Control_complex {
         $field_select_template_decorator->title = 'Template for decorator';
         $field_select_template_decorator->items_set(['not_selected' => '- select -'] + $templates_list);
         $field_select_template_decorator->build();
-        $field_select_template_decorator->name_set($widget->name_get_complex().'__template_decorator');
+        $field_select_template_decorator->name_set($widget->group_control_name_get(['template_decorator']));
         $field_select_template_decorator->value_set('markup_html');
 
         $field_select_template_item = new Field_Select;
@@ -132,7 +130,7 @@ class Widget_Selection_decorator extends Control implements Control_complex {
         $field_select_template_item->title = 'Template for item';
         $field_select_template_item->items_set(['not_selected' => '- select -'] + $templates_list);
         $field_select_template_item->build();
-        $field_select_template_item->name_set($widget->name_get_complex().'__template_item');
+        $field_select_template_item->name_set($widget->group_control_name_get(['template_item']));
         $field_select_template_item->value_set('content');
 
         # control for mapping
@@ -143,7 +141,7 @@ class Widget_Selection_decorator extends Control implements Control_complex {
         $field_textarea_data_mapping->data_validator_id = 'mapping';
         $field_textarea_data_mapping->element_attributes['rows'] = 17;
         $field_textarea_data_mapping->build();
-        $field_textarea_data_mapping->name_set($widget->name_get_complex().'__mapping');
+        $field_textarea_data_mapping->name_set($widget->group_control_name_get(['mapping']));
         $field_textarea_data_mapping->required_set(false);
         $field_textarea_data_mapping->maxlength_set(0xffff);
         $field_textarea_data_mapping->value_data_set([

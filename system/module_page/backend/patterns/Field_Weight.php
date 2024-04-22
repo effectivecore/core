@@ -17,13 +17,14 @@ class Field_Weight extends Field_Number {
     public $attributes = [
         'data-type' => 'weight'];
     public $element_attributes = [
-        'type'     => 'number',
-        'name'     => 'weight',
-        'required' => true,
-        'min'      => self::INPUT_MIN_WEIGHT,
-        'max'      => self::INPUT_MAX_WEIGHT,
-        'step'     => 1,
-        'value'    => 0
+        'type'      => 'number',
+        'data-role' => 'weight',
+        'name'      => 'weight',
+        'required'  => true,
+        'min'       => self::INPUT_MIN_WEIGHT,
+        'max'       => self::INPUT_MAX_WEIGHT,
+        'step'      => 1,
+        'value'     => 0
     ];
 
 }

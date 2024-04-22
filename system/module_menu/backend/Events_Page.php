@@ -39,8 +39,8 @@ abstract class Events_Page {
     }
 
     static function on_block_presets_dynamic_build($event, $id = null) {
-        if ($id === null                                             ) {foreach (Tree::select_all('sql') as $c_item)            Block_preset::insert('block__tree_sql__'.$c_item->id, 'Menus', $c_item->description ?: 'NO DESCRIPTION', [ /* all areas */ ], ['title' => 'Menu', 'title_is_visible' => false, 'type' => 'code', 'source' => '\\effcore\\modules\\menu\\Events_Page::block_markup__tree_get', 'args' => ['instance_id' => $c_item->id, 'entity_name' => 'tree'], 'has_admin_tree_menu' => true, 'attributes' => ['data-id' => 'block__tree_sql__'.$c_item->id]], 0, 'menu');}
-        if ($id !== null && str_starts_with($id, 'block__tree_sql__')) {$c_item__id = substr($id, strlen('block__tree_sql__')); Block_preset::insert('block__tree_sql__'.$c_item__id, 'Menus',                         'NO DESCRIPTION', [ /* all areas */ ], ['title' => 'Menu', 'title_is_visible' => false, 'type' => 'code', 'source' => '\\effcore\\modules\\menu\\Events_Page::block_markup__tree_get', 'args' => ['instance_id' => $c_item__id, 'entity_name' => 'tree'], 'has_admin_tree_menu' => true, 'attributes' => ['data-id' => 'block__tree_sql__'.$c_item__id]], 0, 'menu');}
+        if ($id === null                                             ) {foreach (Tree::select_all('sql') as $c_item)            Block_preset::insert('block__tree_sql__'.$c_item->id, 'Menus', $c_item->description ?: 'NO DESCRIPTION', ['title' => 'Menu', 'title_is_visible' => false, 'type' => 'code', 'source' => '\\effcore\\modules\\menu\\Events_Page::block_markup__tree_get', 'args' => ['instance_id' => $c_item->id, 'entity_name' => 'tree'], 'has_admin_tree_menu' => true, 'attributes' => ['data-id' => 'block__tree_sql__'.$c_item->id]], 0, 'menu');}
+        if ($id !== null && str_starts_with($id, 'block__tree_sql__')) {$c_item__id = substr($id, strlen('block__tree_sql__')); Block_preset::insert('block__tree_sql__'.$c_item__id, 'Menus',                         'NO DESCRIPTION', ['title' => 'Menu', 'title_is_visible' => false, 'type' => 'code', 'source' => '\\effcore\\modules\\menu\\Events_Page::block_markup__tree_get', 'args' => ['instance_id' => $c_item__id, 'entity_name' => 'tree'], 'has_admin_tree_menu' => true, 'attributes' => ['data-id' => 'block__tree_sql__'.$c_item__id]], 0, 'menu');}
     }
 
     static function on_block_build_after($event, $block) {
@@ -76,7 +76,7 @@ abstract class Events_Page {
                  Frontend::insert('tree_manage__menu', 'tree_script', null, 'scripts', [
                      'path' => 'frontend/tree-manage.js',
                      'attributes' => [
-                         'defer' => true],
+                         'type' => 'module'],
                      'weight' => +300], 'menu');
             }
         }

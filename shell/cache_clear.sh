@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-find ../dynamic/cache -type f -not -name 'readme.md' -delete
+cd "$(dirname "$0")/../"
+
+find dynamic/cache -type f -not -name 'readme.md' -delete

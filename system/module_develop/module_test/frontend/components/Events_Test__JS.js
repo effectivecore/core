@@ -5,7 +5,7 @@
 
 'use strict';
 
-import Core from '/system/module_core/frontend/components/Core.jsd';
+import Core from '/system/module_core/frontend/components/Core.js';
 import Translation from '/system/module_locale/frontend/components/Translation.jsd';
 
 // ─────────────────────────────────────────────────────────────────────
@@ -18,7 +18,7 @@ export default class Events_Test__JS {
         return [
             this.test_step_code__Array_isArray,
             this.test_step_code__Object_toString,
-            this.test_step_code__Core_getType,
+            this.test_step_code__Core_get_type,
             this.test_step_code__typeof
         ]
     }
@@ -48,7 +48,7 @@ export default class Events_Test__JS {
             'symbol'           : {'value' : Symbol()          , 'expected' : false},
             'symbol_text'      : {'value' : Symbol('text')    , 'expected' : false},
             'symbol_iterator'  : {'value' : Symbol.iterator   , 'expected' : false},
-            'function'         : {'value' : function(){}      , 'expected' : false},
+            'function'         : {'value' : function () {}    , 'expected' : false},
             'sin'              : {'value' : Math.sin          , 'expected' : false},
             'null'             : {'value' : null              , 'expected' : false},
             'undefined'        : {'value' :  undefined        , 'expected' : false},
@@ -74,11 +74,11 @@ export default class Events_Test__JS {
             let c_value = data[c_key].value;
             let с_received = Array.isArray(c_value);
             let c_result = с_received === c_expected;
-            if (c_result === true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_key, 'result' : Translation.get('success')});
-            if (c_result !== true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_key, 'result' : Translation.get('failure')});
+            if (c_result === true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_key, 'result' : Translation.get('success')});
+            if (c_result !== true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_key, 'result' : Translation.get('failure')});
             if (c_result !== true) {
-                yield Core.argsApply(Translation.get('expected value: %%_value'), {'value' : c_expected ? 'true' : 'false' });
-                yield Core.argsApply(Translation.get('received value: %%_value'), {'value' : с_received ? 'true' : 'false' });
+                yield Core.args_apply(Translation.get('expected value: %%_value'), {'value' : c_expected ? 'true' : 'false' });
+                yield Core.args_apply(Translation.get('received value: %%_value'), {'value' : с_received ? 'true' : 'false' });
                 yield false;
             }
         }
@@ -110,7 +110,7 @@ export default class Events_Test__JS {
             'symbol'           : {'value' : Symbol()          , 'expected' : '[object Symbol]'   },
             'symbol_text'      : {'value' : Symbol('text')    , 'expected' : '[object Symbol]'   },
             'symbol_iterator'  : {'value' : Symbol.iterator   , 'expected' : '[object Symbol]'   },
-            'function'         : {'value' : function(){}      , 'expected' : '[object Function]' },
+            'function'         : {'value' : function () {}    , 'expected' : '[object Function]' },
             'sin'              : {'value' : Math.sin          , 'expected' : '[object Function]' },
             'null'             : {'value' : null              , 'expected' : '[object Null]'     },
             'undefined'        : {'value' :  undefined        , 'expected' : '[object Undefined]'},
@@ -136,17 +136,17 @@ export default class Events_Test__JS {
             let c_value = data[c_key].value;
             let с_received = Object.prototype.toString.call(c_value);
             let c_result = с_received === c_expected;
-            if (c_result === true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_key, 'result' : Translation.get('success')});
-            if (c_result !== true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_key, 'result' : Translation.get('failure')});
+            if (c_result === true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_key, 'result' : Translation.get('success')});
+            if (c_result !== true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_key, 'result' : Translation.get('failure')});
             if (c_result !== true) {
-                yield Core.argsApply(Translation.get('expected value: %%_value'), {'value' : c_expected});
-                yield Core.argsApply(Translation.get('received value: %%_value'), {'value' : с_received});
+                yield Core.args_apply(Translation.get('expected value: %%_value'), {'value' : c_expected});
+                yield Core.args_apply(Translation.get('received value: %%_value'), {'value' : с_received});
                 yield false;
             }
         }
     }
 
-    static *test_step_code__Core_getType(dpath) {
+    static *test_step_code__Core_get_type(dpath) {
 
         let data = {
             'int'              : {'value' : 100               , 'expected' : 'Number'   },
@@ -172,7 +172,7 @@ export default class Events_Test__JS {
             'symbol'           : {'value' : Symbol()          , 'expected' : 'Symbol'   },
             'symbol_text'      : {'value' : Symbol('text')    , 'expected' : 'Symbol'   },
             'symbol_iterator'  : {'value' : Symbol.iterator   , 'expected' : 'Symbol'   },
-            'function'         : {'value' : function(){}      , 'expected' : 'Function' },
+            'function'         : {'value' : function () {}    , 'expected' : 'Function' },
             'sin'              : {'value' : Math.sin          , 'expected' : 'Function' },
             'null'             : {'value' : null              , 'expected' : 'Null'     },
             'undefined'        : {'value' :  undefined        , 'expected' : 'Undefined'},
@@ -196,13 +196,13 @@ export default class Events_Test__JS {
         for (let c_key in data) {
             let c_expected = data[c_key].expected;
             let c_value = data[c_key].value;
-            let с_received = Core.getType(c_value);
+            let с_received = Core.get_type(c_value);
             let c_result = с_received === c_expected;
-            if (c_result === true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_key, 'result' : Translation.get('success')});
-            if (c_result !== true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_key, 'result' : Translation.get('failure')});
+            if (c_result === true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_key, 'result' : Translation.get('success')});
+            if (c_result !== true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_key, 'result' : Translation.get('failure')});
             if (c_result !== true) {
-                yield Core.argsApply(Translation.get('expected value: %%_value'), {'value' : c_expected});
-                yield Core.argsApply(Translation.get('received value: %%_value'), {'value' : с_received});
+                yield Core.args_apply(Translation.get('expected value: %%_value'), {'value' : c_expected});
+                yield Core.args_apply(Translation.get('received value: %%_value'), {'value' : с_received});
                 yield false;
             }
         }
@@ -234,7 +234,7 @@ export default class Events_Test__JS {
             'symbol'           : {'value' : Symbol()          , 'expected' : 'symbol'   },
             'symbol_text'      : {'value' : Symbol('text')    , 'expected' : 'symbol'   },
             'symbol_iterator'  : {'value' : Symbol.iterator   , 'expected' : 'symbol'   },
-            'function'         : {'value' : function(){}      , 'expected' : 'function' },
+            'function'         : {'value' : function () {}    , 'expected' : 'function' },
             'sin'              : {'value' : Math.sin          , 'expected' : 'function' },
             'null'             : {'value' : null              , 'expected' : 'object'   }, /* !!! */
             'undefined'        : {'value' :  undefined        , 'expected' : 'undefined'},
@@ -260,11 +260,11 @@ export default class Events_Test__JS {
             let c_value = data[c_key].value;
             let с_received = typeof(c_value);
             let c_result = с_received === c_expected;
-            if (c_result === true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_key, 'result' : Translation.get('success')});
-            if (c_result !== true) yield Core.argsApply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_key, 'result' : Translation.get('failure')});
+            if (c_result === true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_key, 'result' : Translation.get('success')});
+            if (c_result !== true) yield Core.args_apply(Translation.get('checking of item "%%_id": "%%_result"'), {'id' : c_key, 'result' : Translation.get('failure')});
             if (c_result !== true) {
-                yield Core.argsApply(Translation.get('expected value: %%_value'), {'value' : c_expected});
-                yield Core.argsApply(Translation.get('received value: %%_value'), {'value' : с_received});
+                yield Core.args_apply(Translation.get('expected value: %%_value'), {'value' : c_expected});
+                yield Core.args_apply(Translation.get('received value: %%_value'), {'value' : с_received});
                 yield false;
             }
         }

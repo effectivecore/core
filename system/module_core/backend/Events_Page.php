@@ -8,7 +8,6 @@ namespace effcore\modules\core;
 
 use effcore\Block;
 use effcore\Page;
-use effcore\Storage;
 use effcore\Tab_item;
 use effcore\Tabs;
 use effcore\Tree_item;

@@ -5,16 +5,18 @@ tree_items
     id_tree: system
     title: Develop
     url_hidden: /develop
-    weight: -500
+    weight: -10
     access
       roles
       - =: admins
+# ◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦◦
 - structures|Tree_item
     id: structures
     id_parent: develop
     id_tree: system
     title: Structures
     url: /develop/structures
+    weight: -10
     access
       roles
       - =: admins
@@ -24,6 +26,7 @@ tree_items
     id_tree: system
     title: NoSQL data
     url: /develop/data_nosql
+    weight: -15
     access
       roles
       - =: admins
@@ -33,6 +36,7 @@ tree_items
     id_tree: system
     title: PHP dependencies
     url: /develop/php_dependencies
+    weight: -20
     access
       roles
       - =: admins
@@ -42,7 +46,7 @@ tree_items
     id_tree: system
     title: Console
     url: /develop/console
-    weight: -500
+    weight: -25
     access
       roles
       - =: admins

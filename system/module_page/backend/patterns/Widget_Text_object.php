@@ -8,10 +8,12 @@ namespace effcore;
 
 #[\AllowDynamicProperties]
 
-class Widget_Text_object extends Control implements Control_complex {
+class Widget_Text_object extends Control implements Controls_Group {
+
+    use Controls_Group__Shared;
 
     public $tag_name = 'x-group';
-    public $name_complex = 'text_object';
+    public $group_name = 'text_object';
     public $field_text_title = null;
     public $field_text_value = '';
     public $field_text_maxlength = 255;
@@ -25,7 +27,7 @@ class Widget_Text_object extends Control implements Control_complex {
 
     function build() {
         if (!$this->is_builded) {
-            $this->child_insert(static::widget_manage_get($this), 'manage');
+            $this->child_insert(static::widget_markup($this), 'manage');
             $this->is_builded = true;
         }
     }
@@ -55,10 +57,6 @@ class Widget_Text_object extends Control implements Control_complex {
         }
     }
 
-    function name_get_complex() {
-        return $this->name_complex;
-    }
-
     function disabled_get() {
         return false;
     }
@@ -67,14 +65,14 @@ class Widget_Text_object extends Control implements Control_complex {
     ### static declarations ###
     ###########################
 
-    static function widget_manage_get($widget) {
+    static function widget_markup($widget) {
         $result = new Node;
         # control for text value
         $field_text = new Field_Text;
         $field_text->attributes['data-role'] = 'title';
         $field_text->title = $widget->field_text_title;
         $field_text->build();
-        $field_text->name_set($widget->name_get_complex().'__text');
+        $field_text->name_set($widget->group_control_name_get(['text']));
         $field_text->value_set($widget->field_text_value);
         $field_text->maxlength_set($widget->field_text_maxlength);
         $field_text->required_set($widget->field_text_required);
@@ -83,14 +81,14 @@ class Widget_Text_object extends Control implements Control_complex {
         $field_is_apply_translation->attributes['data-role'] = 'is-apply-translation';
         $field_is_apply_translation->attribute_insert('title', new Text('Is apply translation'), 'element_attributes');
         $field_is_apply_translation->build();
-        $field_is_apply_translation->name_set($widget->name_get_complex().'__is_apply_translation');
+        $field_is_apply_translation->name_set($widget->group_control_name_get(['is_apply_translation']));
         $field_is_apply_translation->checked_set($widget->field_is_apply_translation_checked);
         # control for tokens status
         $field_is_apply_tokens = new Field_Checkbox('To.');
         $field_is_apply_tokens->attributes['data-role'] = 'is-apply-tokens';
         $field_is_apply_tokens->attribute_insert('title', new Text('Is apply tokens'), 'element_attributes');
         $field_is_apply_tokens->build();
-        $field_is_apply_tokens->name_set($widget->name_get_complex().'__is_apply_tokens');
+        $field_is_apply_tokens->name_set($widget->group_control_name_get(['is_apply_tokens']));
         $field_is_apply_tokens->checked_set($widget->field_is_apply_tokens_checked);
         # relate new controls with the widget
         $widget->controls['#text'                ] = $field_text;

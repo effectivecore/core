@@ -98,14 +98,14 @@ x-field [data-field-title] {display: block; font-size: 1.2em}
 x-container {display: block; margin: 20px 0}
 
 x-field[data-type^='file'] input[type='file'] {padding: 8px}
-x-field[data-type^='file'] button[data-style~='insert'] {margin: 5px 5px 5px 10px}
-x-field[data-type^='file']             x-widget[data-type^='delete'] x-item {display: block; margin: 5px}
-x-field[data-type^='file']             x-widget[data-type^='delete'] x-item button[data-style~='delete'] {margin: 0 10px}
-x-field[data-type^='file']             x-widget[data-type^='delete'] x-item img[data-type='thumbnail'] {margin: 2px 10px 2px 0; vertical-align: middle}
-x-field[data-type^='file'][data-debug] x-widget[data-type^='delete+fin'] {min-height: 10px; border-left: 10px solid %%_color(ok)}
-x-field[data-type^='file'][data-debug] x-widget[data-type^='delete+pre'] {min-height: 10px; border-left: 10px solid %%_color(error)}
+x-field[data-type^='file']             x-controls {display: block}
+x-field[data-type^='file']             x-controls[data-type^='delete'] x-item {display: block; margin: 5px}
+x-field[data-type^='file']             x-controls[data-type^='delete'] x-item button[data-style~='delete'] {margin: 0 10px}
+x-field[data-type^='file']             x-controls[data-type^='delete'] x-item img[data-type='thumbnail'] {margin: 2px 10px 2px 0; vertical-align: middle}
+x-field[data-type^='file'][data-debug] x-controls[data-type^='delete+fin'] {min-height: 10px; border-left: 10px solid %%_color(ok)}
+x-field[data-type^='file'][data-debug] x-controls[data-type^='delete+pre'] {min-height: 10px; border-left: 10px solid %%_color(error)}
 x-field[data-type^='file'][data-debug] button[data-style~='insert'][data-is-over] {background-color: %%_color(error)}
-x-field[data-type^='file']             button[data-style~='insert'] {border-radius: 5px}
+x-field[data-type^='file']             button[data-style~='insert'] {margin: 5px 5px 5px 10px; border-radius: 5px}
 
 x-field[data-style~='inline']                    {display: inline-block; margin: 2px 20px 2px 0; vertical-align: middle}
 x-field[data-style~='inline'] [data-field-title] {display: inline-block; margin: 0   10px 0   0; vertical-align: middle}
@@ -187,13 +187,19 @@ select {
  -moz-appearance: none;
 }
 
-select {cursor: pointer; width: 100%; max-width: 300px}
+select {cursor: pointer; max-width: 300px}
 select option {color: %%_color(field_text)}
 textarea {display: block; box-sizing: border-box; width: 100%; min-width: 100px}
 input[type='range'] {border-radius: 20px}
 input[type='email'] {text-transform: lowercase}
 input[type='color'] {height: 40px; padding: 0; cursor: pointer; text-transform: lowercase}
-input[data-is-wide-field] {box-sizing: border-box; width: 100%; min-width: 100px; max-width: 500px}
+
+input[data-is-wide-field] {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 100px;
+  max-width: 500px;
+}
 
 
 /* checkboxes and radiobuttons */
@@ -368,6 +374,41 @@ x-group[data-type='palette'] x-field input[value='transparent']:checked {backgro
 
 
 
+/* rearrangeable */
+
+[data-rearrange-is-processed] x-drag-icon {
+  position: relative;
+  z-index: 100;
+  display: block;
+  width: 30px;
+  height: 44px;
+  cursor: move;
+  background: %%_color(main) url('pictures/icons-drag_and_drop.svgd?color=%%_color(main|encoded=1)') 50% 50%;
+}
+
+[data-rearrange-is-processed] x-drop-area {
+  display: block;
+  position: relative;
+  height: 7px;
+  background: %%_color(warning);
+}
+
+[data-rearrange-is-processed] x-drop-area[data-drop-is-active] {
+  background: %%_color(ok);
+}
+
+                           [data-rearrange-item] x-drop-area {visibility: hidden}
+[data-rearrange-is-active] [data-rearrange-item] x-drop-area {visibility: visible}
+[data-rearrange-is-active] [data-rearrange-item]:not(:last-child)                  > x-drop-area[data-placement='after']  {visibility: hidden}
+[data-rearrange-is-active] [data-rearrange-item-is-active]                           x-drop-area                          {visibility: hidden}
+[data-rearrange-is-active] [data-rearrange-item-is-active] + [data-rearrange-item] > x-drop-area[data-placement='before'] {visibility: hidden}
+
+[data-rearrange-is-processed] x-field[data-type='weight'] {
+  display: none;
+}
+
+
+
 /* widget */
 
 x-widget input[data-opener-type='title'] {margin: 0 10px 0 0; border-radius: 15px; background: %%_color(main) url('pictures/icons-element.svgd?color=white') 0 -60px}
@@ -391,26 +432,36 @@ x-widget[data-type^='items'] x-widgets-group[data-type='manage']:not(:empty) {ma
 x-widget[data-type^='items'] x-widgets-group[data-type='manage'] x-widget::after {content: ''; clear: both; display: block}
 x-widget[data-type^='items'] x-widgets-group[data-type='manage'] x-widget {
   display: grid;
-  grid-template-columns: 40px auto 20px;
   padding: 10px 0;
   border-bottom: 1px dotted %%_color(main|o=.5);
 }
 
-x-widget[data-type^='items'] x-widgets-group[data-type='manage'] x-widget x-icon {grid-row-start: 2; grid-column-start: 1; position: relative; z-index: 100; display: block; width: 30px; height: 44px; cursor: not-allowed; opacity: .2; background: %%_color(main) url('pictures/icons-drag_and_drop.svgd?color=%%_color(main|encoded=1)') 50% 50%}
-x-widget[data-type^='items'] x-widgets-group[data-type='manage'] x-widget x-icon[draggable='true'] {cursor: move; opacity: 1}
-
-x-widget[data-type^='items'] x-widgets-group[data-type='manage'] x-widget x-head {grid-row-start: 2; grid-column-start: 3}
+x-widget[data-type^='items'] x-widgets-group[data-type='manage'] x-widget {grid-template-columns:  0 auto 20px}
+x-widget[data-type^='items'] x-widgets-group[data-type='manage'] x-widget x-head {grid-column-start: 3; grid-row-start: 2}
 x-widget[data-type^='items'] x-widgets-group[data-type='manage'] x-widget x-head button[data-style~='delete'][data-style~='little'] {margin: 12px 0 12px 5px}
-
-x-widget[data-type^='items'] x-widgets-group[data-type='manage'] x-widget x-body {grid-row-start: 2; grid-column-start: 2}
+x-widget[data-type^='items'] x-widgets-group[data-type='manage'] x-widget x-body {grid-column-start: 2; grid-row-start: 2}
 x-widget[data-type^='items'] x-widgets-group[data-type='manage'] x-widget x-body x-info {display: inline-block; vertical-align: middle}
 x-widget[data-type^='items'] x-widgets-group[data-type='manage'] x-widget x-body x-info x-title {display: block; font-size: 1.1em}
 x-widget[data-type^='items'] x-widgets-group[data-type='manage'] x-widget x-body x-info x-id {display: block; opacity: .5}
 x-widget[data-type^='items'] x-widgets-group[data-type='manage'] x-widget x-body img[data-type='thumbnail'] {display: inline-block; margin-right: 10px; vertical-align: middle}
-
-x-widget[data-type^='items'] x-widgets-group[data-type='manage'] x-widget x-foot {grid-row-start: 3; grid-column-start: 1; grid-column-end: 4; overflow: auto}
+x-widget[data-type^='items'] x-widgets-group[data-type='manage'] x-widget x-foot {grid-column-start: 1; grid-column-end: 4; grid-row-start: 3; overflow: auto}
 x-widget[data-type^='items'] x-widgets-group[data-type='manage'] x-widget x-foot x-field[data-type='text'] input[type='text'] {box-sizing: border-box; width: 100%}
 
+
+
+/* widget 'items' + rearrangeable */
+
+                                              x-widget[data-type^='items'][data-rearrange-is-processed] x-widgets-group[data-type='manage'] x-widget {grid-template-columns: 40px auto 20px}
+                                              x-widget[data-type^='items'][data-rearrange-is-processed] x-widgets-group[data-type='manage'] x-drag-icon {grid-column-start: 1; grid-row-start: 2}
+                                              x-widget[data-type^='items'][data-rearrange-is-processed] x-widgets-group[data-type='manage'] x-drop-area[data-placement='before'] {grid-column-start: 1; grid-column-end: 4; grid-row-start: 1; top: -14px; margin-bottom: -7px}
+                                              x-widget[data-type^='items'][data-rearrange-is-processed] x-widgets-group[data-type='manage'] x-drop-area[data-placement='after' ] {grid-column-start: 1; grid-column-end: 4; grid-row-start: 4; top:   7px; margin-bottom: -7px}
+x-layout-manager[data-rearrange-is-processed] x-widget[data-type='items-blocks']                        x-widgets-group[data-type='manage'] x-widget {grid-template-columns: 60px auto 20px}
+x-layout-manager[data-rearrange-is-processed] x-widget[data-type='items-blocks']                        x-widgets-group[data-type='manage'] x-drag-icon {grid-column-start: 1; grid-row-start: 2}
+x-layout-manager[data-rearrange-is-processed] x-widget[data-type='items-blocks']                        x-widgets-group[data-type='manage'] x-drop-area[data-placement='before'] {grid-column-start: 1; grid-column-end: 4; grid-row-start: 1; top: -14px; margin-bottom: -7px}
+x-layout-manager[data-rearrange-is-processed] x-widget[data-type='items-blocks']                        x-widgets-group[data-type='manage'] x-drop-area[data-placement='after' ] {grid-column-start: 1; grid-column-end: 4; grid-row-start: 4; top:   7px; margin-bottom: -7px}
+x-layout-manager[data-rearrange-is-processed] [data-rearrange-area-is-empty='N'] > x-drop-area[data-placement='in'] {
+  display: none !important;
+}
 
 
 x-widget[data-type^='items'] x-widgets-group[data-type='manage'] x-no-items {
@@ -452,34 +503,12 @@ x-widget[data-type^='items'][data-with-settings] x-widgets-group[data-type='mana
 x-widget[data-type^='items'] x-widget[data-type='insert'] {display: block; margin-top: 3px}
 x-widget[data-type^='items'] x-widget[data-type='insert'] x-field {display: inline-block; margin: 0 10px 0 0; vertical-align: top}
 x-widget[data-type^='items'] x-widget[data-type='insert'] x-field [data-field-title] {margin-bottom: 5px}
+x-widget[data-type^='items'] x-widget[data-type='insert'] x-field select {width: 100%}
 x-widget[data-type^='items'] x-widget[data-type='insert'] x-field[data-type='select'] select {max-width: 130px; vertical-align: top}
 x-widget[data-type^='items'] x-widget[data-type='insert'] x-field[data-type^='file'] input {max-width: 300px; vertical-align: top}
 x-widget[data-type^='items'] x-widget[data-type='insert'] x-field[data-type^='file'] x-description {max-width: 300px}
 x-widget[data-type^='items'] x-widget[data-type='insert'] button {margin: 32px 8px 0 0}
 x-widget[data-type^='items'] x-widget[data-type='insert'] button[data-style~='insert'] {border-radius: 5px}
-
-
-
-/* widget 'items': rearrangeable */
-
-x-widget[data-type^='items'] x-widgets-group[data-type='manage'][data-rearrangeable]                           [data-rearrangeable-item] x-droppable-area {display: block; position: relative; height: 7px; margin-bottom: -7px}
-x-widget[data-type^='items'] x-widgets-group[data-type='manage'][data-rearrangeable]                           [data-rearrangeable-item] x-droppable-area[data-position='before'] {grid-row-start: 1; grid-column-start: 1; grid-column-end: 4; background: %%_color(warning); top: -14px}
-x-widget[data-type^='items'] x-widgets-group[data-type='manage'][data-rearrangeable]                           [data-rearrangeable-item] x-droppable-area[data-position='after' ] {grid-row-start: 4; grid-column-start: 1; grid-column-end: 4; background: %%_color(warning); top:   7px}
-x-widget[data-type^='items'] x-widgets-group[data-type='manage'][data-rearrangeable]                           [data-rearrangeable-item] x-droppable-area[data-droppable-is-active] {background: %%_color(ok)}
-x-widget[data-type^='items'] x-widgets-group[data-type='manage'][data-rearrangeable]                           [data-rearrangeable-item]                                                       x-droppable-area                         {visibility: hidden}
-x-widget[data-type^='items'] x-widgets-group[data-type='manage'][data-rearrangeable][data-rearrange-is-active] [data-rearrangeable-item]                                                       x-droppable-area                         {visibility: visible}
-x-widget[data-type^='items'] x-widgets-group[data-type='manage'][data-rearrangeable][data-rearrange-is-active] [data-rearrangeable-item][data-rearrange-is-active]                             x-droppable-area                         {visibility: hidden}
-x-widget[data-type^='items'] x-widgets-group[data-type='manage'][data-rearrangeable][data-rearrange-is-active] [data-rearrangeable-item]:not(:last-child)                                      x-droppable-area[data-position='after']  {visibility: hidden}
-x-widget[data-type^='items'] x-widgets-group[data-type='manage'][data-rearrangeable][data-rearrange-is-active] [data-rearrangeable-item][data-rearrange-is-active] + [data-rearrangeable-item] x-droppable-area[data-position='before'] {visibility: hidden}
-
-x-widget[data-type^='items'] x-widgets-group[data-type='manage'][data-rearrangeable][data-js-is-processed] x-field[data-type='weight'] {
-  display: none;
-}
-
-x-widget[data-type^='items'] x-widgets-group[data-type='manage'][data-rearrange-is-active] * {
-  user-select: none;
- -webkit-user-select: none;
-}
 
 
 
@@ -552,7 +581,6 @@ form#install button[value='install'] {
 
 form#instance_select_multiple [data-selection] {
   margin: 50px 0;
-  overflow: auto;
 }
 
 form#instance_select_multiple button[value='insert'] {

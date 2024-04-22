@@ -6,7 +6,6 @@
 
 namespace effcore\modules\page;
 
-use effcore\Core;
 use effcore\Template;
 use effcore\URL;
 

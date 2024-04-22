@@ -11,33 +11,11 @@
 
 export default class Core {
 
-    constructor() {
-        this.tokens = [];
-        this.tokens['thumbnail_path_cover_default' ] = '%%_thumbnail_path_cover_default';
-        this.tokens['thumbnail_path_poster_default'] = '%%_thumbnail_path_poster_default';
-        console.log(
-            'Core singleton class was initialized'
-        );
-    }
-
-    ///////////////////////////
-    /// static declarations ///
-    ///////////////////////////
-
-    static getInstance() {
-        if (!this.instance) this.instance = new this;
-        return this.instance;
-    }
-
-    static getToken(name) {
-        return this.getInstance().tokens[name];
-    }
-
-    static getType(value) {
+    static get_type(value) {
         return Object.prototype.toString.call(value).slice(8, -1);
     }
 
-    static argsApply(string, args = {}) {
+    static args_apply(string, args = {}) {
         return string.replace(/%%_([a-zA-Z0-9_]+)/g, (c_arg, c_arg_name) => {
             return args[c_arg_name] !== undefined ?
                    args[c_arg_name] : '';
