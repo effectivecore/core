@@ -1,7 +1,12 @@
 .*
+!.editorconfig
+!.gitattributes
 !.gitignore
-/composer.lock
-/package.json
+!.htaccess
+!.nginx
+
+composer.lock
+package.json
 
 /dynamic/*
 !/dynamic/readme.md
