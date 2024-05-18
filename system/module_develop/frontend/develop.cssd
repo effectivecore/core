@@ -402,7 +402,7 @@ x-diagram-uml x-item[data-visibility='private'  ]::before {content: '- '}
 
 /* form 'test' */
 
-form#test x-description {
+form#test > fieldset > x-description {
   padding: 30px;
   opacity: 1;
   text-align: center;
